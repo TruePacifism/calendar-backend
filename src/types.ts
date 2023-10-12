@@ -1,4 +1,16 @@
-export type animalName = 'BULL' | 'TIGER' | 'RABBIT' | 'ROOSTER' | 'PIG' | 'DOG' | 'SNAKE' | 'HORSE' | 'GOAT' | 'RAT' | 'DRAGON' | 'MONKEY'
+export type animalName =
+  | "BULL"
+  | "TIGER"
+  | "RABBIT"
+  | "ROOSTER"
+  | "PIG"
+  | "DOG"
+  | "SNAKE"
+  | "HORSE"
+  | "GOAT"
+  | "RAT"
+  | "DRAGON"
+  | "MONKEY";
 export type coordinatesType = {
   lat: number;
   lng: number;
@@ -112,9 +124,20 @@ export type outputPillarType = pillarType & {
   animal: outputAnimalType;
   element: outputElementType;
 };
-export type parentChartInfoType = customEnumType<{
-    [key: animalName]: number;
-}>;
+export type parentChartInfoType = {
+  BULL: number;
+  TIGER: number;
+  RABBIT: number;
+  MONKEY: number;
+  DRAGON: number;
+  RAT: number;
+  DOG: number;
+  ROOSTER: number;
+  PIG: number;
+  HORSE: number;
+  SNAKE: number;
+  GOAT: number;
+};
 
 export type outputDatePartType = {
   animal: outputAnimalType;

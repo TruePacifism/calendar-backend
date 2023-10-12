@@ -42,4 +42,92 @@ export const Animals: customEnumType<animalType> = {
     },
     element: Elements.FIRE_IN,
   },
+  TIGER: {
+    name: "Тигр",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  RABBIT: {
+    name: "Кролик",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  DRAGON: {
+    name: "Дракон",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  SNAKE: {
+    name: "Змея",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  HORSE: {
+    name: "Лошадь",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  GOAT: {
+    name: "Коза",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  MONKEY: {
+    name: "Обезьяна",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  ROOSTER: {
+    name: "Петух",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  DOG: {
+    name: "Собака",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  PIG: {
+    name: "Свинья",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
+  RAT: {
+    name: "Крыса",
+    monthBounds: {
+      start: 32,
+      end: 54,
+    },
+    element: Elements.FIRE_IN,
+  },
 };
