@@ -1,5 +1,9 @@
-import { Animals } from "../enums";
-import { animalsCounted, elementsCounted, parentChartInfoType } from "../types";
+import { Animals } from "../../enums";
+import {
+  animalsCounted,
+  elementsCounted,
+  parentChartInfoType,
+} from "../../types";
 
 type propsType = {
   momId?: string;

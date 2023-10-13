@@ -1,5 +1,5 @@
-import { Animals } from "../enums";
-import { animalsCounted, dateType, fallingStarType } from "../types";
+import { Animals } from "../../enums";
+import { animalsCounted, dateType, fallingStarType } from "../../types";
 
 type propsType = {
   birthdate: dateType;

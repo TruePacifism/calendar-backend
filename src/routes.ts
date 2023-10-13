@@ -1,7 +1,7 @@
 import express from "express";
-import countDevTime from "./commanders/countDevTime";
+import countDevTime from "./commanders/countingCardData/countDevTime";
 import bodyParser from "body-parser";
-import getCardData from "./commanders/getCardData";
+import getCardData from "./commanders/countingCardData/getCardData";
 
 const app = express();
 app.use(

@@ -1,11 +1,11 @@
-import { Animals } from "../enums";
+import { Animals } from "../../enums";
 import {
   animalName,
   animalType,
   animalsCounted,
   dateType,
   outputDatePartType,
-} from "../types";
+} from "../../types";
 
 const exampleDate = new Date(100, 0, 1, 0, 0);
 

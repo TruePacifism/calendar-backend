@@ -1,4 +1,4 @@
-import { dateType, inputDataType } from "../types";
+import { dateType, inputDataType } from "../../types";
 
 type propsType = inputDataType;
 

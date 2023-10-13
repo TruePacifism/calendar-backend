@@ -49,7 +49,7 @@ export type pillarType = {
   ageYear: number;
   ageMonth: number;
 };
-export type collisionTargetTimeType = "День" | "Месяц" | "Год" | "Час";
+export type collisionTargetTimeType = "день" | "месяц" | "год" | "час" | "такт";
 export type collisionTargetNameType =
   | "mom"
   | "dad"
@@ -58,9 +58,7 @@ export type collisionTargetNameType =
   | "otherCard";
 export type collisionTarget = {
   animal: animalType;
-  targetName: collisionTargetNameType;
   targetTime: collisionTargetTimeType;
-  value: string;
 };
 export type collisionShapeType =
   | "circle"
@@ -68,23 +66,31 @@ export type collisionShapeType =
   | "half"
   | "heart"
   | "rectangle";
-export type collisionColor =
+export type collisionColorType =
   | "red"
-  | "lightgreen"
-  | "darkgreen"
-  | "purple"
   | "brown"
-  | "yellow"
+  | "darkGreen"
+  | "purple"
   | "blue"
-  | "lightblue";
+  | "pink"
+  | "lightGreen"
+  | "orange"
+  | "lightBlue";
+export type collisionKindType =
+  | "Столкновение"
+  | "Самонаказание"
+  | "Наказание нелюбви"
+  | "Наказание неблагодарности"
+  | "Уничижающее наказание"
+  | "Гармония трёх";
+
 export type collisionType = {
   id: number;
   shape: collisionShapeType;
-  color: collisionColor;
+  color: collisionColorType;
   secondTarget: collisionTarget;
   thirdTarget?: collisionTarget;
   kind: string;
-  description: string;
 };
 export type animalsCounted = {
   year: animalType;
@@ -97,6 +103,10 @@ export type elementsCounted = {
   month: elementType;
   day: elementType;
   hour: elementType;
+};
+export type genderCountType = {
+  male: number;
+  female: number;
 };
 
 export type genderType = "male" | "female";
@@ -164,6 +174,6 @@ export type outputDataType = inputDataType & {
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
   fallingStars: fallingStarType[];
-  momCardId?: number;
-  dadCardId?: number;
+  momCardId?: string;
+  dadCardId?: string;
 };

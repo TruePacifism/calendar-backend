@@ -1,4 +1,4 @@
-import { Animals, Elements } from "../enums";
+import { Animals, Elements } from "../../enums";
 import {
   animalType,
   animalsCounted,
@@ -7,7 +7,7 @@ import {
   elementsCounted,
   genderType,
   pillarType,
-} from "../types";
+} from "../../types";
 
 type propsType = {
   birthdate: dateType;

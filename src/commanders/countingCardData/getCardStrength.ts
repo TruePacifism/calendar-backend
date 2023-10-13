@@ -1,26 +1,27 @@
-import { MainElements } from "../enums";
-import { animalsCounted, cardStrengthType, elementsCounted } from "../types";
+import { MainElements } from "../../enums";
+import {
+  animalsCounted,
+  cardStrengthType,
+  elementsCounted,
+  mainElementType,
+} from "../../types";
 
 type propsType = {
   animals: animalsCounted;
   elements: elementsCounted;
+  mainElement: mainElementType;
 };
 
 export default function getCardStrength({
   animals,
   elements,
+  mainElement,
 }: propsType): cardStrengthType {
-  const leader = Object.values(MainElements).find((mainElement) =>
-    mainElement.elements.includes(elements.year)
-  );
   const powerfulElements = Object.values(MainElements).filter(
-    (mainElement, idx) =>
-      mainElement === leader ||
-      Object.values(MainElements)[(idx + 4) % 5] === leader
+    (mainElementItem, idx) =>
+      mainElementItem === mainElement ||
+      Object.values(MainElements)[(idx + 4) % 5] === mainElement
   );
-  console.log("leader", leader);
-  console.log("powerfulElements", powerfulElements);
-
   let power = -1;
   let maxPower = -1;
   Object.values(animals).forEach((animal) => {
