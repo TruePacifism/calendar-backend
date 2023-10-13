@@ -86,6 +86,18 @@ export type collisionType = {
   kind: string;
   description: string;
 };
+export type animalsCounted = {
+  year: animalType;
+  month: animalType;
+  day: animalType;
+  hour: animalType;
+};
+export type elementsCounted = {
+  year: elementType;
+  month: elementType;
+  day: elementType;
+  hour: elementType;
+};
 
 export type genderType = "male" | "female";
 export type inputDataType = {
@@ -104,8 +116,6 @@ export type outputAnimalType = {
 export type fallingStarType = {
   yearNumber: number;
   monthNumber: number;
-  description: string;
-  direction: string;
 };
 
 export type cardStrengthType = {

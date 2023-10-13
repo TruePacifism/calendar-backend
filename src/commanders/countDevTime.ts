@@ -8,9 +8,9 @@ export default async function countDevTime({
   name,
   gender,
   livingcity,
-}: propsType): Promise<inputDataType> {
+}: propsType): Promise<dateType> {
   const { year, month, day, hour, minute } = birthdate;
-  const dateObject = new Date(year, month - 1, day, hour, minute);
+  const dateObject = new Date(year, month, day, hour, minute);
 
   const opencage = require("opencage-api-client");
 
@@ -21,20 +21,14 @@ export default async function countDevTime({
       ((place.annotations.timezone.offset_sec / 3600) * 15 -
         place.geometry.lng) *
       4;
-    dateObject.setMinutes(dateObject.getMinutes() + devTime);
+    dateObject.setMinutes(dateObject.getMinutes() - devTime);
     const newBirthdate: dateType = {
       year: dateObject.getFullYear(),
-      month: dateObject.getMonth() + 1,
+      month: dateObject.getMonth(),
       day: dateObject.getDate(),
       hour: dateObject.getHours(),
       minute: dateObject.getMinutes(),
     };
-    return {
-      birthcity,
-      name,
-      gender,
-      livingcity,
-      birthdate: newBirthdate,
-    };
+    return newBirthdate;
   }
 }
