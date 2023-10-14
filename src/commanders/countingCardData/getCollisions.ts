@@ -22,103 +22,103 @@ const collisionsInfo: {
   kind: collisionKindType;
 }[] = [
   {
-    animals: ["Змея", "Обезьяна", "Тигр"],
+    animals: ["Змея", "Обезьяна", "Тигр"].sort(),
     shape: "rhombus",
     color: "red",
     kind: "Наказание неблагодарности",
   },
   {
-    animals: ["Собака", "Коза", "Бык"],
+    animals: ["Собака", "Коза", "Бык"].sort(),
     shape: "rhombus",
     color: "brown",
     kind: "Уничижающее наказание",
   },
   {
-    animals: ["Собака", "Тигр", "Лошадь"],
+    animals: ["Собака", "Тигр", "Лошадь"].sort(),
     shape: "circle",
     color: "red",
     kind: "Гармония трёх",
   },
   {
-    animals: ["Кролик", "Коза", "Свинья"],
+    animals: ["Кролик", "Коза", "Свинья"].sort(),
     shape: "circle",
     color: "darkGreen",
     kind: "Гармония трёх",
   },
   {
-    animals: ["Змея", "Бык", "Петух"],
+    animals: ["Змея", "Бык", "Петух"].sort(),
     shape: "circle",
     color: "purple",
     kind: "Гармония трёх",
   },
   {
-    animals: ["Обезьяна", "Дракон", "Крыса"],
+    animals: ["Обезьяна", "Дракон", "Крыса"].sort(),
     shape: "circle",
     color: "blue",
     kind: "Гармония трёх",
   },
   {
-    animals: ["Лошадь", "Крыса"],
+    animals: ["Лошадь", "Крыса"].sort(),
     shape: "half",
     color: "red",
     kind: "Столкновение",
   },
   {
-    animals: ["Коза", "Бык"],
+    animals: ["Коза", "Бык"].sort(),
     shape: "half",
     color: "orange",
     kind: "Столкновение",
   },
   {
-    animals: ["Тигр", "Обезьяна"],
+    animals: ["Тигр", "Обезьяна"].sort(),
     shape: "half",
     color: "brown",
     kind: "Столкновение",
   },
   {
-    animals: ["Кролик", "Петух"],
+    animals: ["Кролик", "Петух"].sort(),
     shape: "half",
     color: "pink",
     kind: "Столкновение",
   },
   {
-    animals: ["Змея", "Свинья"],
+    animals: ["Змея", "Свинья"].sort(),
     shape: "half",
     color: "lightGreen",
     kind: "Столкновение",
   },
   {
-    animals: ["Дракон", "Собака"],
+    animals: ["Дракон", "Собака"].sort(),
     shape: "half",
     color: "purple",
     kind: "Столкновение",
   },
   {
-    animals: ["Дракон", "Дракон"],
+    animals: ["Дракон", "Дракон"].sort(),
     shape: "rectangle",
     color: "brown",
     kind: "Самонаказание",
   },
   {
-    animals: ["Петух", "Петух"],
+    animals: ["Петух", "Петух"].sort(),
     shape: "rectangle",
     color: "pink",
     kind: "Самонаказание",
   },
   {
-    animals: ["Лошадь", "Лошадь"],
+    animals: ["Лошадь", "Лошадь"].sort(),
     shape: "rectangle",
     color: "red",
     kind: "Самонаказание",
   },
   {
-    animals: ["Свинья", "Свинья"],
+    animals: ["Свинья", "Свинья"].sort(),
     shape: "rectangle",
     color: "lightBlue",
     kind: "Самонаказание",
   },
   {
-    animals: ["Кролик", "Крыса"],
+    animals: ["Кролик", "Крыса"].sort(),
     shape: "heart",
     color: "red",
     kind: "Наказание нелюбви",
@@ -150,9 +150,14 @@ const getCollisionInfo = (
         .map((animal) => animal.name)
         .sort()
     : [firstAnimal, secondAnimal].map((animal) => animal.name).sort();
-  const collisionInfo = collisionsInfo.find(
-    (collisionInfo) => collisionInfo.animals === animalNames
+  console.log("animalNames", animalNames);
+
+  const collisionInfo = collisionsInfo.find((collisionInfo) =>
+    collisionInfo.animals.every(
+      (animalName, idx) => animalNames[idx] === animalName
+    )
   );
+  console.log("collisionInfo", collisionInfo);
   if (collisionInfo) {
     const { color, kind, shape } = collisionInfo;
     return { color, kind, shape };
@@ -168,7 +173,13 @@ export default function getCollisions({
     ...animals,
     currentPillar: currentPillar.animal,
   };
-  const collisionsInfo = {
+  const collisionsInfo: {
+    year: collisionType[];
+    month: collisionType[];
+    day: collisionType[];
+    hour: collisionType[];
+    currentPillar: collisionType[];
+  } = {
     year: [],
     month: [],
     day: [],
@@ -187,16 +198,24 @@ export default function getCollisions({
         animalsList[secondTime]
       );
       if (collisionInfo) {
-        const collision: collisionType = {
+        const collisionBase = {
           id,
           ...collisionInfo,
+        };
+        collisionsInfo[firstTime].push({
+          ...collisionBase,
           secondTarget: {
             animal: animalsList[secondTime],
             targetTime: getTargetTime(secondTime),
           },
-        };
-        collisionsInfo[firstTime].push(collision);
-        collisionsInfo[secondTime].push(collision);
+        });
+        collisionsInfo[secondTime].push({
+          ...collisionBase,
+          secondTarget: {
+            animal: animalsList[firstTime],
+            targetTime: getTargetTime(firstTime),
+          },
+        });
         id += 1;
       }
       times.slice(idx2 === 4 ? 4 : idx2 + 1).forEach((thirdTime) => {
@@ -213,9 +232,12 @@ export default function getCollisions({
           animalsList[thirdTime]
         );
         if (collisionInfo) {
-          const collision: collisionType = {
+          const collisionBase = {
             id,
             ...collisionInfo,
+          };
+          collisionsInfo[firstTime].push({
+            ...collisionBase,
             secondTarget: {
               animal: animalsList[secondTime],
               targetTime: getTargetTime(secondTime),
@@ -224,10 +246,29 @@ export default function getCollisions({
               animal: animalsList[thirdTime],
               targetTime: getTargetTime(thirdTime),
             },
-          };
-          collisionsInfo[firstTime].push(collision);
-          collisionsInfo[secondTime].push(collision);
-          collisionsInfo[thirdTime].push(collision);
+          });
+          collisionsInfo[secondTime].push({
+            ...collisionBase,
+            secondTarget: {
+              animal: animalsList[firstTime],
+              targetTime: getTargetTime(firstTime),
+            },
+            thirdTarget: {
+              animal: animalsList[thirdTime],
+              targetTime: getTargetTime(thirdTime),
+            },
+          });
+          collisionsInfo[thirdTime].push({
+            ...collisionBase,
+            secondTarget: {
+              animal: animalsList[secondTime],
+              targetTime: getTargetTime(secondTime),
+            },
+            thirdTarget: {
+              animal: animalsList[firstTime],
+              targetTime: getTargetTime(firstTime),
+            },
+          });
           id += 1;
         }
       });

@@ -1,5 +1,5 @@
 import { MainElements } from "../../enums";
-import { animalsCounted, inputDataType } from "../../types";
+import { animalsCounted, inputDataType, outputDataType } from "../../types";
 import countDevTime from "./countDevTime";
 import getAnimals from "./getAnimals";
 import getBlackInfo from "./getBlackInfo";
@@ -12,8 +12,11 @@ import getGenderCount from "./getGenderCount";
 import getGoodInfo from "./getGoodInfo";
 import getMainElement from "./getMainElement";
 import getPillars from "./getPillars";
+import toPrettierData from "./toPrettierData";
 
-export default async function getCardData(inputData: inputDataType) {
+export default async function getCardData(
+  inputData: inputDataType
+): Promise<outputDataType> {
   const { gender } = inputData;
   const trueBirthdate = await countDevTime(inputData);
   const animals: animalsCounted = getAnimals({ birthdate: trueBirthdate });
@@ -37,18 +40,22 @@ export default async function getCardData(inputData: inputDataType) {
   const collisionsInfo = getCollisions({ animals, currentPillar, pillars });
   const fallingStars = getFallingStars({ birthdate: trueBirthdate, animals });
   const genderCount = getGenderCount({ animals });
-  return {
-    ...inputData,
-    birthdate: trueBirthdate,
-    // animals,
-    // elements,
-    // pillars,
-    // currentPillar,
-    // blackInfo,
-    // goodInfo,
-    collisionsInfo,
-    // fallingStars,
-    // cardStrength,
-    // genderCount,
-  };
+  const prettierData = toPrettierData({
+    data: {
+      ...inputData,
+      birthdate: trueBirthdate,
+      animals,
+      elements,
+      pillars,
+      mainElement,
+      currentPillar,
+      blackInfo,
+      goodInfo,
+      collisionsInfo,
+      fallingStars,
+      cardStrength,
+      genderCount,
+    },
+  });
+  return prettierData;
 }

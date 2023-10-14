@@ -140,7 +140,11 @@ export type outputElementType = {
   isGood: boolean;
   isBlack: boolean;
 };
-export type outputPillarType = pillarType & {
+export type outputPillarType = {
+  year: number;
+  month: number;
+  ageYear: number;
+  ageMonth: number;
   animal: outputAnimalType;
   element: outputElementType;
 };
@@ -158,22 +162,68 @@ export type parentChartInfoType = {
   SNAKE: number;
   GOAT: number;
 };
+export type blackInfoPartType = {
+  isAnimalBlack: boolean;
+  isElementBlack: boolean;
+};
+export type blackInfoType = {
+  year: blackInfoPartType;
+  month: blackInfoPartType;
+  day: blackInfoPartType;
+  hour: blackInfoPartType;
+  currentPillar: blackInfoPartType;
+};
+export type goodInfoPartType = {
+  isAnimalGood: boolean;
+  isElementGood: boolean;
+};
+export type goodInfoType = {
+  year: goodInfoPartType;
+  month: goodInfoPartType;
+  day: goodInfoPartType;
+  hour: goodInfoPartType;
+  currentPillar: goodInfoPartType;
+};
+
+export type collisionsInfoType = {
+  year: collisionType[];
+  month: collisionType[];
+  day: collisionType[];
+  hour: collisionType[];
+  currentPillar: collisionType[];
+};
+
+export type countedCardDataType = inputDataType & {
+  animals: animalsCounted;
+  elements: elementsCounted;
+  pillars: pillarType[];
+  currentPillar: pillarType;
+  mainElement: mainElementType;
+  cardStrength: cardStrengthType;
+  blackInfo: blackInfoType;
+  goodInfo: goodInfoType;
+  collisionsInfo: collisionsInfoType;
+  fallingStars: fallingStarType[];
+  genderCount: genderCountType;
+};
 
 export type outputDatePartType = {
   animal: outputAnimalType;
-  element: elementType;
+  element: outputElementType;
   name: string;
 };
+export type outputMainElementType = {};
 export type outputDataType = inputDataType & {
   year: outputDatePartType;
   month: outputDatePartType;
   day: outputDatePartType;
   hour: outputDatePartType;
-  currentPillar: pillarType;
-  pillars: pillarType[];
+  currentPillar: outputPillarType;
+  pillars: outputPillarType[];
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
   fallingStars: fallingStarType[];
+  genderCount: genderCountType;
   momCardId?: string;
   dadCardId?: string;
 };

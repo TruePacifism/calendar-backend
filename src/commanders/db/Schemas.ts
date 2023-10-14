@@ -1,17 +1,49 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+const elementSchema = new Schema({
+  name: String,
+});
+
+const animalSchema = new Schema({
+  name: String,
+  element: elementSchema,
+  monthBounds: {
+    start: Number,
+    end: Number,
+  },
+});
+
+const collisionTargetSchema = new Schema({
+  animal: animalSchema,
+  targetTime: String,
+});
+
+const collisionSchema = new Schema({
+  id: Number,
+  shape: String,
+  color: String,
+  secondTarget: collisionTargetSchema,
+  thirdTarget: collisionTargetSchema,
+});
+
 const outputAnimalSchema = new Schema({
   name: String,
-  collisions: [{ type: Schema.Types.ObjectId, ref: "collision" }],
+  collisions: [collisionSchema],
   isGood: Boolean,
   isBlack: Boolean,
 });
 
-const pillarSchema = new Schema({
-  animal: { type: Schema.Types.ObjectId, ref: "animal" },
-  element: { type: Schema.Types.ObjectId, ref: "element" },
+const outputElementSchema = new Schema({
+  name: String,
+  isGood: Boolean,
+  isBlack: Boolean,
+});
+
+const outputPillarSchema = new Schema({
+  animal: outputAnimalSchema,
+  element: outputElementSchema,
   year: Number,
   month: Number,
   ageYear: Number,
@@ -20,16 +52,16 @@ const pillarSchema = new Schema({
 
 const mainElementSchema = new Schema({
   name: String,
-  animals: [{ type: Schema.Types.ObjectId, ref: "animal" }],
-  elements: [{ type: Schema.Types.ObjectId, ref: "element" }],
+  animals: [animalSchema],
+  elements: [elementSchema],
 });
 
 const cardStrengthSchema = new Schema({
   power: Number,
   powerDescription: String,
-  powerfulElements: [{ type: Schema.Types.ObjectId, ref: "mainElement" }],
+  powerfulElements: [mainElementSchema],
   maxPower: Number,
-  leader: { type: Schema.Types.ObjectId, ref: "mainElement" },
+  leader: mainElementSchema,
 });
 
 const fallingStarSchema = new Schema({
@@ -38,42 +70,36 @@ const fallingStarSchema = new Schema({
 });
 
 const outputDatePartSchema = new Schema({
-  animal: { type: Schema.Types.ObjectId, ref: "outputAnimal" },
-  element: { type: Schema.Types.ObjectId, ref: "element" },
+  animal: outputAnimalSchema,
+  element: outputElementSchema,
   name: String,
 });
 
+const dateSchema = new Schema({
+  year: Number,
+  month: Number,
+  day: Number,
+  hour: Number,
+  minute: Number,
+});
+
 const outputDataSchema = new Schema({
+  id: String,
+  name: String,
+  birthdate: dateSchema,
   year: outputDatePartSchema,
   month: outputDatePartSchema,
   day: outputDatePartSchema,
   hour: outputDatePartSchema,
-  currentPillar: { type: Schema.Types.ObjectId, ref: "pillar" },
-  pillars: [{ type: Schema.Types.ObjectId, ref: "pillar" }],
-  mainElement: { type: Schema.Types.ObjectId, ref: "mainElement" },
+  currentPillar: outputPillarSchema,
+  pillars: [outputPillarSchema],
+  mainElement: mainElementSchema,
   cardStrength: cardStrengthSchema,
   fallingStars: [fallingStarSchema],
   momCardId: String,
   dadCardId: String,
 });
 
-const outputAnimalModel = mongoose.model("outputAnimal", outputAnimalSchema);
-const pillarModel = mongoose.model("pillar", pillarSchema);
-const mainElementModel = mongoose.model("mainElement", mainElementSchema);
-const cardStrengthModel = mongoose.model("cardStrength", cardStrengthSchema);
-const fallingStarModel = mongoose.model("fallingStar", fallingStarSchema);
-const outputDatePartModel = mongoose.model(
-  "outputDatePart",
-  outputDatePartSchema
-);
-const outputDataModel = mongoose.model("outputData", outputDataSchema);
+const CardModel = mongoose.model("Card", outputDataSchema, "Cards");
 
-module.exports = {
-  outputAnimalModel,
-  pillarModel,
-  mainElementModel,
-  cardStrengthModel,
-  fallingStarModel,
-  outputDatePartModel,
-  outputDataModel,
-};
+export default CardModel;
