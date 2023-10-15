@@ -15,15 +15,17 @@ app.use(bodyParser.json());
 
 app.post("/card", async (req, res) => {
   const card = await getCardData(req.body);
-  console.log(Object.keys(card));
 
   await addCard({ card });
   res.send("Карта успешно добавлена");
 });
-app.get("/card:id", async (req, res) => {
-  const { id } = req.params;
-  const card = getCard({ id });
-  res.json(card);
+app.get("/card", async (req, res) => {
+  const { id } = req.query;
+  console.log(id);
+  if (typeof id === "string") {
+    const card = await getCard({ id });
+    res.json(card);
+  }
 });
 app.get("/test", (req, res) => {
   res.send("Testing");
