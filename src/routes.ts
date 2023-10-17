@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import getCardData from "./commanders/countingCardData/getCardData";
 import addCard from "./commanders/db/addCard";
 import getCard from "./commanders/db/getCard";
+import { inputDataType } from "./types";
 
 const app = express();
 app.use(
@@ -12,6 +13,12 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 app.post("/card", async (req, res) => {
   const card = await getCardData(req.body);
@@ -26,6 +33,18 @@ app.get("/card", async (req, res) => {
     const card = await getCard({ id });
     res.json(card);
   }
+});
+app.get("/count", async (req, res) => {
+  if (typeof req.query !== "object") {
+    console.log(req.query);
+
+    return;
+  }
+  const inputData: inputDataType = { ...req.query };
+  console.log(inputData);
+
+  const card = await getCardData(inputData);
+  res.json(card);
 });
 app.get("/test", (req, res) => {
   res.send("Testing");

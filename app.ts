@@ -1,8 +1,7 @@
-import bodyParser from "body-parser";
 import app from "./src/routes";
 import mongoose from "mongoose";
 
-const port = 3000;
+const port = 3333;
 
 const connectToMongoDB = async () => {
   mongoose.connect(

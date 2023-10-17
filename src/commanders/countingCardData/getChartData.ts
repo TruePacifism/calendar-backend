@@ -46,4 +46,5 @@ export default function getChartData({
       chartData[key] += 2.5;
     }
   });
+  return chartData;
 }

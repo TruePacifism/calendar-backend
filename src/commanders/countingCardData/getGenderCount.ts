@@ -44,5 +44,8 @@ export default function getGenderCount({
   genderCount[dayGender] += 7.5;
   const hourGender = getGenderByAnimal(animals.hour);
   genderCount[hourGender] += 2.5;
+  const sum = genderCount.female + genderCount.male;
+  genderCount.female = Math.round((genderCount.female / sum) * 100);
+  genderCount.male = Math.round((genderCount.male / sum) * 100);
   return genderCount;
 }

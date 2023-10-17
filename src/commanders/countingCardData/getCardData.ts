@@ -1,11 +1,14 @@
 import { MainElements } from "../../enums";
 import { animalsCounted, inputDataType, outputDataType } from "../../types";
 import countDevTime from "./countDevTime";
+import getAge from "./getAge";
 import getAnimals from "./getAnimals";
 import getBlackInfo from "./getBlackInfo";
 import getCardStrength from "./getCardStrength";
+import getChartData from "./getChartData";
 import getCollisions from "./getCollisions";
 import getCurrentPillar from "./getCurrentPillar";
+import getDirection from "./getDirection";
 import getElements from "./getElements";
 import getFallingStars from "./getFallingStars";
 import getGenderCount from "./getGenderCount";
@@ -18,11 +21,12 @@ export default async function getCardData(
   inputData: inputDataType
 ): Promise<outputDataType> {
   const { gender } = inputData;
-  const trueBirthdate = await countDevTime(inputData);
-  const animals: animalsCounted = getAnimals({ birthdate: trueBirthdate });
-  const elements = getElements({ birthdate: trueBirthdate, animals: animals });
+  const birthdate = await countDevTime(inputData);
+  const age = getAge({ birthdate });
+  const animals: animalsCounted = getAnimals({ birthdate });
+  const elements = getElements({ birthdate, animals: animals });
   const pillars = getPillars({
-    birthdate: trueBirthdate,
+    birthdate,
     gender,
     animals,
     elements,
@@ -37,15 +41,20 @@ export default async function getCardData(
     currentPillar,
     cardStrength,
   });
+  const chartData = getChartData({ momId: "", dadId: "", animals, elements });
   const collisionsInfo = getCollisions({ animals, currentPillar, pillars });
-  const fallingStars = getFallingStars({ birthdate: trueBirthdate, animals });
+  const fallingStars = getFallingStars({ birthdate, animals });
   const genderCount = getGenderCount({ animals });
+  const direction = getDirection({ birthdate });
   const prettierData = toPrettierData({
     data: {
       ...inputData,
-      birthdate: trueBirthdate,
+      age,
+      birthdate,
       animals,
       elements,
+      chartData,
+      direction,
       pillars,
       mainElement,
       currentPillar,

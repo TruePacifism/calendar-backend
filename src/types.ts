@@ -193,7 +193,18 @@ export type collisionsInfoType = {
   currentPillar: collisionType[];
 };
 
+export type ageType = {
+  year: number;
+  month: number;
+};
+
+export type directionType = {
+  shortName: string;
+  fullName: string;
+};
+
 export type countedCardDataType = inputDataType & {
+  age: ageType;
   animals: animalsCounted;
   elements: elementsCounted;
   pillars: pillarType[];
@@ -201,7 +212,9 @@ export type countedCardDataType = inputDataType & {
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
   blackInfo: blackInfoType;
+  chartData: parentChartInfoType;
   goodInfo: goodInfoType;
+  direction: directionType;
   collisionsInfo: collisionsInfoType;
   fallingStars: fallingStarType[];
   genderCount: genderCountType;
@@ -214,14 +227,17 @@ export type outputDatePartType = {
 };
 export type outputMainElementType = {};
 export type outputDataType = inputDataType & {
+  age: ageType;
   year: outputDatePartType;
   month: outputDatePartType;
   day: outputDatePartType;
   hour: outputDatePartType;
   currentPillar: outputPillarType;
   pillars: outputPillarType[];
+  direction: directionType;
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
+  chartData: parentChartInfoType;
   fallingStars: fallingStarType[];
   genderCount: genderCountType;
   momCardId?: string;
