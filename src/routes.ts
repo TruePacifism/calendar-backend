@@ -5,6 +5,7 @@ import getCardData from "./commanders/countingCardData/getCardData";
 import addCard from "./commanders/db/addCard";
 import getCard from "./commanders/db/getCard";
 import { inputDataType } from "./types";
+import { inputDataSchema } from "./joiSchemas";
 
 const app = express();
 app.use(
@@ -40,7 +41,11 @@ app.get("/count", async (req, res) => {
 
     return;
   }
-  const inputData: inputDataType = { ...req.query };
+  console.log(typeof req.query);
+
+  const inputData: inputDataType = await inputDataSchema.validateAsync(
+    req.query
+  );
   console.log(inputData);
 
   const card = await getCardData(inputData);

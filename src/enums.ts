@@ -1,6 +1,7 @@
 import {
   animalType,
   customEnumType,
+  directionType,
   elementType,
   mainElementType,
 } from "./types";
@@ -168,5 +169,56 @@ export const MainElements: customEnumType<mainElementType> = {
     elements: [Elements.WOOD_IN, Elements.WOOD_YAN],
     animals: [Animals.RABBIT, Animals.SNAKE],
     name: "Дерево",
+  },
+};
+
+export const Directions: customEnumType<directionType> = {
+  N: {
+    shortName: "С",
+    fullName: "Север",
+  },
+  W: {
+    shortName: "З",
+    fullName: "Запад",
+  },
+  S: {
+    shortName: "Ю",
+    fullName: "Юг",
+  },
+  E: {
+    shortName: "В",
+    fullName: "Восток",
+  },
+  NW: {
+    shortName: "СЗ",
+    fullName: "Северо-запад",
+  },
+  NE: {
+    shortName: "СВ",
+    fullName: "Северо-восток",
+  },
+  SW: {
+    shortName: "ЮЗ",
+    fullName: "Юго-запад",
+  },
+  SE: {
+    shortName: "ЮВ",
+    fullName: "Юго-восток",
+  },
+  CN: {
+    shortName: "СЦ",
+    fullName: "Северо-центр",
+  },
+  CS: {
+    shortName: "ЮЦ",
+    fullName: "Юго-центр",
+  },
+  CW: {
+    shortName: "ЦЗ",
+    fullName: "Центро-запад",
+  },
+  CE: {
+    shortName: "ЦВ",
+    fullName: "Центро-восток",
   },
 };

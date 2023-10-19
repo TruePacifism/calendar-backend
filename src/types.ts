@@ -212,6 +212,7 @@ export type countedCardDataType = inputDataType & {
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
   blackInfo: blackInfoType;
+  movedDirection: directionType;
   chartData: parentChartInfoType;
   goodInfo: goodInfoType;
   direction: directionType;
@@ -234,6 +235,7 @@ export type outputDataType = inputDataType & {
   hour: outputDatePartType;
   currentPillar: outputPillarType;
   pillars: outputPillarType[];
+  movedDirection: directionType;
   direction: directionType;
   mainElement: mainElementType;
   cardStrength: cardStrengthType;

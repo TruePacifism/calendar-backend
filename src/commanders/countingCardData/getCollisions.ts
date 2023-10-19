@@ -150,14 +150,12 @@ const getCollisionInfo = (
         .map((animal) => animal.name)
         .sort()
     : [firstAnimal, secondAnimal].map((animal) => animal.name).sort();
-  console.log("animalNames", animalNames);
 
   const collisionInfo = collisionsInfo.find((collisionInfo) =>
     collisionInfo.animals.every(
       (animalName, idx) => animalNames[idx] === animalName
     )
   );
-  console.log("collisionInfo", collisionInfo);
   if (collisionInfo) {
     const { color, kind, shape } = collisionInfo;
     return { color, kind, shape };

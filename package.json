@@ -20,6 +20,7 @@
     "concurrently": "^8.2.1",
     "express": "^4.17.1",
     "geocoder": "^0.2.3",
+    "joi": "^17.11.0",
     "mongoose": "^7.6.2",
     "opencage-api-client": "^1.0.2",
     "typescript-is": "^0.20.0"

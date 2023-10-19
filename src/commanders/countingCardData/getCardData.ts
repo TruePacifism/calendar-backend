@@ -6,6 +6,7 @@ import getAnimals from "./getAnimals";
 import getBlackInfo from "./getBlackInfo";
 import getCardStrength from "./getCardStrength";
 import getChartData from "./getChartData";
+import getCityCoordinates from "./getCityCoordinates";
 import getCollisions from "./getCollisions";
 import getCurrentPillar from "./getCurrentPillar";
 import getDirection from "./getDirection";
@@ -14,6 +15,7 @@ import getFallingStars from "./getFallingStars";
 import getGenderCount from "./getGenderCount";
 import getGoodInfo from "./getGoodInfo";
 import getMainElement from "./getMainElement";
+import getMovedDirection from "./getMovedDirection";
 import getPillars from "./getPillars";
 import toPrettierData from "./toPrettierData";
 
@@ -21,6 +23,12 @@ export default async function getCardData(
   inputData: inputDataType
 ): Promise<outputDataType> {
   const { gender } = inputData;
+  const birthcityCoordinates = await getCityCoordinates({
+    cityName: inputData.birthcity,
+  });
+  const livingcityCoordinates = await getCityCoordinates({
+    cityName: inputData.livingcity,
+  });
   const birthdate = await countDevTime(inputData);
   const age = getAge({ birthdate });
   const animals: animalsCounted = getAnimals({ birthdate });
@@ -41,6 +49,10 @@ export default async function getCardData(
     currentPillar,
     cardStrength,
   });
+  const movedDirection = await getMovedDirection({
+    livingcityCoordinates,
+    birthcityCoordinates,
+  });
   const chartData = getChartData({ momId: "", dadId: "", animals, elements });
   const collisionsInfo = getCollisions({ animals, currentPillar, pillars });
   const fallingStars = getFallingStars({ birthdate, animals });
@@ -56,6 +68,7 @@ export default async function getCardData(
       chartData,
       direction,
       pillars,
+      movedDirection,
       mainElement,
       currentPillar,
       blackInfo,
