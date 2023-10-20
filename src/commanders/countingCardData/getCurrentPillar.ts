@@ -14,5 +14,8 @@ export default function getCurrentPillar({ pillars }: propsType): pillarType {
         (now.getFullYear() === pillar.year + 10 &&
           now.getMonth() < pillar.month))
   );
+  if (!currentPillar) {
+    return pillars[10];
+  }
   return currentPillar;
 }
