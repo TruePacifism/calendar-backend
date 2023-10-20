@@ -50,10 +50,16 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return;
     }
     console.log(typeof req.query);
-    const inputData = yield joiSchemas_1.inputDataSchema.validateAsync(req.query);
-    console.log(inputData);
-    const card = yield (0, getCardData_1.default)(inputData);
-    res.json(card);
+    try {
+        const inputData = yield joiSchemas_1.inputDataSchema.validateAsync(req.query);
+        console.log(inputData);
+        const card = yield (0, getCardData_1.default)(inputData);
+        res.json(card);
+    }
+    catch (error) {
+        console.log(error);
+        res.send(error);
+    }
 }));
 app.get("/test", (req, res) => {
     res.send("Testing");

@@ -45,13 +45,18 @@ app.get("/count", async (req, res) => {
   }
   console.log(typeof req.query);
 
-  const inputData: inputDataType = await inputDataSchema.validateAsync(
-    req.query
-  );
-  console.log(inputData);
+  try {
+    const inputData: inputDataType = await inputDataSchema.validateAsync(
+      req.query
+    );
+    console.log(inputData);
 
-  const card = await getCardData(inputData);
-  res.json(card);
+    const card = await getCardData(inputData);
+    res.json(card);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
 });
 app.get("/test", (req, res) => {
   res.send("Testing");
