@@ -6,8 +6,10 @@ import addCard from "./commanders/db/addCard";
 import getCard from "./commanders/db/getCard";
 import { inputDataType } from "./types";
 import { inputDataSchema } from "./joiSchemas";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,

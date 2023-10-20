@@ -18,7 +18,9 @@ const getCardData_1 = __importDefault(require("./commanders/countingCardData/get
 const addCard_1 = __importDefault(require("./commanders/db/addCard"));
 const getCard_1 = __importDefault(require("./commanders/db/getCard"));
 const joiSchemas_1 = require("./joiSchemas");
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
     extended: true,
 }));
