@@ -40,13 +40,15 @@ const getDaysToCount = (
     (birthdateObject.getTime() - yearStartObject.getTime()) / 1000 / 3600 / 24
   );
   let daysToCount: number;
+  console.log("daysOfYear", daysOfYear);
+  console.log("Animals.RAT.monthBounds.end", Animals.RAT.monthBounds.end);
 
   if (monthAnimal === Animals.RAT) {
     if (direction) {
       daysToCount =
         daysOfYear <= Animals.RAT.monthBounds.end
-          ? Animals.RAT.monthBounds.end - daysOfYear
-          : 365 - daysOfYear + Animals.RAT.monthBounds.start;
+          ? Animals.RAT.monthBounds.end - daysOfYear + 1
+          : 365 - daysOfYear + Animals.RAT.monthBounds.end + 1;
     } else {
       daysToCount =
         daysOfYear <= Animals.RAT.monthBounds.end
@@ -55,11 +57,13 @@ const getDaysToCount = (
     }
   } else {
     if (direction) {
-      daysToCount = monthAnimal.monthBounds.end - daysOfYear;
+      daysToCount = monthAnimal.monthBounds.end - daysOfYear + 1;
     } else {
       daysToCount = daysOfYear - monthAnimal.monthBounds.start;
     }
   }
+  console.log("daysToCount", daysToCount);
+
   return daysToCount;
 };
 
@@ -73,6 +77,9 @@ export default function getPillars({
   const daysToCount = getDaysToCount(direction, birthdate, animals.month);
   const firstYear = birthdate.year;
   const firstMonth = birthdate.month;
+  console.log(direction);
+  console.log(elements.year);
+  console.log(gender);
 
   let year = firstYear + Math.floor(daysToCount / 3);
   let month = birthdate.month + (daysToCount % 3) * 4;
@@ -110,7 +117,7 @@ export default function getPillars({
       element: Object.values(Elements)[elementIndex],
     };
     pillars.push(firstPillar);
-    for (let i = 1; i < 11; i++) {
+    for (let i = 1; i < 13; i++) {
       year += 10;
       ageYear += 10;
       animalIndex += 1;
@@ -141,7 +148,7 @@ export default function getPillars({
       element: Object.values(Elements)[elementIndex],
     };
     pillars.push(firstPillar);
-    for (let i = 1; i < 11; i++) {
+    for (let i = 1; i < 13; i++) {
       year += 10;
       ageYear += 10;
       animalIndex += 11;

@@ -119,6 +119,9 @@ const getTargetTime = (time) => {
     }
 };
 const getCollisionInfo = (firstAnimal, secondAnimal, thirdAnimal) => {
+    if (!firstAnimal || !secondAnimal || !thirdAnimal) {
+        return;
+    }
     const animalNames = thirdAnimal
         ? [firstAnimal, secondAnimal, thirdAnimal]
             .map((animal) => animal.name)
@@ -131,7 +134,8 @@ const getCollisionInfo = (firstAnimal, secondAnimal, thirdAnimal) => {
     }
 };
 function getCollisions({ animals, currentPillar, pillars, }) {
-    const animalsList = Object.assign(Object.assign({}, animals), { currentPillar: currentPillar.animal });
+    const animalsList = currentPillar
+        ? Object.assign(Object.assign({}, animals), { currentPillar: currentPillar.animal }) : animals;
     const collisionsInfo = {
         year: [],
         month: [],
@@ -139,6 +143,7 @@ function getCollisions({ animals, currentPillar, pillars, }) {
         hour: [],
         currentPillar: [],
     };
+    console.log(collisionsInfo);
     const times = Object.keys(collisionsInfo);
     let id = 1;
     times.forEach((firstTime, idx) => {
@@ -149,11 +154,11 @@ function getCollisions({ animals, currentPillar, pillars, }) {
             const collisionInfo = getCollisionInfo(animalsList[firstTime], animalsList[secondTime]);
             if (collisionInfo) {
                 const collisionBase = Object.assign({ id }, collisionInfo);
-                collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { secondTarget: {
+                collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(firstTime), secondTarget: {
                         animal: animalsList[secondTime],
                         targetTime: getTargetTime(secondTime),
                     } }));
-                collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { secondTarget: {
+                collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(secondTime), secondTarget: {
                         animal: animalsList[firstTime],
                         targetTime: getTargetTime(firstTime),
                     } }));
@@ -168,21 +173,21 @@ function getCollisions({ animals, currentPillar, pillars, }) {
                 const collisionInfo = getCollisionInfo(animalsList[firstTime], animalsList[secondTime], animalsList[thirdTime]);
                 if (collisionInfo) {
                     const collisionBase = Object.assign({ id }, collisionInfo);
-                    collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { secondTarget: {
+                    collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(firstTime), secondTarget: {
                             animal: animalsList[secondTime],
                             targetTime: getTargetTime(secondTime),
                         }, thirdTarget: {
                             animal: animalsList[thirdTime],
                             targetTime: getTargetTime(thirdTime),
                         } }));
-                    collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { secondTarget: {
+                    collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(secondTime), secondTarget: {
                             animal: animalsList[firstTime],
                             targetTime: getTargetTime(firstTime),
                         }, thirdTarget: {
                             animal: animalsList[thirdTime],
                             targetTime: getTargetTime(thirdTime),
                         } }));
-                    collisionsInfo[thirdTime].push(Object.assign(Object.assign({}, collisionBase), { secondTarget: {
+                    collisionsInfo[thirdTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(thirdTime), secondTarget: {
                             animal: animalsList[secondTime],
                             targetTime: getTargetTime(secondTime),
                         }, thirdTarget: {

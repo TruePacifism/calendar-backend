@@ -90,6 +90,7 @@ export type collisionType = {
   color: collisionColorType;
   secondTarget: collisionTarget;
   thirdTarget?: collisionTarget;
+  targetName: collisionTargetTimeType;
   kind: string;
 };
 export type animalsCounted = {

@@ -69,7 +69,7 @@ export default function getBlackInfo({
     blackInfo.month.isAnimalBlack = true;
     blackInfo.year.isElementBlack = true;
   }
-  if (blackAnimals.includes(currentPillar.animal)) {
+  if (currentPillar && blackAnimals.includes(currentPillar.animal)) {
     blackInfo.currentPillar.isAnimalBlack = true;
     blackInfo.year.isElementBlack = true;
   }

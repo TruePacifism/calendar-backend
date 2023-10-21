@@ -145,6 +145,9 @@ const getCollisionInfo = (
   secondAnimal: animalType,
   thirdAnimal?: animalType
 ) => {
+  if (!firstAnimal || !secondAnimal || !thirdAnimal) {
+    return;
+  }
   const animalNames: string[] = thirdAnimal
     ? [firstAnimal, secondAnimal, thirdAnimal]
         .map((animal) => animal.name)
@@ -167,10 +170,12 @@ export default function getCollisions({
   currentPillar,
   pillars,
 }: propsType) {
-  const animalsList = {
-    ...animals,
-    currentPillar: currentPillar.animal,
-  };
+  const animalsList = currentPillar
+    ? {
+        ...animals,
+        currentPillar: currentPillar.animal,
+      }
+    : animals;
   const collisionsInfo: {
     year: collisionType[];
     month: collisionType[];
@@ -184,6 +189,8 @@ export default function getCollisions({
     hour: [],
     currentPillar: [],
   };
+  console.log(collisionsInfo);
+
   const times = Object.keys(collisionsInfo);
   let id = 1;
   times.forEach((firstTime, idx) => {
@@ -202,6 +209,7 @@ export default function getCollisions({
         };
         collisionsInfo[firstTime].push({
           ...collisionBase,
+          targetName: getTargetTime(firstTime),
           secondTarget: {
             animal: animalsList[secondTime],
             targetTime: getTargetTime(secondTime),
@@ -209,6 +217,7 @@ export default function getCollisions({
         });
         collisionsInfo[secondTime].push({
           ...collisionBase,
+          targetName: getTargetTime(secondTime),
           secondTarget: {
             animal: animalsList[firstTime],
             targetTime: getTargetTime(firstTime),
@@ -236,6 +245,7 @@ export default function getCollisions({
           };
           collisionsInfo[firstTime].push({
             ...collisionBase,
+            targetName: getTargetTime(firstTime),
             secondTarget: {
               animal: animalsList[secondTime],
               targetTime: getTargetTime(secondTime),
@@ -247,6 +257,7 @@ export default function getCollisions({
           });
           collisionsInfo[secondTime].push({
             ...collisionBase,
+            targetName: getTargetTime(secondTime),
             secondTarget: {
               animal: animalsList[firstTime],
               targetTime: getTargetTime(firstTime),
@@ -258,6 +269,7 @@ export default function getCollisions({
           });
           collisionsInfo[thirdTime].push({
             ...collisionBase,
+            targetName: getTargetTime(thirdTime),
             secondTarget: {
               animal: animalsList[secondTime],
               targetTime: getTargetTime(secondTime),

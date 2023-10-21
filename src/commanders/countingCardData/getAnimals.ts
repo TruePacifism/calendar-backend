@@ -40,7 +40,7 @@ const getDay = (year: number, month: number, day: number): animalType => {
   const timeDiff = dateObject.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
   const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
   const index = dayCount % 12;
-  const indexWithOffset = (index + 10) % 12;
+  const indexWithOffset = (index + 5) % 12;
   return Object.values(Animals)[indexWithOffset];
 };
 

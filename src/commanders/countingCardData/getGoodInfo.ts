@@ -72,7 +72,9 @@ export default function getGoodInfo({
   goodInfo.day.isElementGood = isGoodElement(elements.day);
   goodInfo.hour.isAnimalGood = isGoodAnimal(animals.hour);
   goodInfo.hour.isElementGood = isGoodElement(elements.hour);
-  goodInfo.currentPillar.isAnimalGood = isGoodAnimal(currentPillar.animal);
-  goodInfo.currentPillar.isElementGood = isGoodElement(currentPillar.element);
+  if (currentPillar) {
+    goodInfo.currentPillar.isAnimalGood = isGoodAnimal(currentPillar.animal);
+    goodInfo.currentPillar.isElementGood = isGoodElement(currentPillar.element);
+  }
   return goodInfo;
 }

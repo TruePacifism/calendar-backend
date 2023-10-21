@@ -58,16 +58,17 @@ const getPrettierAnimalsElements = ({ animals, elements, currentPillar, blackInf
             },
             name: birthdate.hour.toString(),
         },
-        currentPillar: Object.assign(Object.assign({}, currentPillar), { animal: {
-                name: currentPillar.animal.name,
-                isBlack: blackInfo.currentPillar.isAnimalBlack,
-                isGood: goodInfo.currentPillar.isAnimalGood,
-                collisions: collisionsInfo.currentPillar,
-            }, element: {
-                name: currentPillar.element.name,
-                isBlack: blackInfo.currentPillar.isElementBlack,
-                isGood: goodInfo.currentPillar.isElementGood,
-            } }),
+        currentPillar: currentPillar
+            ? Object.assign(Object.assign({}, currentPillar), { animal: {
+                    name: currentPillar.animal.name,
+                    isBlack: blackInfo.currentPillar.isAnimalBlack,
+                    isGood: goodInfo.currentPillar.isAnimalGood,
+                    collisions: collisionsInfo.currentPillar,
+                }, element: {
+                    name: currentPillar.element.name,
+                    isBlack: blackInfo.currentPillar.isElementBlack,
+                    isGood: goodInfo.currentPillar.isElementGood,
+                } }) : null,
     };
 };
 const getPrettierPillars = ({ pillars, }) => {

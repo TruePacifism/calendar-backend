@@ -7,9 +7,6 @@ function getCurrentPillar({ pillars }) {
         (now.getFullYear() < pillar.year + 10 ||
             (now.getFullYear() === pillar.year + 10 &&
                 now.getMonth() < pillar.month)));
-    if (!currentPillar) {
-        return pillars[10];
-    }
     return currentPillar;
 }
 exports.default = getCurrentPillar;

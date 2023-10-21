@@ -96,20 +96,22 @@ const getPrettierAnimalsElements = ({
       },
       name: birthdate.hour.toString(),
     },
-    currentPillar: {
-      ...currentPillar,
-      animal: {
-        name: currentPillar.animal.name,
-        isBlack: blackInfo.currentPillar.isAnimalBlack,
-        isGood: goodInfo.currentPillar.isAnimalGood,
-        collisions: collisionsInfo.currentPillar,
-      },
-      element: {
-        name: currentPillar.element.name,
-        isBlack: blackInfo.currentPillar.isElementBlack,
-        isGood: goodInfo.currentPillar.isElementGood,
-      },
-    },
+    currentPillar: currentPillar
+      ? {
+          ...currentPillar,
+          animal: {
+            name: currentPillar.animal.name,
+            isBlack: blackInfo.currentPillar.isAnimalBlack,
+            isGood: goodInfo.currentPillar.isAnimalGood,
+            collisions: collisionsInfo.currentPillar,
+          },
+          element: {
+            name: currentPillar.element.name,
+            isBlack: blackInfo.currentPillar.isElementBlack,
+            isGood: goodInfo.currentPillar.isElementGood,
+          },
+        }
+      : null,
   };
 };
 
