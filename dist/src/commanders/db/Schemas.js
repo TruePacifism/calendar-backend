@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CardModel = exports.UserModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const { Schema } = mongoose_1.default;
 const elementSchema = new Schema({
@@ -74,25 +75,22 @@ const dateSchema = new Schema({
     hour: Number,
     minute: Number,
 });
-const outputDataSchema = new Schema({
+const inputDataSchema = new Schema({
     id: String,
     name: String,
     birthdate: dateSchema,
     birthcity: String,
     gender: String,
     livingcity: String,
-    year: outputDatePartSchema,
-    month: outputDatePartSchema,
-    day: outputDatePartSchema,
-    hour: outputDatePartSchema,
-    currentPillar: outputPillarSchema,
-    pillars: [outputPillarSchema],
-    mainElement: mainElementSchema,
-    cardStrength: cardStrengthSchema,
-    fallingStars: [fallingStarSchema],
-    momCardId: String,
-    dadCardId: String,
 });
-const CardModel = mongoose_1.default.model("Card", outputDataSchema, "Cards");
-exports.default = CardModel;
+const userSchema = new Schema({
+    id: String,
+    token: String,
+    name: String,
+    mail: String,
+    password: String,
+    cards: [inputDataSchema],
+});
+exports.UserModel = mongoose_1.default.model("User", userSchema, "Users");
+exports.CardModel = mongoose_1.default.model("Card", inputDataSchema, "Cards");
 //# sourceMappingURL=Schemas.js.map

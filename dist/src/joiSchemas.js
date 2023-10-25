@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inputDataSchema = void 0;
+exports.userInputSchema = exports.todayInputSchema = exports.inputDataSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 exports.inputDataSchema = joi_1.default.object({
     name: joi_1.default.string().required(),
@@ -17,5 +17,14 @@ exports.inputDataSchema = joi_1.default.object({
     gender: joi_1.default.string().required(),
     livingcity: joi_1.default.string().required(),
     birthcity: joi_1.default.string().required(),
+});
+exports.todayInputSchema = joi_1.default.object({
+    city: joi_1.default.string().required(),
+});
+exports.userInputSchema = joi_1.default.object({
+    token: joi_1.default.string(),
+    password: joi_1.default.string(),
+    mail: joi_1.default.string(),
+    name: joi_1.default.string(),
 });
 //# sourceMappingURL=joiSchemas.js.map

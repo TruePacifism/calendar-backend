@@ -5,9 +5,15 @@ import getCardData from "./commanders/countingCardData/getCardData";
 import addCard from "./commanders/db/addCard";
 import getCard from "./commanders/db/getCard";
 import { inputDataType, todayInputData } from "./types";
-import { inputDataSchema, todayInputSchema } from "./joiSchemas";
+import {
+  inputDataSchema,
+  todayInputSchema,
+  userInputSchema,
+} from "./joiSchemas";
 import cors from "cors";
 import countToday from "./commanders/countingCardData/countToday";
+import addUser from "./commanders/db/addUser";
+import deleteCard from "./commanders/db/deleteCard";
 
 const app = express();
 app.use(cors());
@@ -24,11 +30,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/card", async (req, res) => {
-  const card = await getCardData(req.body);
+app.post("/user", async (req, res) => {
+  const input = req.query;
+  await addUser(await userInputSchema.validateAsync(input));
 
-  await addCard({ card });
+  res.send("Пользователь успешно зарегистрирован");
+});
+app.post("/card/:token", async (req, res) => {
+  const cardInput = req.body;
+
+  await addCard({ card: cardInput, token: req.params.token });
   res.send("Карта успешно добавлена");
+});
+app.delete("/card/:token/:cardId", async (req, res) => {
+  const { token, cardId } = req.params;
+  await deleteCard({ token, cardId });
+  res.send("Карта успешно удалена");
 });
 app.get("/card", async (req, res) => {
   const { id } = req.query;

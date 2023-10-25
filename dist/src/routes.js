@@ -19,6 +19,9 @@ const addCard_1 = __importDefault(require("./commanders/db/addCard"));
 const getCard_1 = __importDefault(require("./commanders/db/getCard"));
 const joiSchemas_1 = require("./joiSchemas");
 const cors_1 = __importDefault(require("cors"));
+const countToday_1 = __importDefault(require("./commanders/countingCardData/countToday"));
+const addUser_1 = __importDefault(require("./commanders/db/addUser"));
+const deleteCard_1 = __importDefault(require("./commanders/db/deleteCard"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
@@ -31,10 +34,20 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
 });
-app.post("/card", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const card = yield (0, getCardData_1.default)(req.body);
-    yield (0, addCard_1.default)({ card });
+app.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const input = req.query;
+    yield (0, addUser_1.default)(yield joiSchemas_1.userInputSchema.validateAsync(input));
+    res.send("Пользователь успешно зарегистрирован");
+}));
+app.post("/card/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const cardInput = req.body;
+    yield (0, addCard_1.default)({ card: cardInput, token: req.params.token });
     res.send("Карта успешно добавлена");
+}));
+app.delete("/card/:token/:cardId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token, cardId } = req.params;
+    yield (0, deleteCard_1.default)({ token, cardId });
+    res.send("Карта успешно удалена");
 }));
 app.get("/card", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.query;
@@ -61,8 +74,10 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.send(error);
     }
 }));
-app.get("/test", (req, res) => {
-    res.send("Testing");
-});
+app.get("/today", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = yield joiSchemas_1.todayInputSchema.validateAsync(req.query);
+    const todayData = yield (0, countToday_1.default)(query);
+    res.json(todayData);
+}));
 exports.default = app;
 //# sourceMappingURL=routes.js.map

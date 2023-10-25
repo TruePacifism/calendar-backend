@@ -1,7 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
-const getDirection = (gender, yearElement) => {
+const getDirection = (gender, yearElement, monthAnimal) => {
+    if (monthAnimal === enums_1.Animals.BULL) {
+        return gender === "male";
+    }
+    if (monthAnimal === enums_1.Animals.TIGER) {
+        return gender === "female";
+    }
     const direction = (gender === "male" && yearElement.name.includes("Ян")) ||
         (gender === "female" && yearElement.name.includes("Инь"));
     return direction;
@@ -39,7 +45,7 @@ const getDaysToCount = (direction, birthdate, monthAnimal) => {
     return daysToCount;
 };
 function getPillars({ birthdate, gender, animals, elements, }) {
-    const direction = getDirection(gender, elements.year);
+    const direction = getDirection(gender, elements.year, animals.month);
     const daysToCount = getDaysToCount(direction, birthdate, animals.month);
     const firstYear = birthdate.year;
     const firstMonth = birthdate.month;

@@ -1,4 +1,4 @@
-import CardModel from "./Schemas";
+import { CardModel } from "./Schemas";
 
 type propsType = {
   id: string;

@@ -83,26 +83,23 @@ const dateSchema = new Schema({
   minute: Number,
 });
 
-const outputDataSchema = new Schema({
+const inputDataSchema = new Schema({
   id: String,
   name: String,
   birthdate: dateSchema,
   birthcity: String,
   gender: String,
   livingcity: String,
-  year: outputDatePartSchema,
-  month: outputDatePartSchema,
-  day: outputDatePartSchema,
-  hour: outputDatePartSchema,
-  currentPillar: outputPillarSchema,
-  pillars: [outputPillarSchema],
-  mainElement: mainElementSchema,
-  cardStrength: cardStrengthSchema,
-  fallingStars: [fallingStarSchema],
-  momCardId: String,
-  dadCardId: String,
 });
 
-const CardModel = mongoose.model("Card", outputDataSchema, "Cards");
+const userSchema = new Schema({
+  id: String,
+  token: String,
+  name: String,
+  mail: String,
+  password: String,
+  cards: [inputDataSchema],
+});
 
-export default CardModel;
+export const UserModel = mongoose.model("User", userSchema, "Users");
+export const CardModel = mongoose.model("Card", inputDataSchema, "Cards");

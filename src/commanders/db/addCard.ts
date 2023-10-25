@@ -1,12 +1,16 @@
-import { outputDataType } from "../../types";
-import CardModel from "./Schemas";
+import { inputDataType, outputDataType } from "../../types";
+import { CardModel, UserModel } from "./Schemas";
 
 type propsType = {
-  card: outputDataType;
+  token: string;
+  card: inputDataType;
 };
 
-export default async function addCard({ card }: propsType) {
-  CardModel.insertMany({ id: "test", ...card })
+export default async function addCard({ token, card }: propsType) {
+  UserModel.findOneAndUpdate(
+    { token },
+    { $push: { cards: { id: "testId", ...card } } }
+  )
     .then(() => {
       console.log("Успешное добавление карты");
     })

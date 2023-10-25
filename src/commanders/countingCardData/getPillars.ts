@@ -18,8 +18,15 @@ type propsType = {
 
 const getDirection = (
   gender: genderType,
-  yearElement: elementType
+  yearElement: elementType,
+  monthAnimal: animalType
 ): boolean => {
+  if (monthAnimal === Animals.BULL) {
+    return gender === "male";
+  }
+  if (monthAnimal === Animals.TIGER) {
+    return gender === "female";
+  }
   const direction: boolean =
     (gender === "male" && yearElement.name.includes("Ян")) ||
     (gender === "female" && yearElement.name.includes("Инь"));
@@ -73,7 +80,7 @@ export default function getPillars({
   animals,
   elements,
 }: propsType): pillarType[] {
-  const direction = getDirection(gender, elements.year);
+  const direction = getDirection(gender, elements.year, animals.month);
   const daysToCount = getDaysToCount(direction, birthdate, animals.month);
   const firstYear = birthdate.year;
   const firstMonth = birthdate.month;

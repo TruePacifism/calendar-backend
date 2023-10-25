@@ -17,3 +17,10 @@ export const inputDataSchema = Joi.object({
 export const todayInputSchema = Joi.object({
   city: Joi.string().required(),
 });
+
+export const userInputSchema = Joi.object({
+  token: Joi.string(),
+  password: Joi.string(),
+  mail: Joi.string(),
+  name: Joi.string(),
+});

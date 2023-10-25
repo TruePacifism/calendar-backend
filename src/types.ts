@@ -250,3 +250,10 @@ export type outputDataType = inputDataType & {
 export type todayInputData = {
   city: string;
 };
+
+export type userInput = {
+  name: string;
+  token: string;
+  password: string;
+  mail: string;
+};

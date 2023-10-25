@@ -10,16 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Schemas_1 = require("./Schemas");
-function addCard({ token, card }) {
+function deleteCard({ token, cardId }) {
     return __awaiter(this, void 0, void 0, function* () {
-        Schemas_1.UserModel.findOneAndUpdate({ token }, { $push: { cards: Object.assign({ id: "testId" }, card) } })
+        console.log(token);
+        console.log(cardId);
+        Schemas_1.UserModel.findOneAndUpdate({ token }, { $pull: { cards: { id: cardId } } })
             .then(() => {
-            console.log("Успешное добавление карты");
+            console.log("Карта успешно удалена");
         })
             .catch((error) => {
-            console.error("Ошибка добавления:", error);
+            console.log("Ошибка при удалении карты");
+            console.log(error);
         });
     });
 }
-exports.default = addCard;
-//# sourceMappingURL=addCard.js.map
+exports.default = deleteCard;
+//# sourceMappingURL=deleteCard.js.map
