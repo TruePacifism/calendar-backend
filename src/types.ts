@@ -246,3 +246,7 @@ export type outputDataType = inputDataType & {
   momCardId?: string;
   dadCardId?: string;
 };
+
+export type todayInputData = {
+  city: string;
+};

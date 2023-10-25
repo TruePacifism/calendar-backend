@@ -13,3 +13,7 @@ export const inputDataSchema = Joi.object({
   livingcity: Joi.string().required(),
   birthcity: Joi.string().required(),
 });
+
+export const todayInputSchema = Joi.object({
+  city: Joi.string().required(),
+});

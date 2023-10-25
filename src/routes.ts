@@ -4,9 +4,10 @@ import bodyParser from "body-parser";
 import getCardData from "./commanders/countingCardData/getCardData";
 import addCard from "./commanders/db/addCard";
 import getCard from "./commanders/db/getCard";
-import { inputDataType } from "./types";
-import { inputDataSchema } from "./joiSchemas";
+import { inputDataType, todayInputData } from "./types";
+import { inputDataSchema, todayInputSchema } from "./joiSchemas";
 import cors from "cors";
+import countToday from "./commanders/countingCardData/countToday";
 
 const app = express();
 app.use(cors());
@@ -58,8 +59,10 @@ app.get("/count", async (req, res) => {
     res.send(error);
   }
 });
-app.get("/test", (req, res) => {
-  res.send("Testing");
+app.get("/today", async (req, res) => {
+  const query: todayInputData = await todayInputSchema.validateAsync(req.query);
+  const todayData = await countToday(query);
+  res.json(todayData);
 });
 
 export default app;
