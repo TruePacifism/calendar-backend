@@ -164,7 +164,9 @@ function getCollisions({ animals, currentPillar, pillars, }) {
                     } }));
                 id += 1;
             }
-            times.slice(idx2 === 4 ? 4 : idx2 + 1).forEach((thirdTime) => {
+            times
+                .slice(idx === 0 ? 1 : 0 + idx2 === 4 ? 4 : idx + idx2 + 1)
+                .forEach((thirdTime, idx3) => {
                 if (firstTime === secondTime ||
                     secondTime === thirdTime ||
                     firstTime === thirdTime) {

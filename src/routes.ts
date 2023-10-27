@@ -14,6 +14,7 @@ import cors from "cors";
 import countToday from "./commanders/countingCardData/countToday";
 import addUser from "./commanders/db/addUser";
 import deleteCard from "./commanders/db/deleteCard";
+import getCitiesList from "./commanders/utils/getCitiesList";
 
 const app = express();
 app.use(cors());
@@ -80,6 +81,11 @@ app.get("/today", async (req, res) => {
   const query: todayInputData = await todayInputSchema.validateAsync(req.query);
   const todayData = await countToday(query);
   res.json(todayData);
+});
+app.get("/city/:query", async (req, res) => {
+  const { query } = req.params;
+  const cities = await getCitiesList({ query });
+  res.json(cities);
 });
 
 export default app;

@@ -225,63 +225,66 @@ export default function getCollisions({
         });
         id += 1;
       }
-      times.slice(idx2 === 4 ? 4 : idx2 + 1).forEach((thirdTime) => {
-        if (
-          firstTime === secondTime ||
-          secondTime === thirdTime ||
-          firstTime === thirdTime
-        ) {
-          return;
-        }
-        const collisionInfo = getCollisionInfo(
-          animalsList[firstTime],
-          animalsList[secondTime],
-          animalsList[thirdTime]
-        );
-        if (collisionInfo) {
-          const collisionBase = {
-            id,
-            ...collisionInfo,
-          };
-          collisionsInfo[firstTime].push({
-            ...collisionBase,
-            targetName: getTargetTime(firstTime),
-            secondTarget: {
-              animal: animalsList[secondTime],
-              targetTime: getTargetTime(secondTime),
-            },
-            thirdTarget: {
-              animal: animalsList[thirdTime],
-              targetTime: getTargetTime(thirdTime),
-            },
-          });
-          collisionsInfo[secondTime].push({
-            ...collisionBase,
-            targetName: getTargetTime(secondTime),
-            secondTarget: {
-              animal: animalsList[firstTime],
-              targetTime: getTargetTime(firstTime),
-            },
-            thirdTarget: {
-              animal: animalsList[thirdTime],
-              targetTime: getTargetTime(thirdTime),
-            },
-          });
-          collisionsInfo[thirdTime].push({
-            ...collisionBase,
-            targetName: getTargetTime(thirdTime),
-            secondTarget: {
-              animal: animalsList[secondTime],
-              targetTime: getTargetTime(secondTime),
-            },
-            thirdTarget: {
-              animal: animalsList[firstTime],
-              targetTime: getTargetTime(firstTime),
-            },
-          });
-          id += 1;
-        }
-      });
+      times
+        .slice(idx === 0 ? 1 : 0 + idx2 === 4 ? 4 : idx + idx2 + 1)
+        .forEach((thirdTime, idx3) => {
+          if (
+            firstTime === secondTime ||
+            secondTime === thirdTime ||
+            firstTime === thirdTime
+          ) {
+            return;
+          }
+          const collisionInfo = getCollisionInfo(
+            animalsList[firstTime],
+            animalsList[secondTime],
+            animalsList[thirdTime]
+          );
+
+          if (collisionInfo) {
+            const collisionBase = {
+              id,
+              ...collisionInfo,
+            };
+            collisionsInfo[firstTime].push({
+              ...collisionBase,
+              targetName: getTargetTime(firstTime),
+              secondTarget: {
+                animal: animalsList[secondTime],
+                targetTime: getTargetTime(secondTime),
+              },
+              thirdTarget: {
+                animal: animalsList[thirdTime],
+                targetTime: getTargetTime(thirdTime),
+              },
+            });
+            collisionsInfo[secondTime].push({
+              ...collisionBase,
+              targetName: getTargetTime(secondTime),
+              secondTarget: {
+                animal: animalsList[firstTime],
+                targetTime: getTargetTime(firstTime),
+              },
+              thirdTarget: {
+                animal: animalsList[thirdTime],
+                targetTime: getTargetTime(thirdTime),
+              },
+            });
+            collisionsInfo[thirdTime].push({
+              ...collisionBase,
+              targetName: getTargetTime(thirdTime),
+              secondTarget: {
+                animal: animalsList[secondTime],
+                targetTime: getTargetTime(secondTime),
+              },
+              thirdTarget: {
+                animal: animalsList[firstTime],
+                targetTime: getTargetTime(firstTime),
+              },
+            });
+            id += 1;
+          }
+        });
     });
   });
   return collisionsInfo;
