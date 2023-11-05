@@ -11,8 +11,8 @@ export default async function countToday({
   const now = new Date();
   const todayProps: inputDataType = {
     name: "сегодня",
-    birthcity: city,
-    livingcity: city,
+    birthcity: "Черемхово",
+    livingcity: "Санкт-петербург",
     birthdate: {
       year: now.getFullYear(),
       month: now.getMonth(),

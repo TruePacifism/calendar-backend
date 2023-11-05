@@ -50,7 +50,6 @@ app.delete("/card/:token/:cardId", async (req, res) => {
 });
 app.get("/card", async (req, res) => {
   const { id } = req.query;
-  console.log(id);
   if (typeof id === "string") {
     const card = await getCard({ id });
     res.json(card);
@@ -58,11 +57,8 @@ app.get("/card", async (req, res) => {
 });
 app.get("/count", async (req, res) => {
   if (typeof req.query !== "object") {
-    console.log(req.query);
-
     return;
   }
-  console.log(typeof req.query);
 
   try {
     const inputData: inputDataType = await inputDataSchema.validateAsync(
@@ -78,8 +74,8 @@ app.get("/count", async (req, res) => {
   }
 });
 app.get("/today", async (req, res) => {
-  const query: todayInputData = await todayInputSchema.validateAsync(req.query);
-  const todayData = await countToday(query);
+  // const query: todayInputData = await todayInputSchema.validateAsync(req.query);
+  const todayData = await countToday({ city: "Санкт-петербург" });
   res.json(todayData);
 });
 app.get("/city/:query", async (req, res) => {

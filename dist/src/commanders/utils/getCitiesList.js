@@ -9,16 +9,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const TOKEN = "ab9911f0-d8fa-4a84-bc03-deff6bf16f49";
+var url = "https://cleaner.dadata.ru/api/v1/clean/address";
+var token = "ada648e142ad690535690892e99b4328476aa93b";
+var secret = "ee1888bbbd215aac7ac056e5973ba24ba123bdef";
+var testquery = "москва сухонская 11";
 function getCitiesList({ query }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const opencage = require("opencage-api-client");
-        const response = yield opencage.geocode({ q: query });
-        const output = response.results.map((city) => {
+        const response = yield fetch(url, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Token " + token,
+                "X-Secret": secret,
+            },
+            body: JSON.stringify([query]),
+        });
+        const responseJSON = yield response.json();
+        const output = responseJSON.map((city) => {
             return {
-                name: city.formatted,
-                coordinates: city.geometry,
+                name: city.result,
             };
         });
+        // const output = response.data.map((city) => {
+        //   return {
+        //     name: `${city.name}, ${city.state}, ${city.country}`,
+        //     coordinates: city.geometry,
+        //   };
+        // });
         return output;
     });
 }

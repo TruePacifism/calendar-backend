@@ -189,7 +189,6 @@ export default function getCollisions({
     hour: [],
     currentPillar: [],
   };
-  console.log(collisionsInfo);
 
   const times = Object.keys(collisionsInfo);
   let id = 1;

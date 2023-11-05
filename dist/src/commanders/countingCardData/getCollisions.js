@@ -143,7 +143,6 @@ function getCollisions({ animals, currentPillar, pillars, }) {
         hour: [],
         currentPillar: [],
     };
-    console.log(collisionsInfo);
     const times = Object.keys(collisionsInfo);
     let id = 1;
     times.forEach((firstTime, idx) => {

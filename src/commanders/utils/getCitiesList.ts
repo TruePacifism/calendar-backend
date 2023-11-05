@@ -1,17 +1,40 @@
+import axios from "axios";
+
 type propsType = {
   query: string;
 };
 
-export default async function getCitiesList({ query }: propsType) {
-  const opencage = require("opencage-api-client");
+const TOKEN = "ab9911f0-d8fa-4a84-bc03-deff6bf16f49";
 
-  const response = await opencage.geocode({ q: query });
-  const output = response.results.map((city) => {
+var url = "https://cleaner.dadata.ru/api/v1/clean/address";
+var token = "ada648e142ad690535690892e99b4328476aa93b";
+var secret = "ee1888bbbd215aac7ac056e5973ba24ba123bdef";
+var testquery = "москва сухонская 11";
+
+export default async function getCitiesList({ query }: propsType) {
+  const response = await fetch(url, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + token,
+      "X-Secret": secret,
+    },
+    body: JSON.stringify([query]),
+  });
+  const responseJSON = await response.json();
+
+  const output = responseJSON.map((city) => {
     return {
-      name: city.formatted,
-      coordinates: city.geometry,
+      name: city.result,
     };
   });
+  // const output = response.data.map((city) => {
+  //   return {
+  //     name: `${city.name}, ${city.state}, ${city.country}`,
+  //     coordinates: city.geometry,
+  //   };
+  // });
 
   return output;
 }

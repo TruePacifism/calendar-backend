@@ -18,8 +18,8 @@ function countToday({ city, }) {
         const now = new Date();
         const todayProps = {
             name: "сегодня",
-            birthcity: city,
-            livingcity: city,
+            birthcity: "Черемхово",
+            livingcity: "Санкт-петербург",
             birthdate: {
                 year: now.getFullYear(),
                 month: now.getMonth(),

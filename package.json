@@ -12,12 +12,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/cors": "^2.8.15",
     "@types/express": "^4.17.1",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
+    "axios": "^1.6.0",
     "body-parser": "^1.20.2",
     "concurrently": "^8.2.1",
     "cors": "^2.8.5",
@@ -26,6 +28,7 @@
     "geocoder": "^0.2.3",
     "joi": "^17.11.0",
     "mongoose": "^7.6.2",
+    "nodejs-yandex-geocoder": "^1.0.5",
     "opencage-api-client": "^1.0.2",
     "typescript-is": "^0.20.0"
   }

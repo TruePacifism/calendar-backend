@@ -52,7 +52,6 @@ app.delete("/card/:token/:cardId", (req, res) => __awaiter(void 0, void 0, void 
 }));
 app.get("/card", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.query;
-    console.log(id);
     if (typeof id === "string") {
         const card = yield (0, getCard_1.default)({ id });
         res.json(card);
@@ -60,10 +59,8 @@ app.get("/card", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (typeof req.query !== "object") {
-        console.log(req.query);
         return;
     }
-    console.log(typeof req.query);
     try {
         const inputData = yield joiSchemas_1.inputDataSchema.validateAsync(req.query);
         console.log(inputData);
@@ -76,8 +73,8 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 app.get("/today", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = yield joiSchemas_1.todayInputSchema.validateAsync(req.query);
-    const todayData = yield (0, countToday_1.default)(query);
+    // const query: todayInputData = await todayInputSchema.validateAsync(req.query);
+    const todayData = yield (0, countToday_1.default)({ city: "Санкт-петербург" });
     res.json(todayData);
 }));
 app.get("/city/:query", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

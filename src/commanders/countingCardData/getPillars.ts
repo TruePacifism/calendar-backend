@@ -47,8 +47,6 @@ const getDaysToCount = (
     (birthdateObject.getTime() - yearStartObject.getTime()) / 1000 / 3600 / 24
   );
   let daysToCount: number;
-  console.log("daysOfYear", daysOfYear);
-  console.log("Animals.RAT.monthBounds.end", Animals.RAT.monthBounds.end);
 
   if (monthAnimal === Animals.RAT) {
     if (direction) {
@@ -69,7 +67,6 @@ const getDaysToCount = (
       daysToCount = daysOfYear - monthAnimal.monthBounds.start;
     }
   }
-  console.log("daysToCount", daysToCount);
 
   return daysToCount;
 };
@@ -84,9 +81,6 @@ export default function getPillars({
   const daysToCount = getDaysToCount(direction, birthdate, animals.month);
   const firstYear = birthdate.year;
   const firstMonth = birthdate.month;
-  console.log(direction);
-  console.log(elements.year);
-  console.log(gender);
 
   let year = firstYear + Math.floor(daysToCount / 3);
   let month = birthdate.month + (daysToCount % 3) * 4;

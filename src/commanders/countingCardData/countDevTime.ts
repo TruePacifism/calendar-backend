@@ -17,6 +17,7 @@ export default async function countDevTime({
   const data = await opencage.geocode({ q: birthcity });
   if (data.status.code === 200 && data.results.length > 0) {
     const place = data.results[0];
+
     const devTime =
       ((place.annotations.timezone.offset_sec / 3600) * 15 -
         place.geometry.lng) *

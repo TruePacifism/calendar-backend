@@ -17,8 +17,6 @@ const getDaysToCount = (direction, birthdate, monthAnimal) => {
     const yearStartObject = new Date(birthdate.year, 0, 1);
     const daysOfYear = Math.ceil((birthdateObject.getTime() - yearStartObject.getTime()) / 1000 / 3600 / 24);
     let daysToCount;
-    console.log("daysOfYear", daysOfYear);
-    console.log("Animals.RAT.monthBounds.end", enums_1.Animals.RAT.monthBounds.end);
     if (monthAnimal === enums_1.Animals.RAT) {
         if (direction) {
             daysToCount =
@@ -41,7 +39,6 @@ const getDaysToCount = (direction, birthdate, monthAnimal) => {
             daysToCount = daysOfYear - monthAnimal.monthBounds.start;
         }
     }
-    console.log("daysToCount", daysToCount);
     return daysToCount;
 };
 function getPillars({ birthdate, gender, animals, elements, }) {
@@ -49,9 +46,6 @@ function getPillars({ birthdate, gender, animals, elements, }) {
     const daysToCount = getDaysToCount(direction, birthdate, animals.month);
     const firstYear = birthdate.year;
     const firstMonth = birthdate.month;
-    console.log(direction);
-    console.log(elements.year);
-    console.log(gender);
     let year = firstYear + Math.floor(daysToCount / 3);
     let month = birthdate.month + (daysToCount % 3) * 4;
     if (month > 11) {
