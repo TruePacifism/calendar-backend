@@ -15,6 +15,8 @@ import countToday from "./commanders/countingCardData/countToday";
 import addUser from "./commanders/db/addUser";
 import deleteCard from "./commanders/db/deleteCard";
 import getCitiesList from "./commanders/utils/getCitiesList";
+import getUser from "./commanders/db/getUser";
+import authUser from "./commanders/db/authUser";
 
 const app = express();
 app.use(cors());
@@ -31,11 +33,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/user", async (req, res) => {
-  const input = req.query;
-  await addUser(await userInputSchema.validateAsync(input));
+app.post("/login", async (req, res) => {
+  const input = req.body;
+  await authUser(await userInputSchema.validateAsync(input));
 
   res.send("Пользователь успешно зарегистрирован");
+});
+app.get("/login/:token", async (req, res) => {
+  const { token } = req.params;
+  const user = await getUser({ token });
+  res.json(user);
 });
 app.post("/card/:token", async (req, res) => {
   const cardInput = req.body;

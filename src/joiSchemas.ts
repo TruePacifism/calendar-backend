@@ -20,7 +20,6 @@ export const todayInputSchema = Joi.object({
 
 export const userInputSchema = Joi.object({
   token: Joi.string(),
-  password: Joi.string(),
   mail: Joi.string(),
   name: Joi.string(),
 });

@@ -20,9 +20,10 @@ const getCard_1 = __importDefault(require("./commanders/db/getCard"));
 const joiSchemas_1 = require("./joiSchemas");
 const cors_1 = __importDefault(require("cors"));
 const countToday_1 = __importDefault(require("./commanders/countingCardData/countToday"));
-const addUser_1 = __importDefault(require("./commanders/db/addUser"));
 const deleteCard_1 = __importDefault(require("./commanders/db/deleteCard"));
 const getCitiesList_1 = __importDefault(require("./commanders/utils/getCitiesList"));
+const getUser_1 = __importDefault(require("./commanders/db/getUser"));
+const authUser_1 = __importDefault(require("./commanders/db/authUser"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
@@ -35,10 +36,15 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
 });
-app.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const input = req.query;
-    yield (0, addUser_1.default)(yield joiSchemas_1.userInputSchema.validateAsync(input));
+app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const input = req.body;
+    yield (0, authUser_1.default)(yield joiSchemas_1.userInputSchema.validateAsync(input));
     res.send("Пользователь успешно зарегистрирован");
+}));
+app.get("/login/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token } = req.params;
+    const user = yield (0, getUser_1.default)({ token });
+    res.json(user);
 }));
 app.post("/card/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cardInput = req.body;

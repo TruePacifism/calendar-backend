@@ -97,7 +97,6 @@ const userSchema = new Schema({
   token: String,
   name: String,
   mail: String,
-  password: String,
   cards: [inputDataSchema],
 });
 

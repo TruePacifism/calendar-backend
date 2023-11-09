@@ -23,7 +23,6 @@ exports.todayInputSchema = joi_1.default.object({
 });
 exports.userInputSchema = joi_1.default.object({
     token: joi_1.default.string(),
-    password: joi_1.default.string(),
     mail: joi_1.default.string(),
     name: joi_1.default.string(),
 });
