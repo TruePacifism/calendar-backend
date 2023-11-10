@@ -1,4 +1,4 @@
-import { MainElements } from "../../enums";
+import { Animals, Elements, MainElements } from "../../enums";
 import {
   animalsCounted,
   cardStrengthType,
@@ -25,6 +25,9 @@ export default function getCardStrength({
   let power = -1;
   let maxPower = -1;
   Object.values(animals).forEach((animal) => {
+    if (animal === Animals.NULL_ANIMAL) {
+      return;
+    }
     if (
       powerfulElements[0].animals.includes(animal) ||
       powerfulElements[1].animals.includes(animal)
@@ -34,6 +37,9 @@ export default function getCardStrength({
     maxPower += 1;
   });
   Object.values(elements).forEach((element) => {
+    if (element === Elements.NULL_ELEMENT) {
+      return;
+    }
     if (
       powerfulElements[0].elements.includes(element) ||
       powerfulElements[1].elements.includes(element)
@@ -42,7 +48,7 @@ export default function getCardStrength({
     }
     maxPower += 1;
   });
-  let powerDescription;
+  let powerDescription: string;
   if (power < maxPower / 2) {
     powerDescription = "Слабая";
   }

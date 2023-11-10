@@ -9,9 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function countDevTime({ birthdate, birthcity, name, gender, livingcity, }) {
+function countDevTime({ birthdate, birthcity, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const { year, month, day, hour, minute } = birthdate;
+        // Если время не будет задано
+        if (hour === -1 || !birthcity) {
+            return birthdate;
+        }
         const dateObject = new Date(year, month, day, hour, minute);
         const opencage = require("opencage-api-client");
         const data = yield opencage.geocode({ q: birthcity });

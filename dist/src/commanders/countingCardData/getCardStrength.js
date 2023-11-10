@@ -7,6 +7,9 @@ function getCardStrength({ animals, elements, mainElement, }) {
     let power = -1;
     let maxPower = -1;
     Object.values(animals).forEach((animal) => {
+        if (animal === enums_1.Animals.NULL_ANIMAL) {
+            return;
+        }
         if (powerfulElements[0].animals.includes(animal) ||
             powerfulElements[1].animals.includes(animal)) {
             power += 1;
@@ -14,6 +17,9 @@ function getCardStrength({ animals, elements, mainElement, }) {
         maxPower += 1;
     });
     Object.values(elements).forEach((element) => {
+        if (element === enums_1.Elements.NULL_ELEMENT) {
+            return;
+        }
         if (powerfulElements[0].elements.includes(element) ||
             powerfulElements[1].elements.includes(element)) {
             power += 1;

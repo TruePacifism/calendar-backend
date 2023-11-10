@@ -77,6 +77,9 @@ export default function getPillars({
   animals,
   elements,
 }: propsType): pillarType[] {
+  if (birthdate.day === -1 || birthdate.month === -1 || !gender) {
+    return [];
+  }
   const direction = getDirection(gender, elements.year, animals.month);
   const daysToCount = getDaysToCount(direction, birthdate, animals.month);
   const firstYear = birthdate.year;

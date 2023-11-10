@@ -5,11 +5,12 @@ type propsType = inputDataType;
 export default async function countDevTime({
   birthdate,
   birthcity,
-  name,
-  gender,
-  livingcity,
 }: propsType): Promise<dateType> {
   const { year, month, day, hour, minute } = birthdate;
+  // Если время не будет задано
+  if (hour === -1 || !birthcity) {
+    return birthdate;
+  }
   const dateObject = new Date(year, month, day, hour, minute);
 
   const opencage = require("opencage-api-client");

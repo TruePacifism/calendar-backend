@@ -1,6 +1,5 @@
 import { Animals, Elements } from "../../enums";
 import {
-  animalType,
   animalsCounted,
   dateType,
   elementType,
@@ -23,6 +22,9 @@ const exampleDate = new Date(100, 0, 1, 0, 0);
 
 const getYear = (year: number, dayOfYear: number): elementType => {
   const index = year % 10;
+  if (dayOfYear === -1) {
+    return Object.values(Elements)[index];
+  }
   const trueIndex =
     dayOfYear < Animals.TIGER.monthBounds.start ? index - 1 : index;
   const indexWithOffset = trueIndex % 10;
@@ -64,9 +66,10 @@ export default function getElements({
   const dateObject = new Date(year, month, day, hour, minute);
   const dayOfYear = getDayOfYear(new Date(year, month, day));
   const yearElement = getYear(year, dayOfYear);
-  const monthElement = getMonth(dateObject, animals);
-  const dayElement = getDay(dateObject);
-  const hourElement = getHour(dateObject);
+  const monthElement =
+    month === -1 ? Elements.NULL_ELEMENT : getMonth(dateObject, animals);
+  const dayElement = day === -1 ? Elements.NULL_ELEMENT : getDay(dateObject);
+  const hourElement = hour === -1 ? Elements.NULL_ELEMENT : getHour(dateObject);
   return {
     year: yearElement,
     month: monthElement,

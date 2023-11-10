@@ -41,7 +41,8 @@ const exampleStars = [
 ];
 function getFallingStars({ birthdate, animals, }) {
     const { year, month, day } = birthdate;
-    const dayOfYear = Math.floor((new Date(year, month, day).getTime() - new Date(year, 0, 1).getTime()) /
+    const dayOfYear = Math.floor((new Date(year, month === -1 ? 0 : month, day === -1 ? 1 : day).getTime() -
+        new Date(year, 0, 1).getTime()) /
         1000 /
         3600 /
         24);
@@ -58,7 +59,7 @@ function getFallingStars({ birthdate, animals, }) {
     }
     exampleStars.forEach((exampleStar) => {
         const yearNumber = exampleStar.year - yearOffset + 1;
-        const monthNumber = exampleStar.month - monthOffset + 1;
+        const monthNumber = month === -1 ? -10 : exampleStar.month - monthOffset + 1;
         fallingStars.push({
             yearNumber: yearNumber > 0 ? yearNumber : yearNumber + 9,
             monthNumber: monthNumber > 0 ? monthNumber : monthNumber + 9,

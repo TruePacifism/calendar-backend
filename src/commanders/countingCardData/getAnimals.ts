@@ -21,6 +21,9 @@ type propsType = {
 
 const getYear = (year: number, dayOfYear: number): animalType => {
   const index = year % 12;
+  if (dayOfYear == -1) {
+    return Object.values(Animals)[index];
+  }
   const trueIndex =
     dayOfYear < Animals.TIGER.monthBounds.start ? index - 1 : index;
   const indexWithOffset = (trueIndex + 7) % 12;
@@ -36,6 +39,9 @@ const getMonth = (dayOfYear: number): animalType => {
   return animal ? animal : Animals.RAT;
 };
 const getDay = (year: number, month: number, day: number): animalType => {
+  if (day == -1) {
+    return Animals.NULL_ANIMAL;
+  }
   const dateObject = new Date(year, month, day);
   const timeDiff = dateObject.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
   const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
@@ -83,15 +89,15 @@ const getHour = (hour: number): animalType => {
     case 22:
       return Animals.PIG;
     default:
-      break;
+      return Animals.NULL_ANIMAL;
   }
 };
 export default function getAnimals({ birthdate }: propsType): animalsCounted {
   const { year, month, day, hour, minute } = birthdate;
   const dateObject = new Date(year, month, day, hour, minute);
-  const dayOfYear = getDayOfYear(new Date(year, month, day));
+  const dayOfYear = month == -1 ? -1 : getDayOfYear(new Date(year, month, day));
 
-  const monthAnimal = getMonth(dayOfYear);
+  const monthAnimal = day == -1 ? Animals.NULL_ANIMAL : getMonth(dayOfYear);
   const yearAnimal = getYear(year, dayOfYear);
   const dayAnimal = getDay(year, month, day);
   const hourAnimal = getHour(hour);

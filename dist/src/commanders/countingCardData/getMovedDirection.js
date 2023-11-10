@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
 function getMovedDirection({ livingcityCoordinates, birthcityCoordinates, }) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (!livingcityCoordinates || !birthcityCoordinates) {
+            return enums_1.Directions.NULL_DIRECTION;
+        }
         const { lat: livingLat, lng: livingLng } = livingcityCoordinates;
         const { lat: birthcityLat, lng: birthcityLng } = birthcityCoordinates;
         const directionX = livingLat > birthcityLat

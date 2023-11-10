@@ -7,6 +7,9 @@ type propsType = {
 export default async function getCityCoordinates({
   cityName,
 }: propsType): Promise<coordinatesType> {
+  if (!cityName) {
+    return null;
+  }
   const opencage = require("opencage-api-client");
 
   const data = await opencage.geocode({ q: cityName });

@@ -7,6 +7,27 @@ type propsType = {
 
 export default function getDirection({ birthdate }: propsType): directionType {
   const { year, month } = birthdate;
+  if (month === -1) {
+    switch (year) {
+      case 0:
+      case 1:
+        return Directions.W;
+      case 2:
+      case 3:
+        return Directions.N;
+      case 4:
+      case 5:
+        return Directions.E;
+      case 6:
+      case 7:
+        return Directions.S;
+      case 8:
+      case 9:
+        return Directions.C;
+      default:
+        return Directions.NULL_DIRECTION;
+    }
+  }
   if (month === 0) {
     return {
       shortName: "С",

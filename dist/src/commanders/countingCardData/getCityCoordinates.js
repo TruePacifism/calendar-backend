@@ -11,6 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 function getCityCoordinates({ cityName, }) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (!cityName) {
+            return null;
+        }
         const opencage = require("opencage-api-client");
         const data = yield opencage.geocode({ q: cityName });
         if (data.status.code === 200 && data.results.length > 0) {

@@ -38,6 +38,9 @@ export const Elements: customEnumType<elementType> = {
   EARTH_IN: {
     name: "Земля Инь",
   },
+  NULL_ELEMENT: {
+    name: "",
+  },
 };
 
 const firstYears: number[] = [
@@ -143,6 +146,14 @@ export const Animals: customEnumType<animalType> = {
     },
     element: Elements.WATER_YAN,
   },
+  NULL_ANIMAL: {
+    name: "",
+    monthBounds: {
+      start: -1,
+      end: -1,
+    },
+    element: Elements.NULL_ELEMENT,
+  },
 };
 export const MainElements: customEnumType<mainElementType> = {
   WATER: {
@@ -169,6 +180,11 @@ export const MainElements: customEnumType<mainElementType> = {
     elements: [Elements.WOOD_IN, Elements.WOOD_YAN],
     animals: [Animals.RABBIT, Animals.SNAKE],
     name: "Дерево",
+  },
+  NULL_SIMPLE_ELEMENT: {
+    elements: [Elements.NULL_ELEMENT, Elements.NULL_ELEMENT],
+    animals: [Animals.NULL_ANIMAL],
+    name: "",
   },
 };
 
@@ -220,5 +236,13 @@ export const Directions: customEnumType<directionType> = {
   CE: {
     shortName: "ЦВ",
     fullName: "Центро-восток",
+  },
+  C: {
+    shortName: "Ц",
+    fullName: "Центр",
+  },
+  NULL_DIRECTION: {
+    shortName: "-",
+    fullName: "Не подсчитано",
   },
 };

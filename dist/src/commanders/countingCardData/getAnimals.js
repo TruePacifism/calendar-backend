@@ -10,6 +10,9 @@ function getDayOfYear(date) {
 }
 const getYear = (year, dayOfYear) => {
     const index = year % 12;
+    if (dayOfYear == -1) {
+        return Object.values(enums_1.Animals)[index];
+    }
     const trueIndex = dayOfYear < enums_1.Animals.TIGER.monthBounds.start ? index - 1 : index;
     const indexWithOffset = (trueIndex + 7) % 12;
     return Object.values(enums_1.Animals)[indexWithOffset];
@@ -20,6 +23,9 @@ const getMonth = (dayOfYear) => {
     return animal ? animal : enums_1.Animals.RAT;
 };
 const getDay = (year, month, day) => {
+    if (day == -1) {
+        return enums_1.Animals.NULL_ANIMAL;
+    }
     const dateObject = new Date(year, month, day);
     const timeDiff = dateObject.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
     const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
@@ -66,14 +72,14 @@ const getHour = (hour) => {
         case 22:
             return enums_1.Animals.PIG;
         default:
-            break;
+            return enums_1.Animals.NULL_ANIMAL;
     }
 };
 function getAnimals({ birthdate }) {
     const { year, month, day, hour, minute } = birthdate;
     const dateObject = new Date(year, month, day, hour, minute);
-    const dayOfYear = getDayOfYear(new Date(year, month, day));
-    const monthAnimal = getMonth(dayOfYear);
+    const dayOfYear = month == -1 ? -1 : getDayOfYear(new Date(year, month, day));
+    const monthAnimal = day == -1 ? enums_1.Animals.NULL_ANIMAL : getMonth(dayOfYear);
     const yearAnimal = getYear(year, dayOfYear);
     const dayAnimal = getDay(year, month, day);
     const hourAnimal = getHour(hour);

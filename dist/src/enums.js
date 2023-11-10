@@ -32,6 +32,9 @@ exports.Elements = {
     EARTH_IN: {
         name: "Земля Инь",
     },
+    NULL_ELEMENT: {
+        name: "",
+    },
 };
 const firstYears = [
     1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 1997, 2000, 2001, 2004, 2005,
@@ -135,6 +138,14 @@ exports.Animals = {
         },
         element: exports.Elements.WATER_YAN,
     },
+    NULL_ANIMAL: {
+        name: "",
+        monthBounds: {
+            start: -1,
+            end: -1,
+        },
+        element: exports.Elements.NULL_ELEMENT,
+    },
 };
 exports.MainElements = {
     WATER: {
@@ -161,6 +172,11 @@ exports.MainElements = {
         elements: [exports.Elements.WOOD_IN, exports.Elements.WOOD_YAN],
         animals: [exports.Animals.RABBIT, exports.Animals.SNAKE],
         name: "Дерево",
+    },
+    NULL_SIMPLE_ELEMENT: {
+        elements: [exports.Elements.NULL_ELEMENT, exports.Elements.NULL_ELEMENT],
+        animals: [exports.Animals.NULL_ANIMAL],
+        name: "",
     },
 };
 exports.Directions = {
@@ -211,6 +227,14 @@ exports.Directions = {
     CE: {
         shortName: "ЦВ",
         fullName: "Центро-восток",
+    },
+    C: {
+        shortName: "Ц",
+        fullName: "Центр",
+    },
+    NULL_DIRECTION: {
+        shortName: "-",
+        fullName: "Не подсчитано",
     },
 };
 //# sourceMappingURL=enums.js.map

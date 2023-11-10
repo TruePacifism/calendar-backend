@@ -3,6 +3,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
 function getDirection({ birthdate }) {
     const { year, month } = birthdate;
+    if (month === -1) {
+        switch (year) {
+            case 0:
+            case 1:
+                return enums_1.Directions.W;
+            case 2:
+            case 3:
+                return enums_1.Directions.N;
+            case 4:
+            case 5:
+                return enums_1.Directions.E;
+            case 6:
+            case 7:
+                return enums_1.Directions.S;
+            case 8:
+            case 9:
+                return enums_1.Directions.C;
+            default:
+                return enums_1.Directions.NULL_DIRECTION;
+        }
+    }
     if (month === 0) {
         return {
             shortName: "С",

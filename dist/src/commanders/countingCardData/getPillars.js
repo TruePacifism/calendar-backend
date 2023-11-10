@@ -42,6 +42,9 @@ const getDaysToCount = (direction, birthdate, monthAnimal) => {
     return daysToCount;
 };
 function getPillars({ birthdate, gender, animals, elements, }) {
+    if (birthdate.day === -1 || birthdate.month === -1 || !gender) {
+        return [];
+    }
     const direction = getDirection(gender, elements.year, animals.month);
     const daysToCount = getDaysToCount(direction, birthdate, animals.month);
     const firstYear = birthdate.year;

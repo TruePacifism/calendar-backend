@@ -10,6 +10,9 @@ export default async function getMovedDirection({
   livingcityCoordinates,
   birthcityCoordinates,
 }: propsType): Promise<directionType> {
+  if (!livingcityCoordinates || !birthcityCoordinates) {
+    return Directions.NULL_DIRECTION;
+  }
   const { lat: livingLat, lng: livingLng } = livingcityCoordinates;
   const { lat: birthcityLat, lng: birthcityLng } = birthcityCoordinates;
 

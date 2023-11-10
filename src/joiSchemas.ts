@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const inputDataSchema = Joi.object({
-  name: Joi.string().required(),
+  name: Joi.string().allow(""),
   birthdate: Joi.object({
     year: Joi.number(),
     month: Joi.number(),
@@ -9,9 +9,9 @@ export const inputDataSchema = Joi.object({
     hour: Joi.number(),
     minute: Joi.number(),
   }),
-  gender: Joi.string().required(),
-  livingcity: Joi.string().required(),
-  birthcity: Joi.string().required(),
+  gender: Joi.string().allow(""),
+  livingcity: Joi.string().allow(""),
+  birthcity: Joi.string().allow(""),
 });
 
 export const todayInputSchema = Joi.object({
