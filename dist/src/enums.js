@@ -33,7 +33,7 @@ exports.Elements = {
         name: "Земля Инь",
     },
     NULL_ELEMENT: {
-        name: "",
+        name: " ",
     },
 };
 const firstYears = [
@@ -139,7 +139,7 @@ exports.Animals = {
         element: exports.Elements.WATER_YAN,
     },
     NULL_ANIMAL: {
-        name: "",
+        name: " ",
         monthBounds: {
             start: -1,
             end: -1,
@@ -176,7 +176,7 @@ exports.MainElements = {
     NULL_SIMPLE_ELEMENT: {
         elements: [exports.Elements.NULL_ELEMENT, exports.Elements.NULL_ELEMENT],
         animals: [exports.Animals.NULL_ANIMAL],
-        name: "",
+        name: " ",
     },
 };
 exports.Directions = {

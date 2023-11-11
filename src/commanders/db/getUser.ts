@@ -1,4 +1,3 @@
-import { userInput } from "../../types";
 import { UserModel } from "./Schemas";
 
 type propsType = {

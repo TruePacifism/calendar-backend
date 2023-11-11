@@ -39,7 +39,7 @@ export const Elements: customEnumType<elementType> = {
     name: "Земля Инь",
   },
   NULL_ELEMENT: {
-    name: "",
+    name: " ",
   },
 };
 
@@ -147,7 +147,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.WATER_YAN,
   },
   NULL_ANIMAL: {
-    name: "",
+    name: " ",
     monthBounds: {
       start: -1,
       end: -1,
@@ -184,7 +184,7 @@ export const MainElements: customEnumType<mainElementType> = {
   NULL_SIMPLE_ELEMENT: {
     elements: [Elements.NULL_ELEMENT, Elements.NULL_ELEMENT],
     animals: [Animals.NULL_ANIMAL],
-    name: "",
+    name: " ",
   },
 };
 

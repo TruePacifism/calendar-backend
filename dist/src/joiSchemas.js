@@ -25,5 +25,7 @@ exports.userInputSchema = joi_1.default.object({
     token: joi_1.default.string(),
     mail: joi_1.default.string(),
     name: joi_1.default.string(),
+    livingcity: joi_1.default.string().allow(""),
+    birthcity: joi_1.default.string().allow(""),
 });
 //# sourceMappingURL=joiSchemas.js.map

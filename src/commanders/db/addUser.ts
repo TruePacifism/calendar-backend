@@ -4,7 +4,7 @@ import { UserModel } from "./Schemas";
 type propsType = userInput;
 
 export default async function addUser(input: propsType) {
-  const id: string = Math.random().toString();
+  const id: string = input.token;
   UserModel.insertMany({ id, ...input })
     .then(() => {
       console.log("Пользователь успешно зарегистрирован");

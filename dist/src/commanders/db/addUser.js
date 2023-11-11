@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Schemas_1 = require("./Schemas");
 function addUser(input) {
     return __awaiter(this, void 0, void 0, function* () {
-        const id = Math.random().toString();
+        const id = input.token;
         Schemas_1.UserModel.insertMany(Object.assign({ id }, input))
             .then(() => {
             console.log("Пользователь успешно зарегистрирован");

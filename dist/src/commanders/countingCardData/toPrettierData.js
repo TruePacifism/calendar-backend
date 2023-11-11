@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const getPrettierAnimalsElements = ({ animals, elements, currentPillar, blackInfo, goodInfo, collisionsInfo, birthdate, }) => {
-    console.log(elements);
     return {
         year: {
             animal: {

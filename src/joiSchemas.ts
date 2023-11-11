@@ -22,4 +22,6 @@ export const userInputSchema = Joi.object({
   token: Joi.string(),
   mail: Joi.string(),
   name: Joi.string(),
+  livingcity: Joi.string().allow(""),
+  birthcity: Joi.string().allow(""),
 });
