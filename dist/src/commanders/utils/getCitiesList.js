@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const TOKEN = "ab9911f0-d8fa-4a84-bc03-deff6bf16f49";
-var url = "https://cleaner.dadata.ru/api/v1/clean/address";
+var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
 var token = "ada648e142ad690535690892e99b4328476aa93b";
 var secret = "ee1888bbbd215aac7ac056e5973ba24ba123bdef";
 var testquery = "москва сухонская 11";
@@ -21,15 +21,19 @@ function getCitiesList({ query }) {
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
+                Accept: "application/json",
                 Authorization: "Token " + token,
-                "X-Secret": secret,
             },
-            body: JSON.stringify([query]),
+            body: JSON.stringify({ query }),
         });
         const responseJSON = yield response.json();
-        const output = responseJSON.map((city) => {
+        console.log(responseJSON);
+        if (!responseJSON) {
+            return;
+        }
+        const output = responseJSON.suggestions.map((city) => {
             return {
-                name: city.result,
+                name: city.value,
             };
         });
         // const output = response.data.map((city) => {
