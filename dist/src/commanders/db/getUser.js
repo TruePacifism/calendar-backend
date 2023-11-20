@@ -13,7 +13,6 @@ const Schemas_1 = require("./Schemas");
 function getUser({ token }) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield Schemas_1.UserModel.findOne({ token });
-        console.log("Пользователь найден");
         return user;
     });
 }

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Schemas_1 = require("./Schemas");
 function getCard({ id }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const card = yield Schemas_1.CardModel.findOne({ id });
+        const card = (yield Schemas_1.CardModel.findOne({ id })).toJSON();
         return card;
     });
 }

@@ -91,6 +91,7 @@ export type collisionType = {
   secondTarget: collisionTarget;
   thirdTarget?: collisionTarget;
   targetName: collisionTargetTimeType;
+  animal: animalType;
   kind: string;
 };
 export type animalsCounted = {

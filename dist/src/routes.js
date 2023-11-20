@@ -22,6 +22,7 @@ const cors_1 = __importDefault(require("cors"));
 const countToday_1 = __importDefault(require("./commanders/countingCardData/countToday"));
 const deleteCard_1 = __importDefault(require("./commanders/db/deleteCard"));
 const getCitiesList_1 = __importDefault(require("./commanders/utils/getCitiesList"));
+const getUser_1 = __importDefault(require("./commanders/db/getUser"));
 const authUser_1 = __importDefault(require("./commanders/db/authUser"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -39,6 +40,11 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const input = req.body;
     const token = yield (0, authUser_1.default)(yield joiSchemas_1.userInputSchema.validateAsync(input));
     res.send(token);
+}));
+app.get("/login/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token } = req.params;
+    const user = yield (0, getUser_1.default)({ token });
+    res.json(user);
 }));
 app.post("/card/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cardInput = req.body;

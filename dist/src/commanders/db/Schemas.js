@@ -83,12 +83,62 @@ const inputDataSchema = new Schema({
     gender: String,
     livingcity: String,
 });
+const ageSchema = new Schema({
+    year: Number,
+    month: Number,
+});
+const directionSchema = new Schema({
+    shortName: String,
+    fullName: String,
+});
+const chartDataSchema = new Schema({
+    BULL: Number,
+    TIGER: Number,
+    RABBIT: Number,
+    MONKEY: Number,
+    DRAGON: Number,
+    RAT: Number,
+    DOG: Number,
+    ROOSTER: Number,
+    PIG: Number,
+    HORSE: Number,
+    SNAKE: Number,
+    GOAT: Number,
+});
+const genderCountSchema = new Schema({
+    male: Number,
+    female: Number,
+});
+const cardSchema = new Schema({
+    id: String,
+    name: String,
+    birthdate: dateSchema,
+    birthcity: String,
+    gender: String,
+    livingcity: String,
+    age: ageSchema,
+    year: outputDatePartSchema,
+    month: outputDatePartSchema,
+    day: outputDatePartSchema,
+    hour: outputDatePartSchema,
+    currentPillar: outputPillarSchema,
+    pillars: [outputPillarSchema],
+    movedDirection: directionSchema,
+    direction: directionSchema,
+    mainElement: mainElementSchema,
+    cardStrength: cardStrengthSchema,
+    chartData: chartDataSchema,
+    fallingStars: [fallingStarSchema],
+    genderCount: genderCountSchema,
+    momCardId: String,
+    dadCardId: String,
+});
 const userSchema = new Schema({
     id: String,
     token: String,
     name: String,
     mail: String,
-    cards: [inputDataSchema],
+    cards: [cardSchema],
 });
 exports.UserModel = mongoose_1.default.model("User", userSchema, "Users");
 exports.CardModel = mongoose_1.default.model("Card", inputDataSchema, "Cards");

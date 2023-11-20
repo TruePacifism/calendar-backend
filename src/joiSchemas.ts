@@ -8,10 +8,12 @@ export const inputDataSchema = Joi.object({
     day: Joi.number(),
     hour: Joi.number(),
     minute: Joi.number(),
+    _id: Joi.string(),
   }),
   gender: Joi.string().allow(""),
   livingcity: Joi.string().allow(""),
   birthcity: Joi.string().allow(""),
+  _id: Joi.string(),
 });
 
 export const todayInputSchema = Joi.object({
@@ -24,4 +26,5 @@ export const userInputSchema = Joi.object({
   name: Joi.string(),
   livingcity: Joi.string().allow(""),
   birthcity: Joi.string().allow(""),
+  _id: Joi.string(),
 });

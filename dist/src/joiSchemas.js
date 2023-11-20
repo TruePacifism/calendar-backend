@@ -13,10 +13,12 @@ exports.inputDataSchema = joi_1.default.object({
         day: joi_1.default.number(),
         hour: joi_1.default.number(),
         minute: joi_1.default.number(),
+        _id: joi_1.default.string(),
     }),
     gender: joi_1.default.string().allow(""),
     livingcity: joi_1.default.string().allow(""),
     birthcity: joi_1.default.string().allow(""),
+    _id: joi_1.default.string(),
 });
 exports.todayInputSchema = joi_1.default.object({
     city: joi_1.default.string().required(),
@@ -27,5 +29,6 @@ exports.userInputSchema = joi_1.default.object({
     name: joi_1.default.string(),
     livingcity: joi_1.default.string().allow(""),
     birthcity: joi_1.default.string().allow(""),
+    _id: joi_1.default.string(),
 });
 //# sourceMappingURL=joiSchemas.js.map

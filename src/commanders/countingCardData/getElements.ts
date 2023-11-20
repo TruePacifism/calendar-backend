@@ -63,7 +63,6 @@ export default function getElements({
   animals,
 }: propsType): elementsCounted {
   const { year, month, day, hour, minute } = birthdate;
-  console.log(birthdate);
 
   const dateObject = new Date(
     year,
@@ -72,7 +71,6 @@ export default function getElements({
     hour === -1 ? 1 : hour,
     minute === -1 ? 1 : minute
   );
-  console.log(dateObject);
 
   const dayOfYear = getDayOfYear(new Date(year, month, day));
   const yearElement = getYear(year, dayOfYear);

@@ -39,6 +39,12 @@ app.post("/login", async (req, res) => {
 
   res.send(token);
 });
+app.get("/login/:token", async (req, res) => {
+  const { token } = req.params;
+  const user = await getUser({ token });
+
+  res.json(user);
+});
 app.post("/card/:token", async (req, res) => {
   const cardInput = req.body;
 

@@ -119,7 +119,7 @@ const getTargetTime = (time) => {
     }
 };
 const getCollisionInfo = (firstAnimal, secondAnimal, thirdAnimal) => {
-    if (!firstAnimal || !secondAnimal || !thirdAnimal) {
+    if (!firstAnimal || !secondAnimal) {
         return;
     }
     const animalNames = thirdAnimal
@@ -127,9 +127,10 @@ const getCollisionInfo = (firstAnimal, secondAnimal, thirdAnimal) => {
             .map((animal) => animal.name)
             .sort()
         : [firstAnimal, secondAnimal].map((animal) => animal.name).sort();
-    const collisionInfo = collisionsInfo.find((collisionInfo) => collisionInfo.animals.every((animalName, idx) => animalNames[idx] === animalName));
-    if (collisionInfo) {
-        const { color, kind, shape } = collisionInfo;
+    const foundCollisionInfo = collisionsInfo.find((collisionInfo) => collisionInfo.animals.length === animalNames.length &&
+        collisionInfo.animals.every((animalName, idx) => animalNames[idx] === animalName));
+    if (foundCollisionInfo) {
+        const { color, kind, shape } = foundCollisionInfo;
         return { color, kind, shape };
     }
 };
@@ -144,28 +145,37 @@ function getCollisions({ animals, currentPillar, pillars, }) {
         currentPillar: [],
     };
     const times = Object.keys(collisionsInfo);
+    const selectedTimes = {
+        first: 0,
+        second: 1,
+        third: 2,
+    };
     let id = 1;
     times.forEach((firstTime, idx) => {
-        times.slice(idx === 4 ? 4 : idx + 1).forEach((secondTime, idx2) => {
-            if (firstTime === secondTime) {
-                return;
-            }
+        selectedTimes.first = idx;
+        if (selectedTimes.first === 4) {
+            return;
+        }
+        times.slice(selectedTimes.first + 1).forEach((secondTime, idx2) => {
+            selectedTimes.second = selectedTimes.first + 1 + idx2;
             const collisionInfo = getCollisionInfo(animalsList[firstTime], animalsList[secondTime]);
             if (collisionInfo) {
                 const collisionBase = Object.assign({ id }, collisionInfo);
-                collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(firstTime), secondTarget: {
+                collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { animal: animalsList[firstTime], targetName: getTargetTime(firstTime), secondTarget: {
                         animal: animalsList[secondTime],
                         targetTime: getTargetTime(secondTime),
                     } }));
-                collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(secondTime), secondTarget: {
+                collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(secondTime), animal: animalsList[secondTime], secondTarget: {
                         animal: animalsList[firstTime],
                         targetTime: getTargetTime(firstTime),
                     } }));
                 id += 1;
             }
-            times
-                .slice(idx === 0 ? 1 : 0 + idx2 === 4 ? 4 : idx + idx2 + 1)
-                .forEach((thirdTime, idx3) => {
+            if (idx2 === 4) {
+                return;
+            }
+            times.slice(selectedTimes.second + 1).forEach((thirdTime, idx3) => {
+                selectedTimes.third = selectedTimes.second + 1 + idx3;
                 if (firstTime === secondTime ||
                     secondTime === thirdTime ||
                     firstTime === thirdTime) {
@@ -174,21 +184,21 @@ function getCollisions({ animals, currentPillar, pillars, }) {
                 const collisionInfo = getCollisionInfo(animalsList[firstTime], animalsList[secondTime], animalsList[thirdTime]);
                 if (collisionInfo) {
                     const collisionBase = Object.assign({ id }, collisionInfo);
-                    collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(firstTime), secondTarget: {
+                    collisionsInfo[firstTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(firstTime), animal: animalsList[firstTime], secondTarget: {
                             animal: animalsList[secondTime],
                             targetTime: getTargetTime(secondTime),
                         }, thirdTarget: {
                             animal: animalsList[thirdTime],
                             targetTime: getTargetTime(thirdTime),
                         } }));
-                    collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(secondTime), secondTarget: {
+                    collisionsInfo[secondTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(secondTime), animal: animalsList[secondTime], secondTarget: {
                             animal: animalsList[firstTime],
                             targetTime: getTargetTime(firstTime),
                         }, thirdTarget: {
                             animal: animalsList[thirdTime],
                             targetTime: getTargetTime(thirdTime),
                         } }));
-                    collisionsInfo[thirdTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(thirdTime), secondTarget: {
+                    collisionsInfo[thirdTime].push(Object.assign(Object.assign({}, collisionBase), { targetName: getTargetTime(thirdTime), animal: animalsList[thirdTime], secondTarget: {
                             animal: animalsList[secondTime],
                             targetTime: getTargetTime(secondTime),
                         }, thirdTarget: {
@@ -197,9 +207,26 @@ function getCollisions({ animals, currentPillar, pillars, }) {
                         } }));
                     id += 1;
                 }
+                // console.log(selectedTimes);
             });
+            // console.log(selectedTimes);
         });
     });
+    // Object.entries(collisionsInfo).forEach((value) => {
+    //   const [time, collisions] = value;
+    //   console.log(
+    //     time,
+    //     collisions.map((collision) => {
+    //       const { id, animal, secondTarget, thirdTarget } = collision;
+    //       return {
+    //         id,
+    //         animalOne: animal.name,
+    //         animalTwo: secondTarget.animal.name,
+    //         animalThree: thirdTarget ? thirdTarget.animal.name : null,
+    //       };
+    //     })
+    //   );
+    // });
     return collisionsInfo;
 }
 exports.default = getCollisions;

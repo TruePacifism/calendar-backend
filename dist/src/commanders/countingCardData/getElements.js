@@ -43,9 +43,7 @@ const getHour = (date) => {
 };
 function getElements({ birthdate, animals, }) {
     const { year, month, day, hour, minute } = birthdate;
-    console.log(birthdate);
     const dateObject = new Date(year, month === -1 ? 0 : month, day === -1 ? 1 : day, hour === -1 ? 1 : hour, minute === -1 ? 1 : minute);
-    console.log(dateObject);
     const dayOfYear = getDayOfYear(new Date(year, month, day));
     const yearElement = getYear(year, dayOfYear);
     const monthElement = month === -1 ? enums_1.Elements.NULL_ELEMENT : getMonth(dateObject, animals);
