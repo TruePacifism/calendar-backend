@@ -204,6 +204,15 @@ export type directionType = {
   shortName: string;
   fullName: string;
 };
+export type lineChartDataPartType = {
+  date: number;
+  value: number;
+};
+export type lineChartDataType = {
+  year: lineChartDataPartType[];
+  month: lineChartDataPartType[];
+  day: lineChartDataPartType[];
+};
 
 export type countedCardDataType = inputDataType & {
   age: ageType;
