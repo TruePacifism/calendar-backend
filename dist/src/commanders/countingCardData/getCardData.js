@@ -26,6 +26,7 @@ const getElements_1 = __importDefault(require("./getElements"));
 const getFallingStars_1 = __importDefault(require("./getFallingStars"));
 const getGenderCount_1 = __importDefault(require("./getGenderCount"));
 const getGoodInfo_1 = __importDefault(require("./getGoodInfo"));
+const getLineChartData_1 = __importDefault(require("./getLineChartData"));
 const getMainElement_1 = __importDefault(require("./getMainElement"));
 const getMovedDirection_1 = __importDefault(require("./getMovedDirection"));
 const getPillars_1 = __importDefault(require("./getPillars"));
@@ -51,6 +52,11 @@ function getCardData(inputData) {
         });
         const currentPillar = (0, getCurrentPillar_1.default)({ pillars });
         const mainElement = (0, getMainElement_1.default)({ elements });
+        const lineChartData = (0, getLineChartData_1.default)({
+            year: animals.year,
+            month: animals.month,
+            day: animals.day,
+        });
         const cardStrength = (0, getCardStrength_1.default)({ animals, elements, mainElement });
         const blackInfo = (0, getBlackInfo_1.default)({ animals, elements, currentPillar });
         const goodInfo = (0, getGoodInfo_1.default)({
@@ -77,6 +83,7 @@ function getCardData(inputData) {
                 direction,
                 pillars,
                 movedDirection,
+                lineChartData,
                 mainElement,
                 currentPillar,
                 blackInfo,

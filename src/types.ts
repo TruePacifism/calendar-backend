@@ -111,7 +111,7 @@ export type genderCountType = {
   female: number;
 };
 
-export type genderType = "male" | "female";
+export type genderType = "male" | "female" | "";
 export type inputDataType = {
   name: string;
   birthdate: dateType;
@@ -227,6 +227,7 @@ export type countedCardDataType = inputDataType & {
   chartData: parentChartInfoType;
   goodInfo: goodInfoType;
   direction: directionType;
+  lineChartData: lineChartDataType;
   collisionsInfo: collisionsInfoType;
   fallingStars: fallingStarType[];
   genderCount: genderCountType;
@@ -247,6 +248,7 @@ export type outputDataType = inputDataType & {
   currentPillar: outputPillarType;
   pillars: outputPillarType[];
   movedDirection: directionType;
+  lineChartData: lineChartDataType;
   direction: directionType;
   mainElement: mainElementType;
   cardStrength: cardStrengthType;

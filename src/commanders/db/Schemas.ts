@@ -76,11 +76,26 @@ const outputDatePartSchema = new Schema({
 });
 
 const dateSchema = new Schema({
-  year: Number,
-  month: Number,
-  day: Number,
-  hour: Number,
-  minute: Number,
+  year: {
+    type: Number,
+    required: true,
+  },
+  month: {
+    type: Number,
+    required: true,
+  },
+  day: {
+    type: Number,
+    required: true,
+  },
+  hour: {
+    type: Number,
+    required: true,
+  },
+  minute: {
+    type: Number,
+    required: true,
+  },
 });
 
 const inputDataSchema = new Schema({
@@ -88,7 +103,10 @@ const inputDataSchema = new Schema({
   name: String,
   birthdate: dateSchema,
   birthcity: String,
-  gender: String,
+  gender: {
+    type: String,
+    required: true,
+  },
   livingcity: String,
 });
 
@@ -118,6 +136,15 @@ const genderCountSchema = new Schema({
   male: Number,
   female: Number,
 });
+const lineChartDataPartSchema = new Schema({
+  value: Number,
+  date: String,
+});
+const lineChartDataSchema = new Schema({
+  year: [lineChartDataPartSchema],
+  month: [lineChartDataPartSchema],
+  day: [lineChartDataPartSchema],
+});
 
 const cardSchema = new Schema({
   id: String,
@@ -131,6 +158,7 @@ const cardSchema = new Schema({
   month: outputDatePartSchema,
   day: outputDatePartSchema,
   hour: outputDatePartSchema,
+  lineChartData: lineChartDataSchema,
   currentPillar: outputPillarSchema,
   pillars: [outputPillarSchema],
   movedDirection: directionSchema,

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const date_and_time_1 = require("date-and-time");
 const enums_1 = require("../../enums");
 const getAnimals_1 = __importDefault(require("./getAnimals"));
 const animalsOrder = [
@@ -27,41 +28,63 @@ const getAnimalValue = (animalBirth, animalNow) => {
     const indexAnimalNow = animalsOrder.findIndex((animal) => animal.name === animalNow.name);
     const indexDiff = Math.abs(indexAnimalBirth - indexAnimalNow);
     const value = indexDiff > 6 ? indexDiff - 6 : indexDiff;
-    return value;
+    return value - 6;
+};
+const dateToObject = (date) => {
+    return {
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+        hour: date.getHours(),
+        minute: date.getMinutes(),
+    };
 };
 function getLineChartData({ year, month, day, }) {
     const now = new Date();
-    const nowAnimals = (0, getAnimals_1.default)({
-        birthdate: {
-            year: now.getFullYear(),
-            month: now.getMonth(),
-            day: now.getDate(),
-            hour: now.getHours(),
-            minute: now.getMinutes(),
-        },
-    });
-    const yearValue = getAnimalValue(year, nowAnimals.year);
-    const monthValue = (getAnimalValue(month, nowAnimals.month) * 2) / 3;
-    const dayValue = (getAnimalValue(day, nowAnimals.day) * 1) / 3;
+    const yearNowValue = getAnimalValue(year, (0, getAnimals_1.default)({ birthdate: dateToObject(now) }).year);
+    const monthNowValue = getAnimalValue(month, (0, getAnimals_1.default)({ birthdate: dateToObject(now) }).month);
+    const startYearsDate = (0, date_and_time_1.addYears)(now, -4);
+    const yearValues = [];
+    const startMonthDate = (0, date_and_time_1.addMonths)(now, -4);
+    const monthValues = [];
+    const startDaysDate = (0, date_and_time_1.addDays)(now, -4);
+    const dayValues = [];
+    for (let i = 1; i <= 9; i++) {
+        // Вычисление данных по году
+        const yearDate = (0, date_and_time_1.addYears)(startYearsDate, i);
+        const yearAnimal = (0, getAnimals_1.default)({
+            birthdate: dateToObject(yearDate),
+        }).year;
+        const yearValue = getAnimalValue(year, yearAnimal);
+        yearValues.push({
+            date: yearDate.getFullYear(),
+            value: yearValue,
+        });
+        // Вычисление данных по месяцу
+        const monthDate = (0, date_and_time_1.addMonths)(startMonthDate, i);
+        const monthAnimal = (0, getAnimals_1.default)({
+            birthdate: dateToObject(monthDate),
+        }).month;
+        const monthValue = getAnimalValue(month, monthAnimal);
+        monthValues.push({
+            date: monthDate.getMonth(),
+            value: monthValue * (2 / 3) + yearNowValue,
+        });
+        //Вычисление данных по дню
+        const dayDate = (0, date_and_time_1.addDays)(startDaysDate, i);
+        const dayAnimal = (0, getAnimals_1.default)({
+            birthdate: dateToObject(dayDate),
+        }).day;
+        const dayValue = getAnimalValue(day, dayAnimal);
+        dayValues.push({
+            date: dayDate.getDate(),
+            value: dayValue * (1 / 3) + monthNowValue * (2 / 3) + yearNowValue,
+        });
+    }
     const result = {
-        year: [
-            {
-                date: now.getFullYear(),
-                value: yearValue,
-            },
-        ],
-        month: [
-            {
-                date: now.getMonth(),
-                value: monthValue,
-            },
-        ],
-        day: [
-            {
-                date: now.getDate(),
-                value: dayValue,
-            },
-        ],
+        year: yearValues,
+        month: monthValues,
+        day: dayValues,
     };
     return result;
 }
