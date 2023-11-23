@@ -42,9 +42,21 @@ const getAnimalValue = (
   const indexAnimalNow: number = animalsOrder.findIndex(
     (animal) => animal.name === animalNow.name
   );
-  const indexDiff: number = Math.abs(indexAnimalBirth - indexAnimalNow);
-  const value: number = indexDiff > 6 ? indexDiff - 6 : indexDiff;
-  return value - 6;
+  const indexDiff: number =
+    indexAnimalBirth > indexAnimalNow
+      ? indexAnimalBirth - indexAnimalNow
+      : indexAnimalNow - indexAnimalBirth;
+  const indexDiffMinimal: number = indexDiff > 6 ? 12 - indexDiff : indexDiff;
+  const value: number = Math.abs(indexDiffMinimal - 6) - 3;
+  console.log(
+    `Животное рождения: ${animalBirth.name}
+    Животное для сравнения: ${animalNow.name}
+    Разница: ${indexDiff}
+    Минимальная разница: ${indexDiffMinimal}
+    Результат: ${value}`
+  );
+
+  return value;
 };
 
 const dateToObject = (date: Date): dateType => {

@@ -24,6 +24,7 @@ const deleteCard_1 = __importDefault(require("./commanders/db/deleteCard"));
 const getCitiesList_1 = __importDefault(require("./commanders/utils/getCitiesList"));
 const getUser_1 = __importDefault(require("./commanders/db/getUser"));
 const authUser_1 = __importDefault(require("./commanders/db/authUser"));
+const recountAllData_1 = __importDefault(require("./commanders/countingCardData/recountAllData"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
@@ -87,6 +88,10 @@ app.get("/city/:query", (req, res) => __awaiter(void 0, void 0, void 0, function
     const { query } = req.params;
     const cities = yield (0, getCitiesList_1.default)({ query });
     res.json(cities);
+}));
+app.patch("/recount", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, recountAllData_1.default)();
+    res.send(result);
 }));
 exports.default = app;
 //# sourceMappingURL=routes.js.map

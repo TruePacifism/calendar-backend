@@ -17,6 +17,7 @@ import deleteCard from "./commanders/db/deleteCard";
 import getCitiesList from "./commanders/utils/getCitiesList";
 import getUser from "./commanders/db/getUser";
 import authUser from "./commanders/db/authUser";
+import recountAllData from "./commanders/countingCardData/recountAllData";
 
 const app = express();
 app.use(cors());
@@ -90,6 +91,10 @@ app.get("/city/:query", async (req, res) => {
   const { query } = req.params;
   const cities = await getCitiesList({ query });
   res.json(cities);
+});
+app.patch("/recount", async (req, res) => {
+  const result = await recountAllData();
+  res.send(result);
 });
 
 export default app;
