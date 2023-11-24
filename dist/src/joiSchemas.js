@@ -21,7 +21,17 @@ exports.inputDataSchema = joi_1.default.object({
     _id: joi_1.default.string(),
 });
 exports.todayInputSchema = joi_1.default.object({
-    user: joi_1.default.object(),
+    user: joi_1.default.object({
+        _id: joi_1.default.string(),
+        id: joi_1.default.number(),
+        token: joi_1.default.string(),
+        name: joi_1.default.string(),
+        mail: joi_1.default.string(),
+        livingcity: joi_1.default.string(),
+        birthcity: joi_1.default.string(),
+        UTC: joi_1.default.number(),
+        __v: joi_1.default.string(),
+    }),
 });
 exports.userInputSchema = joi_1.default.object({
     token: joi_1.default.string(),
