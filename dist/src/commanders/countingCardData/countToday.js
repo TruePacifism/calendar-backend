@@ -38,14 +38,15 @@ function countToday({ user, }) {
         console.log("nowServer", nowServer);
         const now = new Date(Date.UTC(nowServer.getUTCFullYear(), nowServer.getUTCMonth(), nowServer.getUTCDate(), nowServer.getUTCHours(), nowServer.getUTCMinutes()));
         console.log("nowUTC", now);
-        (0, date_and_time_1.addHours)(now, UTC);
-        console.log("nowResult", now);
+        const newHours = (0, date_and_time_1.addHours)(now, UTC - 2);
+        console.log("UTC", UTC);
+        console.log("nowResult", newHours);
         const birthdate = {
-            year: now.getFullYear(),
-            month: now.getMonth(),
-            day: now.getDate(),
-            hour: now.getHours(),
-            minute: now.getMinutes(),
+            year: newHours.getFullYear(),
+            month: newHours.getMonth(),
+            day: newHours.getDate(),
+            hour: newHours.getHours(),
+            minute: newHours.getMinutes(),
         };
         const gender = "female";
         const inputData = {

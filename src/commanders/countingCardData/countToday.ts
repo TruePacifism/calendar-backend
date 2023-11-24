@@ -47,14 +47,16 @@ export default async function countToday({
     )
   );
   console.log("nowUTC", now);
-  addHours(now, UTC);
-  console.log("nowResult", now);
+  const newHours = addHours(now, UTC - 2);
+  console.log("UTC", UTC);
+
+  console.log("nowResult", newHours);
   const birthdate = {
-    year: now.getFullYear(),
-    month: now.getMonth(),
-    day: now.getDate(),
-    hour: now.getHours(),
-    minute: now.getMinutes(),
+    year: newHours.getFullYear(),
+    month: newHours.getMonth(),
+    day: newHours.getDate(),
+    hour: newHours.getHours(),
+    minute: newHours.getMinutes(),
   };
   const gender = "female";
   const inputData: inputDataType = {
