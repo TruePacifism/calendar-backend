@@ -31,11 +31,13 @@ const getAnimalValue = (animalBirth, animalNow) => {
         : indexAnimalNow - indexAnimalBirth;
     const indexDiffMinimal = indexDiff > 6 ? 12 - indexDiff : indexDiff;
     const value = Math.abs(indexDiffMinimal - 6) - 3;
-    console.log(`Животное рождения: ${animalBirth.name}
-    Животное для сравнения: ${animalNow.name}
-    Разница: ${indexDiff}
-    Минимальная разница: ${indexDiffMinimal}
-    Результат: ${value}`);
+    // console.log(
+    //   `Животное рождения: ${animalBirth.name}
+    //   Животное для сравнения: ${animalNow.name}
+    //   Разница: ${indexDiff}
+    //   Минимальная разница: ${indexDiffMinimal}
+    //   Результат: ${value}`
+    // );
     return value;
 };
 const dateToObject = (date) => {

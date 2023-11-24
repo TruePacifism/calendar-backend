@@ -17,6 +17,9 @@ function getMovedDirection({ livingcityCoordinates, birthcityCoordinates, }) {
         }
         const { lat: livingLat, lng: livingLng } = livingcityCoordinates;
         const { lat: birthcityLat, lng: birthcityLng } = birthcityCoordinates;
+        if (livingLat === birthcityLat && livingLng === birthcityLng) {
+            return enums_1.Directions.NULL_DIRECTION;
+        }
         const directionX = livingLat > birthcityLat
             ? "запад"
             : livingLat < birthcityLat

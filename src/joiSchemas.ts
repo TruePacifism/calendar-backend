@@ -17,7 +17,7 @@ export const inputDataSchema = Joi.object({
 });
 
 export const todayInputSchema = Joi.object({
-  city: Joi.string().required(),
+  user: Joi.object(),
 });
 
 export const userInputSchema = Joi.object({

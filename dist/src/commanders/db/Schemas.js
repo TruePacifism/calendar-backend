@@ -166,6 +166,9 @@ const userSchema = new Schema({
     token: String,
     name: String,
     mail: String,
+    livingcity: String,
+    birthcity: String,
+    UTC: Number,
     cards: [cardSchema],
 });
 exports.UserModel = mongoose_1.default.model("User", userSchema, "Users");

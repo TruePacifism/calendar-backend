@@ -10,6 +10,7 @@ import {
   outputDatePartType,
   outputPillarType,
   pillarType,
+  todayDataType,
 } from "../../types";
 
 type propsType = {

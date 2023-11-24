@@ -80,8 +80,10 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 app.get("/today", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const query: todayInputData = await todayInputSchema.validateAsync(req.query);
-    const todayData = yield (0, countToday_1.default)({ city: "Санкт-петербург" });
+    console.log(req.query);
+    const query = yield joiSchemas_1.todayInputSchema.validateAsync(req.query);
+    const { user } = query;
+    const todayData = yield (0, countToday_1.default)({ user });
     res.json(todayData);
 }));
 app.get("/city/:query", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

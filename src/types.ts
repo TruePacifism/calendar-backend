@@ -259,8 +259,30 @@ export type outputDataType = inputDataType & {
   dadCardId?: string;
 };
 
+export type todayDataType = {
+  name: string;
+  livingcity: string;
+  birthcity: string;
+  birthdate: dateType;
+  gender: genderType;
+  age: ageType;
+  animals: animalsCounted;
+  elements: elementsCounted;
+  pillars: pillarType[];
+  currentPillar: pillarType;
+  mainElement: mainElementType;
+  cardStrength: cardStrengthType;
+  blackInfo: blackInfoType;
+  movedDirection: directionType;
+  chartData: parentChartInfoType;
+  goodInfo: goodInfoType;
+  direction: directionType;
+  collisionsInfo: collisionsInfoType;
+  genderCount: genderCountType;
+};
+
 export type todayInputData = {
-  city: string;
+  user: userType;
 };
 
 export type userInput = {
@@ -268,4 +290,16 @@ export type userInput = {
   token: string;
   password: string;
   mail: string;
+  livingcity: string;
+  birthcity: string;
+};
+export type userType = {
+  name: string;
+  token: string;
+  password: string;
+  mail: string;
+  livingcity: string;
+  birthcity: string;
+  UTC: number;
+  cards: [];
 };

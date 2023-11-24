@@ -12,7 +12,6 @@ import {
 } from "./joiSchemas";
 import cors from "cors";
 import countToday from "./commanders/countingCardData/countToday";
-import addUser from "./commanders/db/addUser";
 import deleteCard from "./commanders/db/deleteCard";
 import getCitiesList from "./commanders/utils/getCitiesList";
 import getUser from "./commanders/db/getUser";
@@ -83,8 +82,11 @@ app.get("/count", async (req, res) => {
   }
 });
 app.get("/today", async (req, res) => {
-  // const query: todayInputData = await todayInputSchema.validateAsync(req.query);
-  const todayData = await countToday({ city: "Санкт-петербург" });
+  console.log(req.query);
+
+  const query: todayInputData = await todayInputSchema.validateAsync(req.query);
+  const { user } = query;
+  const todayData = await countToday({ user });
   res.json(todayData);
 });
 app.get("/city/:query", async (req, res) => {

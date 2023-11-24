@@ -15,6 +15,9 @@ export default async function getMovedDirection({
   }
   const { lat: livingLat, lng: livingLng } = livingcityCoordinates;
   const { lat: birthcityLat, lng: birthcityLng } = birthcityCoordinates;
+  if (livingLat === birthcityLat && livingLng === birthcityLng) {
+    return Directions.NULL_DIRECTION;
+  }
 
   const directionX =
     livingLat > birthcityLat

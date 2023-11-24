@@ -1,4 +1,3 @@
-import { MainElements } from "../../enums";
 import { animalsCounted, inputDataType, outputDataType } from "../../types";
 import countDevTime from "./countDevTime";
 import getAge from "./getAge";

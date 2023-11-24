@@ -48,13 +48,13 @@ const getAnimalValue = (
       : indexAnimalNow - indexAnimalBirth;
   const indexDiffMinimal: number = indexDiff > 6 ? 12 - indexDiff : indexDiff;
   const value: number = Math.abs(indexDiffMinimal - 6) - 3;
-  console.log(
-    `Животное рождения: ${animalBirth.name}
-    Животное для сравнения: ${animalNow.name}
-    Разница: ${indexDiff}
-    Минимальная разница: ${indexDiffMinimal}
-    Результат: ${value}`
-  );
+  // console.log(
+  //   `Животное рождения: ${animalBirth.name}
+  //   Животное для сравнения: ${animalNow.name}
+  //   Разница: ${indexDiff}
+  //   Минимальная разница: ${indexDiffMinimal}
+  //   Результат: ${value}`
+  // );
 
   return value;
 };

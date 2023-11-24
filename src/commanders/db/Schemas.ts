@@ -177,6 +177,9 @@ const userSchema = new Schema({
   token: String,
   name: String,
   mail: String,
+  livingcity: String,
+  birthcity: String,
+  UTC: Number,
   cards: [cardSchema],
 });
 
