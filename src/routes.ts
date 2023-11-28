@@ -85,8 +85,8 @@ app.get("/today", async (req, res) => {
   console.log(req.query);
 
   const query: todayInputData = await todayInputSchema.validateAsync(req.query);
-  const { user } = query;
-  const todayData = await countToday({ user });
+  const { user, dayOffset } = query;
+  const todayData = await countToday({ user, dayOffset });
   res.json(todayData);
 });
 app.get("/city/:query", async (req, res) => {

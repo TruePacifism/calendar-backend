@@ -283,6 +283,7 @@ export type todayDataType = {
 
 export type todayInputData = {
   user: userType;
+  dayOffset: number;
 };
 
 export type userInput = {

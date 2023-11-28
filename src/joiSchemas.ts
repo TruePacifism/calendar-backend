@@ -28,6 +28,7 @@ export const todayInputSchema = Joi.object({
     UTC: Joi.number(),
     __v: Joi.string(),
   }),
+  dayOffset: Joi.number(),
 });
 
 export const userInputSchema = Joi.object({

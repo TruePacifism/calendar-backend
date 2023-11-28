@@ -32,6 +32,7 @@ exports.todayInputSchema = joi_1.default.object({
         UTC: joi_1.default.number(),
         __v: joi_1.default.string(),
     }),
+    dayOffset: joi_1.default.number(),
 });
 exports.userInputSchema = joi_1.default.object({
     token: joi_1.default.string(),

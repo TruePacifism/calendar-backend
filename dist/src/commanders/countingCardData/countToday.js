@@ -31,22 +31,22 @@ const getMovedDirection_1 = __importDefault(require("./getMovedDirection"));
 const getPillars_1 = __importDefault(require("./getPillars"));
 const toPrettierData_1 = __importDefault(require("./toPrettierData"));
 const getCityCoordinates_1 = __importDefault(require("./getCityCoordinates"));
-function countToday({ user, }) {
+function countToday({ user, dayOffset, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const { birthcity, livingcity, UTC } = user;
         const nowServer = new Date();
         console.log("nowServer", nowServer);
         const now = new Date(Date.UTC(nowServer.getUTCFullYear(), nowServer.getUTCMonth(), nowServer.getUTCDate(), nowServer.getUTCHours(), nowServer.getUTCMinutes()));
         console.log("nowUTC", now);
-        const newHours = (0, date_and_time_1.addHours)(now, UTC - 2);
+        const newDate = (0, date_and_time_1.addDays)((0, date_and_time_1.addHours)(now, UTC - 2), dayOffset);
         console.log("UTC", UTC);
-        console.log("nowResult", newHours);
+        console.log("nowResult", newDate);
         const birthdate = {
-            year: newHours.getFullYear(),
-            month: newHours.getMonth(),
-            day: newHours.getDate(),
-            hour: newHours.getHours(),
-            minute: newHours.getMinutes(),
+            year: newDate.getFullYear(),
+            month: newDate.getMonth(),
+            day: newDate.getDate(),
+            hour: newDate.getHours(),
+            minute: newDate.getMinutes(),
         };
         const gender = "female";
         const inputData = {

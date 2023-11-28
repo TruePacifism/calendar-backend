@@ -1,4 +1,4 @@
-import { addHours } from "date-and-time";
+import { addDays, addHours } from "date-and-time";
 import getCardData from "./getCardData";
 import {
   animalsCounted,
@@ -28,10 +28,12 @@ import getCityCoordinates from "./getCityCoordinates";
 
 type propsType = {
   user: userType;
+  dayOffset: number;
 };
 
 export default async function countToday({
   user,
+  dayOffset,
 }: propsType): Promise<outputDataType> {
   const { birthcity, livingcity, UTC } = user;
   const nowServer = new Date();
@@ -47,16 +49,16 @@ export default async function countToday({
     )
   );
   console.log("nowUTC", now);
-  const newHours = addHours(now, UTC - 2);
+  const newDate = addDays(addHours(now, UTC - 2), dayOffset);
   console.log("UTC", UTC);
 
-  console.log("nowResult", newHours);
+  console.log("nowResult", newDate);
   const birthdate = {
-    year: newHours.getFullYear(),
-    month: newHours.getMonth(),
-    day: newHours.getDate(),
-    hour: newHours.getHours(),
-    minute: newHours.getMinutes(),
+    year: newDate.getFullYear(),
+    month: newDate.getMonth(),
+    day: newDate.getDate(),
+    hour: newDate.getHours(),
+    minute: newDate.getMinutes(),
   };
   const gender = "female";
   const inputData: inputDataType = {
