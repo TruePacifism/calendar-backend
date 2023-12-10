@@ -78,7 +78,7 @@ export default async function countToday({
   const animals: animalsCounted = getAnimals({ birthdate });
   const elements = getElements({ birthdate, animals: animals });
   const pillars = getPillars({
-    birthdate,
+    trueBirthdate: birthdate,
     gender,
     animals,
     elements,
@@ -110,6 +110,7 @@ export default async function countToday({
   const prettierData = toPrettierData({
     data: {
       ...inputData,
+      trueBirthdate: birthdate,
       age,
       birthdate,
       animals,

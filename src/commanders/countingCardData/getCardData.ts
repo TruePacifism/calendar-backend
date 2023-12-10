@@ -29,12 +29,12 @@ export default async function getCardData(
   const livingcityCoordinates = await getCityCoordinates({
     cityName: inputData.livingcity,
   });
-  const birthdate = await countDevTime(inputData);
-  const age = getAge({ birthdate });
-  const animals: animalsCounted = getAnimals({ birthdate });
-  const elements = getElements({ birthdate, animals: animals });
+  const trueBirthdate = await countDevTime(inputData);
+  const age = getAge({ birthdate: trueBirthdate });
+  const animals: animalsCounted = getAnimals({ birthdate: trueBirthdate });
+  const elements = getElements({ birthdate: trueBirthdate, animals: animals });
   const pillars = getPillars({
-    birthdate,
+    trueBirthdate,
     gender,
     animals,
     elements,
@@ -60,14 +60,14 @@ export default async function getCardData(
   });
   const chartData = getChartData({ momId: "", dadId: "", animals, elements });
   const collisionsInfo = getCollisions({ animals, currentPillar, pillars });
-  const fallingStars = getFallingStars({ birthdate, animals });
+  const fallingStars = getFallingStars({ birthdate: trueBirthdate, animals });
   const genderCount = getGenderCount({ animals });
-  const direction = getDirection({ birthdate });
+  const direction = getDirection({ birthdate: trueBirthdate });
   const prettierData = toPrettierData({
     data: {
       ...inputData,
       age,
-      birthdate,
+      trueBirthdate,
       animals,
       elements,
       chartData,

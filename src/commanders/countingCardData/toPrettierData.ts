@@ -24,7 +24,7 @@ const getPrettierAnimalsElements = ({
   blackInfo,
   goodInfo,
   collisionsInfo,
-  birthdate,
+  trueBirthdate: birthdate,
 }: {
   animals: animalsCounted;
   elements: elementsCounted;
@@ -32,7 +32,7 @@ const getPrettierAnimalsElements = ({
   blackInfo: blackInfoType;
   goodInfo: goodInfoType;
   collisionsInfo: collisionsInfoType;
-  birthdate: dateType;
+  trueBirthdate: dateType;
 }): {
   year: outputDatePartType;
   month: outputDatePartType;
@@ -145,6 +145,7 @@ export default function toPrettierData({ data }: propsType): outputDataType {
     name,
     gender,
     age,
+    trueBirthdate,
     livingcity,
     birthcity,
     birthdate,
@@ -170,11 +171,12 @@ export default function toPrettierData({ data }: propsType): outputDataType {
     currentPillar,
     goodInfo,
     blackInfo,
-    birthdate,
+    trueBirthdate,
     collisionsInfo,
   });
   const prettierPillars = getPrettierPillars({ pillars });
   return {
+    trueBirthdate,
     name,
     gender,
     livingcity,

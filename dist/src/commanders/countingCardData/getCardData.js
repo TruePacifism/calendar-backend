@@ -40,12 +40,12 @@ function getCardData(inputData) {
         const livingcityCoordinates = yield (0, getCityCoordinates_1.default)({
             cityName: inputData.livingcity,
         });
-        const birthdate = yield (0, countDevTime_1.default)(inputData);
-        const age = (0, getAge_1.default)({ birthdate });
-        const animals = (0, getAnimals_1.default)({ birthdate });
-        const elements = (0, getElements_1.default)({ birthdate, animals: animals });
+        const trueBirthdate = yield (0, countDevTime_1.default)(inputData);
+        const age = (0, getAge_1.default)({ birthdate: trueBirthdate });
+        const animals = (0, getAnimals_1.default)({ birthdate: trueBirthdate });
+        const elements = (0, getElements_1.default)({ birthdate: trueBirthdate, animals: animals });
         const pillars = (0, getPillars_1.default)({
-            birthdate,
+            trueBirthdate,
             gender,
             animals,
             elements,
@@ -71,12 +71,12 @@ function getCardData(inputData) {
         });
         const chartData = (0, getChartData_1.default)({ momId: "", dadId: "", animals, elements });
         const collisionsInfo = (0, getCollisions_1.default)({ animals, currentPillar, pillars });
-        const fallingStars = (0, getFallingStars_1.default)({ birthdate, animals });
+        const fallingStars = (0, getFallingStars_1.default)({ birthdate: trueBirthdate, animals });
         const genderCount = (0, getGenderCount_1.default)({ animals });
-        const direction = (0, getDirection_1.default)({ birthdate });
+        const direction = (0, getDirection_1.default)({ birthdate: trueBirthdate });
         const prettierData = (0, toPrettierData_1.default)({
             data: Object.assign(Object.assign({}, inputData), { age,
-                birthdate,
+                trueBirthdate,
                 animals,
                 elements,
                 chartData,

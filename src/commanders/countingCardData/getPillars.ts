@@ -10,7 +10,7 @@ import {
 } from "../../types";
 
 type propsType = {
-  birthdate: dateType;
+  trueBirthdate: dateType;
   gender: genderType;
   animals: animalsCounted;
   elements: elementsCounted;
@@ -72,7 +72,7 @@ const getDaysToCount = (
 };
 
 export default function getPillars({
-  birthdate,
+  trueBirthdate: birthdate,
   gender,
   animals,
   elements,

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const getPrettierAnimalsElements = ({ animals, elements, currentPillar, blackInfo, goodInfo, collisionsInfo, birthdate, }) => {
+const getPrettierAnimalsElements = ({ animals, elements, currentPillar, blackInfo, goodInfo, collisionsInfo, trueBirthdate: birthdate, }) => {
     return {
         year: {
             animal: {
@@ -87,18 +87,19 @@ const getPrettierPillars = ({ pillars, }) => {
     });
 };
 function toPrettierData({ data }) {
-    const { name, gender, age, livingcity, birthcity, birthdate, chartData, direction, animals, elements, pillars, lineChartData, movedDirection, currentPillar, mainElement, cardStrength, blackInfo, goodInfo, collisionsInfo, fallingStars, genderCount, } = data;
+    const { name, gender, age, trueBirthdate, livingcity, birthcity, birthdate, chartData, direction, animals, elements, pillars, lineChartData, movedDirection, currentPillar, mainElement, cardStrength, blackInfo, goodInfo, collisionsInfo, fallingStars, genderCount, } = data;
     const prettierAnimalsElements = getPrettierAnimalsElements({
         animals,
         elements,
         currentPillar,
         goodInfo,
         blackInfo,
-        birthdate,
+        trueBirthdate,
         collisionsInfo,
     });
     const prettierPillars = getPrettierPillars({ pillars });
-    return Object.assign(Object.assign({ name,
+    return Object.assign(Object.assign({ trueBirthdate,
+        name,
         gender,
         livingcity,
         birthcity,

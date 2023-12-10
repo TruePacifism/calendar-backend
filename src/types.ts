@@ -215,6 +215,7 @@ export type lineChartDataType = {
 };
 
 export type countedCardDataType = inputDataType & {
+  trueBirthdate: dateType;
   age: ageType;
   animals: animalsCounted;
   elements: elementsCounted;
@@ -240,6 +241,7 @@ export type outputDatePartType = {
 };
 export type outputMainElementType = {};
 export type outputDataType = inputDataType & {
+  trueBirthdate: dateType;
   age: ageType;
   year: outputDatePartType;
   month: outputDatePartType;

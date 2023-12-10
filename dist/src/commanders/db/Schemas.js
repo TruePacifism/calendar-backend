@@ -139,6 +139,7 @@ const lineChartDataSchema = new Schema({
 const cardSchema = new Schema({
     id: String,
     name: String,
+    trueBirthdate: dateSchema,
     birthdate: dateSchema,
     birthcity: String,
     gender: String,

@@ -41,7 +41,7 @@ const getDaysToCount = (direction, birthdate, monthAnimal) => {
     }
     return daysToCount;
 };
-function getPillars({ birthdate, gender, animals, elements, }) {
+function getPillars({ trueBirthdate: birthdate, gender, animals, elements, }) {
     if (birthdate.day === -1 || birthdate.month === -1 || !gender) {
         return [];
     }

@@ -66,7 +66,7 @@ function countToday({ user, dayOffset, }) {
         const animals = (0, getAnimals_1.default)({ birthdate });
         const elements = (0, getElements_1.default)({ birthdate, animals: animals });
         const pillars = (0, getPillars_1.default)({
-            birthdate,
+            trueBirthdate: birthdate,
             gender,
             animals,
             elements,
@@ -96,7 +96,7 @@ function countToday({ user, dayOffset, }) {
         });
         const direction = (0, getDirection_1.default)({ birthdate });
         const prettierData = (0, toPrettierData_1.default)({
-            data: Object.assign(Object.assign({}, inputData), { age,
+            data: Object.assign(Object.assign({}, inputData), { trueBirthdate: birthdate, age,
                 birthdate,
                 animals,
                 elements,
