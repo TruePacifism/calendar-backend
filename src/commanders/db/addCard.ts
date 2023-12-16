@@ -1,5 +1,6 @@
 import { inputDataType, outputDataType } from "../../types";
 import { CardModel, UserModel } from "./Schemas";
+import { v4 as uuidv4 } from "uuid";
 
 type propsType = {
   token: string;
@@ -7,10 +8,8 @@ type propsType = {
 };
 
 export default async function addCard({ token, card }: propsType) {
-  UserModel.findOneAndUpdate(
-    { token },
-    { $push: { cards: { id: "testId", ...card } } }
-  )
+  const id: string = uuidv4();
+  UserModel.findOneAndUpdate({ token }, { $push: { cards: { id, ...card } } })
     .then(() => {
       console.log("Успешное добавление карты");
     })

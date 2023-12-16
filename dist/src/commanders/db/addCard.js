@@ -10,9 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Schemas_1 = require("./Schemas");
+const uuid_1 = require("uuid");
 function addCard({ token, card }) {
     return __awaiter(this, void 0, void 0, function* () {
-        Schemas_1.UserModel.findOneAndUpdate({ token }, { $push: { cards: Object.assign({ id: "testId" }, card) } })
+        const id = (0, uuid_1.v4)();
+        Schemas_1.UserModel.findOneAndUpdate({ token }, { $push: { cards: Object.assign({ id }, card) } })
             .then(() => {
             console.log("Успешное добавление карты");
         })
