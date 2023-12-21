@@ -111,6 +111,7 @@ export default async function countToday({
     data: {
       ...inputData,
       trueBirthdate: birthdate,
+      date: new Date(),
       age,
       birthdate,
       animals,

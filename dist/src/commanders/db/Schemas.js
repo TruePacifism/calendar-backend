@@ -143,6 +143,7 @@ const cardSchema = new Schema({
     birthdate: dateSchema,
     birthcity: String,
     gender: String,
+    date: Date,
     livingcity: String,
     age: ageSchema,
     year: outputDatePartSchema,

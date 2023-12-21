@@ -34,6 +34,7 @@ const toPrettierData_1 = __importDefault(require("./toPrettierData"));
 function getCardData(inputData) {
     return __awaiter(this, void 0, void 0, function* () {
         const { gender } = inputData;
+        const date = new Date();
         const birthcityCoordinates = yield (0, getCityCoordinates_1.default)({
             cityName: inputData.birthcity,
         });
@@ -75,7 +76,8 @@ function getCardData(inputData) {
         const genderCount = (0, getGenderCount_1.default)({ animals });
         const direction = (0, getDirection_1.default)({ birthdate: trueBirthdate });
         const prettierData = (0, toPrettierData_1.default)({
-            data: Object.assign(Object.assign({}, inputData), { age,
+            data: Object.assign(Object.assign({}, inputData), { date,
+                age,
                 trueBirthdate,
                 animals,
                 elements,

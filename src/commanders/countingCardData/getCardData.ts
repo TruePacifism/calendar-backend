@@ -23,6 +23,7 @@ export default async function getCardData(
   inputData: inputDataType
 ): Promise<outputDataType> {
   const { gender } = inputData;
+  const date = new Date();
   const birthcityCoordinates = await getCityCoordinates({
     cityName: inputData.birthcity,
   });
@@ -66,6 +67,7 @@ export default async function getCardData(
   const prettierData = toPrettierData({
     data: {
       ...inputData,
+      date,
       age,
       trueBirthdate,
       animals,

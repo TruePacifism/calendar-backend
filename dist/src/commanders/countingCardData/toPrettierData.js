@@ -87,7 +87,7 @@ const getPrettierPillars = ({ pillars, }) => {
     });
 };
 function toPrettierData({ data }) {
-    const { name, gender, age, trueBirthdate, livingcity, birthcity, birthdate, chartData, direction, animals, elements, pillars, lineChartData, movedDirection, currentPillar, mainElement, cardStrength, blackInfo, goodInfo, collisionsInfo, fallingStars, genderCount, } = data;
+    const { name, date, gender, age, trueBirthdate, livingcity, birthcity, birthdate, chartData, direction, animals, elements, pillars, lineChartData, movedDirection, currentPillar, mainElement, cardStrength, blackInfo, goodInfo, collisionsInfo, fallingStars, genderCount, } = data;
     const prettierAnimalsElements = getPrettierAnimalsElements({
         animals,
         elements,
@@ -98,7 +98,8 @@ function toPrettierData({ data }) {
         collisionsInfo,
     });
     const prettierPillars = getPrettierPillars({ pillars });
-    return Object.assign(Object.assign({ trueBirthdate,
+    return Object.assign(Object.assign({ date,
+        trueBirthdate,
         name,
         gender,
         livingcity,

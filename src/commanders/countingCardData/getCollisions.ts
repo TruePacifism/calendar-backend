@@ -235,15 +235,16 @@ export default function getCollisions({
         });
         id += 1;
       }
-      if (idx2 === 4) {
+      if (idx2 === 3) {
         return;
       }
       times.slice(selectedTimes.second + 1).forEach((thirdTime, idx3) => {
         selectedTimes.third = selectedTimes.second + 1 + idx3;
         if (
-          firstTime === secondTime ||
-          secondTime === thirdTime ||
-          firstTime === thirdTime
+          selectedTimes.first === selectedTimes.second ||
+          selectedTimes.second === selectedTimes.third ||
+          selectedTimes.third === selectedTimes.first ||
+          selectedTimes.third > 3
         ) {
           return;
         }
@@ -299,26 +300,27 @@ export default function getCollisions({
           });
           id += 1;
         }
-        // console.log(selectedTimes);
+        console.log(selectedTimes);
       });
-      // console.log(selectedTimes);
+      console.log(selectedTimes);
     });
   });
-  // Object.entries(collisionsInfo).forEach((value) => {
-  //   const [time, collisions] = value;
-  //   console.log(
-  //     time,
-  //     collisions.map((collision) => {
-  //       const { id, animal, secondTarget, thirdTarget } = collision;
-  //       return {
-  //         id,
-  //         animalOne: animal.name,
-  //         animalTwo: secondTarget.animal.name,
-  //         animalThree: thirdTarget ? thirdTarget.animal.name : null,
-  //       };
-  //     })
-  //   );
-  // });
+  Object.entries(collisionsInfo).forEach((value) => {
+    const [time, collisions] = value;
+    console.log(
+      time,
+      collisions.map((collision) => {
+        const { id, animal, secondTarget, thirdTarget } = collision;
+        return {
+          id,
+          animalOne: animal.name,
+          animalTwo: secondTarget.animal.name,
+          animalThree:
+            thirdTarget && thirdTarget.animal ? thirdTarget.animal.name : null,
+        };
+      })
+    );
+  });
 
   return collisionsInfo;
 }

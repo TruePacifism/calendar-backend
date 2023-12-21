@@ -96,7 +96,7 @@ function countToday({ user, dayOffset, }) {
         });
         const direction = (0, getDirection_1.default)({ birthdate });
         const prettierData = (0, toPrettierData_1.default)({
-            data: Object.assign(Object.assign({}, inputData), { trueBirthdate: birthdate, age,
+            data: Object.assign(Object.assign({}, inputData), { trueBirthdate: birthdate, date: new Date(), age,
                 birthdate,
                 animals,
                 elements,

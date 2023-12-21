@@ -143,6 +143,7 @@ const getPrettierPillars = ({
 export default function toPrettierData({ data }: propsType): outputDataType {
   const {
     name,
+    date,
     gender,
     age,
     trueBirthdate,
@@ -176,6 +177,7 @@ export default function toPrettierData({ data }: propsType): outputDataType {
   });
   const prettierPillars = getPrettierPillars({ pillars });
   return {
+    date,
     trueBirthdate,
     name,
     gender,
