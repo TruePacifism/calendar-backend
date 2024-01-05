@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routes_1 = __importDefault(require("./src/routes"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const port = 3333;
+const port = 443;
 const connectToMongoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     mongoose_1.default.connect("mongodb+srv://TruePacifism:vector2323@nodejs-homework.rluvyh6.mongodb.net/Calendar");
     console.log("Connected to MongoDB");
