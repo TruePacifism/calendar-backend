@@ -65,7 +65,9 @@ export type collisionShapeType =
   | "rhombus"
   | "half"
   | "heart"
-  | "rectangle";
+  | "rectangle"
+  | "triangle"
+  | "half-horizontal";
 export type collisionColorType =
   | "red"
   | "brown"
@@ -82,12 +84,16 @@ export type collisionKindType =
   | "Наказание нелюбви"
   | "Наказание неблагодарности"
   | "Уничижающее наказание"
+  | "Слияние"
   | "Гармония трёх";
+export type collisionElementType = "Металл" | "Огонь" | "Дерево" | "Вода";
 
 export type collisionType = {
   id: number;
   shape: collisionShapeType;
   color: collisionColorType;
+  secondColor?: collisionColorType;
+  element?: collisionElementType;
   secondTarget: collisionTarget;
   thirdTarget?: collisionTarget;
   targetName: collisionTargetTimeType;
