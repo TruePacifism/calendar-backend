@@ -19,7 +19,7 @@ import authUser from "./commanders/db/authUser";
 import recountAllData from "./commanders/countingCardData/recountAllData";
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,
