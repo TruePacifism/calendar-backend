@@ -18,6 +18,7 @@ const getCardData_1 = __importDefault(require("./commanders/countingCardData/get
 const addCard_1 = __importDefault(require("./commanders/db/addCard"));
 const getCard_1 = __importDefault(require("./commanders/db/getCard"));
 const joiSchemas_1 = require("./joiSchemas");
+const cors_1 = __importDefault(require("cors"));
 const countToday_1 = __importDefault(require("./commanders/countingCardData/countToday"));
 const deleteCard_1 = __importDefault(require("./commanders/db/deleteCard"));
 const getCitiesList_1 = __importDefault(require("./commanders/utils/getCitiesList"));
@@ -25,7 +26,7 @@ const getUser_1 = __importDefault(require("./commanders/db/getUser"));
 const authUser_1 = __importDefault(require("./commanders/db/authUser"));
 const recountAllData_1 = __importDefault(require("./commanders/countingCardData/recountAllData"));
 const app = (0, express_1.default)();
-// app.use(cors());
+app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
     extended: true,
 }));
