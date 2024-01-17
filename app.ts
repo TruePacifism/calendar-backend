@@ -1,7 +1,7 @@
 import app from "./src/routes";
 import mongoose from "mongoose";
 
-const port = 80;
+const port = 3000;
 
 const connectToMongoDB = async () => {
   mongoose.connect(
