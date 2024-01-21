@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const recountAllData_1 = __importDefault(require("./src/commanders/countingCardData/recountAllData"));
 const routes_1 = __importDefault(require("./src/routes"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const port = 3000;
@@ -22,6 +23,8 @@ const connectToMongoDB = () => __awaiter(void 0, void 0, void 0, function* () {
 connectToMongoDB();
 routes_1.default.listen(port, () => {
     console.log(`Express is listening at http://localhost:${port}`);
+    (0, recountAllData_1.default)();
+    setInterval(recountAllData_1.default, 86400000);
     return console.log(`Express is listening at http://localhost:${port}`);
 });
 //# sourceMappingURL=app.js.map

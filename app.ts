@@ -1,3 +1,4 @@
+import recountAllData from "./src/commanders/countingCardData/recountAllData";
 import app from "./src/routes";
 import mongoose from "mongoose";
 
@@ -14,6 +15,8 @@ connectToMongoDB();
 
 app.listen(port, () => {
   console.log(`Express is listening at http://localhost:${port}`);
+  recountAllData();
+  setInterval(recountAllData, 86_400_000);
 
   return console.log(`Express is listening at http://localhost:${port}`);
 });

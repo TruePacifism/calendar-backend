@@ -8,35 +8,35 @@ import {
 
 export const Elements: customEnumType<elementType> = {
   METAL_YAN: {
-    name: "Металл Ян",
+    name: "металл ян",
   },
   METAL_IN: {
-    name: "Металл Инь",
+    name: "металл инь",
   },
   WATER_YAN: {
-    name: "Вода Ян",
+    name: "вода ян",
   },
   WATER_IN: {
-    name: "Вода Инь",
+    name: "вода инь",
   },
   WOOD_YAN: {
-    name: "Дерево Ян",
+    name: "дерево ян",
   },
   WOOD_IN: {
-    name: "Дерево Инь",
+    name: "дерево инь",
   },
   FIRE_YAN: {
-    name: "Огонь Ян",
+    name: "огонь ян",
   },
 
   FIRE_IN: {
-    name: "Огонь Инь",
+    name: "огонь инь",
   },
   EARTH_YAN: {
-    name: "Земля Ян",
+    name: "земля ян",
   },
   EARTH_IN: {
-    name: "Земля Инь",
+    name: "земля инь",
   },
   NULL_ELEMENT: {
     name: " ",
@@ -51,7 +51,7 @@ const firstYears: number[] = [
 
 export const Animals: customEnumType<animalType> = {
   BULL: {
-    name: "Бык",
+    name: "бык",
     monthBounds: {
       start: 6,
       end: 35,
@@ -59,7 +59,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.WATER_IN,
   },
   TIGER: {
-    name: "Тигр",
+    name: "тигр",
     monthBounds: {
       start: 36,
       end: 64,
@@ -67,7 +67,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.WATER_YAN,
   },
   RABBIT: {
-    name: "Кролик",
+    name: "кролик",
     monthBounds: {
       start: 65,
       end: 94,
@@ -75,7 +75,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.WOOD_IN,
   },
   DRAGON: {
-    name: "Дракон",
+    name: "дракон",
     monthBounds: {
       start: 95,
       end: 125,
@@ -83,7 +83,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.EARTH_YAN,
   },
   SNAKE: {
-    name: "Змея",
+    name: "змея",
     monthBounds: {
       start: 126,
       end: 156,
@@ -91,7 +91,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.WOOD_IN,
   },
   HORSE: {
-    name: "Лошадь",
+    name: "лошадь",
     monthBounds: {
       start: 157,
       end: 188,
@@ -99,7 +99,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.FIRE_YAN,
   },
   GOAT: {
-    name: "Коза",
+    name: "коза",
     monthBounds: {
       start: 189,
       end: 219,
@@ -107,7 +107,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.FIRE_IN,
   },
   MONKEY: {
-    name: "Обезьяна",
+    name: "обезьяна",
     monthBounds: {
       start: 220,
       end: 250,
@@ -115,7 +115,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.EARTH_YAN,
   },
   ROOSTER: {
-    name: "Петух",
+    name: "петух",
     monthBounds: {
       start: 251,
       end: 281,
@@ -123,7 +123,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.METAL_IN,
   },
   DOG: {
-    name: "Собака",
+    name: "собака",
     monthBounds: {
       start: 282,
       end: 311,
@@ -131,7 +131,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.METAL_YAN,
   },
   PIG: {
-    name: "Свинья",
+    name: "свинья",
     monthBounds: {
       start: 312,
       end: 340,
@@ -139,7 +139,7 @@ export const Animals: customEnumType<animalType> = {
     element: Elements.WATER_IN,
   },
   RAT: {
-    name: "Крыса",
+    name: "крыса",
     monthBounds: {
       start: 341,
       end: 5,
@@ -159,27 +159,27 @@ export const MainElements: customEnumType<mainElementType> = {
   WATER: {
     elements: [Elements.WATER_IN, Elements.WATER_YAN],
     animals: [Animals.BULL, Animals.TIGER, Animals.PIG, Animals.RAT],
-    name: "Вода",
-  },
-  EARTH: {
-    elements: [Elements.EARTH_IN, Elements.EARTH_YAN],
-    animals: [Animals.DRAGON, Animals.MONKEY],
-    name: "Земля",
+    name: "вода",
   },
   METAL: {
     elements: [Elements.METAL_IN, Elements.METAL_YAN],
     animals: [Animals.ROOSTER, Animals.DOG],
-    name: "Металл",
+    name: "металл",
+  },
+  EARTH: {
+    elements: [Elements.EARTH_IN, Elements.EARTH_YAN],
+    animals: [Animals.DRAGON, Animals.MONKEY],
+    name: "земля",
   },
   FIRE: {
     elements: [Elements.FIRE_IN, Elements.FIRE_YAN],
     animals: [Animals.GOAT, Animals.HORSE],
-    name: "Огонь",
+    name: "огонь",
   },
   WOOD: {
     elements: [Elements.WOOD_IN, Elements.WOOD_YAN],
     animals: [Animals.RABBIT, Animals.SNAKE],
-    name: "Дерево",
+    name: "дерево",
   },
   NULL_SIMPLE_ELEMENT: {
     elements: [Elements.NULL_ELEMENT, Elements.NULL_ELEMENT],
@@ -207,39 +207,39 @@ export const Directions: customEnumType<directionType> = {
   },
   NW: {
     shortName: "СЗ",
-    fullName: "Северо-запад",
+    fullName: "Северо-Запад",
   },
   NE: {
     shortName: "СВ",
-    fullName: "Северо-восток",
+    fullName: "Северо-Восток",
   },
   SW: {
     shortName: "ЮЗ",
-    fullName: "Юго-запад",
+    fullName: "Юго-Запад",
   },
   SE: {
     shortName: "ЮВ",
-    fullName: "Юго-восток",
+    fullName: "Юго-Восток",
   },
   CN: {
-    shortName: "СЦ",
-    fullName: "Северо-центр",
+    shortName: "СЗ",
+    fullName: "Северо-Запад",
   },
   CS: {
-    shortName: "ЮЦ",
-    fullName: "Юго-центр",
+    shortName: "ЮЗ",
+    fullName: "Юго-Запад",
   },
   CW: {
-    shortName: "ЦЗ",
-    fullName: "Центро-запад",
+    shortName: "З",
+    fullName: "Запад",
   },
   CE: {
-    shortName: "ЦВ",
-    fullName: "Центро-восток",
+    shortName: "ЗВ",
+    fullName: "Западо-Восток",
   },
   C: {
-    shortName: "Ц",
-    fullName: "Центр",
+    shortName: "З",
+    fullName: "Запад",
   },
   NULL_DIRECTION: {
     shortName: "-",
