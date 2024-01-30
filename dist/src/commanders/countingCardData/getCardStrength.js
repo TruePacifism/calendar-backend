@@ -2,8 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
 function getCardStrength({ animals, elements, mainElement, }) {
-    const powerfulElements = Object.values(enums_1.MainElements).filter((mainElementItem, idx) => mainElementItem === mainElement ||
-        Object.values(enums_1.MainElements)[(idx + 4) % 5] === mainElement);
+    const powerfulElements = Object.values(enums_1.MainElements).filter((mainElementItem, idx) => {
+        return (mainElementItem === mainElement ||
+            Object.values(enums_1.MainElements)[(idx + 4) % 5] === mainElement);
+    });
     let power = -1;
     let maxPower = -1;
     Object.values(animals).forEach((animal) => {

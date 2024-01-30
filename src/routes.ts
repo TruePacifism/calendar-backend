@@ -72,7 +72,6 @@ app.get("/count", async (req, res) => {
     const inputData: inputDataType = await inputDataSchema.validateAsync(
       req.query
     );
-    console.log(inputData);
 
     const card = await getCardData(inputData);
     res.json(card);

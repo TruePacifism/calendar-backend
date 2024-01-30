@@ -83,12 +83,6 @@ function getAnimals({ birthdate }) {
     const yearAnimal = getYear(year, dayOfYear);
     const dayAnimal = getDay(year, month, day);
     const hourAnimal = getHour(hour);
-    console.log({
-        year: yearAnimal,
-        month: monthAnimal,
-        day: dayAnimal,
-        hour: hourAnimal,
-    });
     return {
         year: yearAnimal,
         month: monthAnimal,

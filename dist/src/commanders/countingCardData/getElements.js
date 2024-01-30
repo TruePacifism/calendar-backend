@@ -14,7 +14,7 @@ const getYear = (year, dayOfYear) => {
         return Object.values(enums_1.Elements)[index];
     }
     const trueIndex = dayOfYear < enums_1.Animals.TIGER.monthBounds.start ? index - 1 : index;
-    const indexWithOffset = trueIndex % 10;
+    const indexWithOffset = (trueIndex + 10) % 10;
     return Object.values(enums_1.Elements)[indexWithOffset];
 };
 const getMonth = (date, animals) => {

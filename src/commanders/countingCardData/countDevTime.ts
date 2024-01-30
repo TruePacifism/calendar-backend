@@ -1,4 +1,5 @@
 import { dateType, inputDataType } from "../../types";
+import date from "date-and-time";
 
 type propsType = inputDataType;
 
@@ -23,13 +24,22 @@ export default async function countDevTime({
       ((place.annotations.timezone.offset_sec / 3600) * 15 -
         place.geometry.lng) *
       4;
-    dateObject.setMinutes(dateObject.getMinutes() - devTime);
+    const isSummerTime: boolean =
+      (month > 2 && month < 9) ||
+      (month === 2 && day > 27) ||
+      (month === 9 && day < 30) ||
+      (month === 2 && day === 27 && hour > 2) ||
+      (month === 9 && day === 30 && hour < 2);
+    const devTimedDateObject = date.addMinutes(
+      dateObject,
+      devTime * -1 - (isSummerTime ? 60 : 0)
+    );
     const newBirthdate: dateType = {
-      year: dateObject.getFullYear(),
-      month: dateObject.getMonth(),
-      day: dateObject.getDate(),
-      hour: dateObject.getHours(),
-      minute: dateObject.getMinutes(),
+      year: devTimedDateObject.getFullYear(),
+      month: devTimedDateObject.getMonth(),
+      day: devTimedDateObject.getDate(),
+      hour: devTimedDateObject.getHours(),
+      minute: devTimedDateObject.getMinutes(),
     };
     return newBirthdate;
   }

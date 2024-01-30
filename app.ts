@@ -15,7 +15,7 @@ connectToMongoDB();
 
 app.listen(port, () => {
   console.log(`Express is listening at http://localhost:${port}`);
-  recountAllData();
+  // recountAllData();
   setInterval(recountAllData, 86_400_000);
 
   return console.log(`Express is listening at http://localhost:${port}`);

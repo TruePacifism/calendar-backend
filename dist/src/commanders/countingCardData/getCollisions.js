@@ -2,113 +2,113 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const collisionsInfo = [
     {
-        animals: ["Змея", "Обезьяна", "Тигр"].sort(),
+        animals: ["змея", "обезьяна", "тигр"].sort(),
         shape: "half-horizontal",
         color: "red",
         kind: "Наказание неблагодарности",
     },
     {
-        animals: ["Собака", "Коза", "Бык"].sort(),
+        animals: ["собака", "коза", "бык"].sort(),
         shape: "half-horizontal",
         color: "brown",
         kind: "Уничижающее наказание",
     },
     {
-        animals: ["Собака", "Тигр", "Лошадь"].sort(),
+        animals: ["собака", "тигр", "лошадь"].sort(),
         shape: "triangle",
         color: "red",
         element: "Огонь",
         kind: "Гармония трёх",
     },
     {
-        animals: ["Кролик", "Коза", "Свинья"].sort(),
+        animals: ["кролик", "коза", "свинья"].sort(),
         shape: "triangle",
         color: "darkGreen",
         element: "Дерево",
         kind: "Гармония трёх",
     },
     {
-        animals: ["Змея", "Бык", "Петух"].sort(),
+        animals: ["змея", "бык", "петух"].sort(),
         shape: "triangle",
         color: "purple",
         element: "Металл",
         kind: "Гармония трёх",
     },
     {
-        animals: ["Обезьяна", "Дракон", "Крыса"].sort(),
+        animals: ["обезьяна", "дракон", "крыса"].sort(),
         shape: "triangle",
         color: "blue",
         element: "Вода",
         kind: "Гармония трёх",
     },
     {
-        animals: ["Лошадь", "Крыса"].sort(),
+        animals: ["лошадь", "крыса"].sort(),
         shape: "half",
         color: "blue",
         secondColor: "red",
         kind: "Столкновение",
     },
     {
-        animals: ["Коза", "Бык"].sort(),
+        animals: ["коза", "бык"].sort(),
         shape: "half",
         color: "lightBlue",
         secondColor: "orange",
         kind: "Столкновение",
     },
     {
-        animals: ["Тигр", "Обезьяна"].sort(),
+        animals: ["тигр", "обезьяна"].sort(),
         shape: "half",
         color: "blue",
         secondColor: "brown",
         kind: "Столкновение",
     },
     {
-        animals: ["Кролик", "Петух"].sort(),
+        animals: ["кролик", "петух"].sort(),
         shape: "half",
         color: "lightGreen",
         secondColor: "pink",
         kind: "Столкновение",
     },
     {
-        animals: ["Змея", "Свинья"].sort(),
+        animals: ["змея", "свинья"].sort(),
         shape: "half",
         color: "lightGreen",
         secondColor: "lightBlue",
         kind: "Столкновение",
     },
     {
-        animals: ["Дракон", "Собака"].sort(),
+        animals: ["дракон", "собака"].sort(),
         shape: "half",
         color: "brown",
         secondColor: "purple",
         kind: "Столкновение",
     },
     {
-        animals: ["Дракон", "Дракон"].sort(),
+        animals: ["дракон", "дракон"].sort(),
         shape: "half",
         color: "brown",
         kind: "Самонаказание",
     },
     {
-        animals: ["Петух", "Петух"].sort(),
+        animals: ["петух", "петух"].sort(),
         shape: "half",
         color: "pink",
         kind: "Самонаказание",
     },
     {
-        animals: ["Лошадь", "Лошадь"].sort(),
+        animals: ["лошадь", "лошадь"].sort(),
         shape: "half",
         color: "red",
         kind: "Самонаказание",
     },
     {
-        animals: ["Свинья", "Свинья"].sort(),
+        animals: ["свинья", "свинья"].sort(),
         shape: "half",
         color: "lightBlue",
         kind: "Самонаказание",
     },
     {
-        animals: ["Кролик", "Крыса"].sort(),
+        animals: ["кролик", "крыса"].sort(),
         shape: "heart",
         color: "red",
         kind: "Наказание нелюбви",
@@ -140,8 +140,8 @@ const getCollisionInfo = (firstAnimal, secondAnimal, thirdAnimal) => {
     const foundCollisionInfo = collisionsInfo.find((collisionInfo) => collisionInfo.animals.length === animalNames.length &&
         collisionInfo.animals.every((animalName, idx) => animalNames[idx] === animalName));
     if (foundCollisionInfo) {
-        const { color, kind, shape } = foundCollisionInfo;
-        return { color, kind, shape };
+        const { color, secondColor, kind, shape } = foundCollisionInfo;
+        return { color, secondColor, kind, shape };
     }
 };
 function getCollisions({ animals, currentPillar, pillars, }) {

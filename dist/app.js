@@ -23,7 +23,7 @@ const connectToMongoDB = () => __awaiter(void 0, void 0, void 0, function* () {
 connectToMongoDB();
 routes_1.default.listen(port, () => {
     console.log(`Express is listening at http://localhost:${port}`);
-    (0, recountAllData_1.default)();
+    // recountAllData();
     setInterval(recountAllData_1.default, 86400000);
     return console.log(`Express is listening at http://localhost:${port}`);
 });

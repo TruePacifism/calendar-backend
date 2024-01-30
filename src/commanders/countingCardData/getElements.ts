@@ -27,7 +27,7 @@ const getYear = (year: number, dayOfYear: number): elementType => {
   }
   const trueIndex =
     dayOfYear < Animals.TIGER.monthBounds.start ? index - 1 : index;
-  const indexWithOffset = trueIndex % 10;
+  const indexWithOffset = (trueIndex + 10) % 10;
   return Object.values(Elements)[indexWithOffset];
 };
 const getMonth = (date: Date, animals: animalsCounted): elementType => {

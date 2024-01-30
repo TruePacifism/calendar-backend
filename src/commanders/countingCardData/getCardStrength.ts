@@ -18,10 +18,14 @@ export default function getCardStrength({
   mainElement,
 }: propsType): cardStrengthType {
   const powerfulElements = Object.values(MainElements).filter(
-    (mainElementItem, idx) =>
-      mainElementItem === mainElement ||
-      Object.values(MainElements)[(idx + 4) % 5] === mainElement
+    (mainElementItem, idx) => {
+      return (
+        mainElementItem === mainElement ||
+        Object.values(MainElements)[(idx + 4) % 5] === mainElement
+      );
+    }
   );
+
   let power = -1;
   let maxPower = -1;
   Object.values(animals).forEach((animal) => {
