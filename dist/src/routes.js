@@ -70,6 +70,7 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     try {
         const inputData = yield joiSchemas_1.inputDataSchema.validateAsync(req.query);
+        console.log(inputData);
         const card = yield (0, getCardData_1.default)(inputData);
         res.json(card);
     }

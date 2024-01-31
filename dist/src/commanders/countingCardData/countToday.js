@@ -19,7 +19,6 @@ const getBlackInfo_1 = __importDefault(require("./getBlackInfo"));
 const getCardStrength_1 = __importDefault(require("./getCardStrength"));
 const getChartData_1 = __importDefault(require("./getChartData"));
 const getCollisions_1 = __importDefault(require("./getCollisions"));
-const getCurrentPillar_1 = __importDefault(require("./getCurrentPillar"));
 const getDirection_1 = __importDefault(require("./getDirection"));
 const getElements_1 = __importDefault(require("./getElements"));
 const getFallingStars_1 = __importDefault(require("./getFallingStars"));
@@ -71,7 +70,7 @@ function countToday({ user, dayOffset, }) {
             animals,
             elements,
         });
-        const currentPillar = (0, getCurrentPillar_1.default)({ pillars });
+        const currentPillar = null;
         const mainElement = (0, getMainElement_1.default)({ elements });
         const cardStrength = (0, getCardStrength_1.default)({ animals, elements, mainElement });
         const blackInfo = (0, getBlackInfo_1.default)({ animals, elements, currentPillar });

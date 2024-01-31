@@ -83,7 +83,7 @@ export default async function countToday({
     animals,
     elements,
   });
-  const currentPillar = getCurrentPillar({ pillars });
+  const currentPillar = null;
   const mainElement = getMainElement({ elements });
   const cardStrength = getCardStrength({ animals, elements, mainElement });
   const blackInfo = getBlackInfo({ animals, elements, currentPillar });
