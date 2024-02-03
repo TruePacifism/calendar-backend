@@ -25,6 +25,7 @@ import getMovedDirection from "./getMovedDirection";
 import getPillars from "./getPillars";
 import toPrettierData from "./toPrettierData";
 import getCityCoordinates from "./getCityCoordinates";
+import getChineseDate from "./getChineseDate";
 
 type propsType = {
   user: userType;
@@ -77,6 +78,7 @@ export default async function countToday({
   const age = getAge({ birthdate });
   const animals: animalsCounted = getAnimals({ birthdate });
   const elements = getElements({ birthdate, animals: animals });
+  const chineseBirthdate = getChineseDate(birthdate, animals);
   const pillars = getPillars({
     trueBirthdate: birthdate,
     gender,
@@ -114,6 +116,7 @@ export default async function countToday({
       date: new Date(),
       age,
       birthdate,
+      chineseBirthdate,
       animals,
       elements,
       chartData,

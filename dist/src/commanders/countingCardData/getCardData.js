@@ -18,6 +18,7 @@ const getAnimals_1 = __importDefault(require("./getAnimals"));
 const getBlackInfo_1 = __importDefault(require("./getBlackInfo"));
 const getCardStrength_1 = __importDefault(require("./getCardStrength"));
 const getChartData_1 = __importDefault(require("./getChartData"));
+const getChineseDate_1 = __importDefault(require("./getChineseDate"));
 const getCityCoordinates_1 = __importDefault(require("./getCityCoordinates"));
 const getCollisions_1 = __importDefault(require("./getCollisions"));
 const getCurrentPillar_1 = __importDefault(require("./getCurrentPillar"));
@@ -45,6 +46,7 @@ function getCardData(inputData) {
         const age = (0, getAge_1.default)({ birthdate: trueBirthdate });
         const animals = (0, getAnimals_1.default)({ birthdate: trueBirthdate });
         const elements = (0, getElements_1.default)({ birthdate: trueBirthdate, animals: animals });
+        const chineseBirthdate = (0, getChineseDate_1.default)(trueBirthdate, animals);
         const pillars = (0, getPillars_1.default)({
             trueBirthdate,
             gender,
@@ -74,11 +76,12 @@ function getCardData(inputData) {
         const collisionsInfo = (0, getCollisions_1.default)({ animals, currentPillar, pillars });
         const fallingStars = (0, getFallingStars_1.default)({ birthdate: trueBirthdate, animals });
         const genderCount = (0, getGenderCount_1.default)({ animals });
-        const direction = (0, getDirection_1.default)({ birthdate: trueBirthdate });
+        const direction = (0, getDirection_1.default)({ birthdate: chineseBirthdate });
         const prettierData = (0, toPrettierData_1.default)({
             data: Object.assign(Object.assign({}, inputData), { date,
                 age,
                 trueBirthdate,
+                chineseBirthdate,
                 animals,
                 elements,
                 chartData,

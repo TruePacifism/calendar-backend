@@ -219,10 +219,11 @@ export type lineChartDataType = {
   month: lineChartDataPartType[];
   day: lineChartDataPartType[];
 };
-
+export type chineseDate = Omit<dateType, "hour" | "minute">;
 export type countedCardDataType = inputDataType & {
   date: Date;
   trueBirthdate: dateType;
+  chineseBirthdate: chineseDate;
   age: ageType;
   animals: animalsCounted;
   elements: elementsCounted;

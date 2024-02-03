@@ -1,8 +1,13 @@
 import { Directions } from "../../enums";
-import { customEnumType, dateType, directionType } from "../../types";
+import {
+  chineseDate,
+  customEnumType,
+  dateType,
+  directionType,
+} from "../../types";
 
 type propsType = {
-  birthdate: dateType;
+  birthdate: chineseDate;
 };
 
 export default function getDirection({ birthdate }: propsType): directionType {

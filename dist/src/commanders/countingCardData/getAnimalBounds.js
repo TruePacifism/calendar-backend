@@ -1,0 +1,1 @@
+//# sourceMappingURL=getAnimalBounds.js.map

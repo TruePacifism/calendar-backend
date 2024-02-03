@@ -5,6 +5,7 @@ import getAnimals from "./getAnimals";
 import getBlackInfo from "./getBlackInfo";
 import getCardStrength from "./getCardStrength";
 import getChartData from "./getChartData";
+import getChineseDate from "./getChineseDate";
 import getCityCoordinates from "./getCityCoordinates";
 import getCollisions from "./getCollisions";
 import getCurrentPillar from "./getCurrentPillar";
@@ -34,6 +35,7 @@ export default async function getCardData(
   const age = getAge({ birthdate: trueBirthdate });
   const animals: animalsCounted = getAnimals({ birthdate: trueBirthdate });
   const elements = getElements({ birthdate: trueBirthdate, animals: animals });
+  const chineseBirthdate = getChineseDate(trueBirthdate, animals);
   const pillars = getPillars({
     trueBirthdate,
     gender,
@@ -63,13 +65,14 @@ export default async function getCardData(
   const collisionsInfo = getCollisions({ animals, currentPillar, pillars });
   const fallingStars = getFallingStars({ birthdate: trueBirthdate, animals });
   const genderCount = getGenderCount({ animals });
-  const direction = getDirection({ birthdate: trueBirthdate });
+  const direction = getDirection({ birthdate: chineseBirthdate });
   const prettierData = toPrettierData({
     data: {
       ...inputData,
       date,
       age,
       trueBirthdate,
+      chineseBirthdate,
       animals,
       elements,
       chartData,

@@ -30,6 +30,7 @@ const getMovedDirection_1 = __importDefault(require("./getMovedDirection"));
 const getPillars_1 = __importDefault(require("./getPillars"));
 const toPrettierData_1 = __importDefault(require("./toPrettierData"));
 const getCityCoordinates_1 = __importDefault(require("./getCityCoordinates"));
+const getChineseDate_1 = __importDefault(require("./getChineseDate"));
 function countToday({ user, dayOffset, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const { birthcity, livingcity, UTC } = user;
@@ -64,6 +65,7 @@ function countToday({ user, dayOffset, }) {
         const age = (0, getAge_1.default)({ birthdate });
         const animals = (0, getAnimals_1.default)({ birthdate });
         const elements = (0, getElements_1.default)({ birthdate, animals: animals });
+        const chineseBirthdate = (0, getChineseDate_1.default)(birthdate, animals);
         const pillars = (0, getPillars_1.default)({
             trueBirthdate: birthdate,
             gender,
@@ -97,6 +99,7 @@ function countToday({ user, dayOffset, }) {
         const prettierData = (0, toPrettierData_1.default)({
             data: Object.assign(Object.assign({}, inputData), { trueBirthdate: birthdate, date: new Date(), age,
                 birthdate,
+                chineseBirthdate,
                 animals,
                 elements,
                 chartData,
