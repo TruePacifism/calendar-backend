@@ -34,7 +34,9 @@ export const todayInputSchema = Joi.object({
 export const userInputSchema = Joi.object({
   token: Joi.string(),
   mail: Joi.string(),
-  name: Joi.string(),
+  firstName: Joi.string().required(),
+  secondName: Joi.string(),
+  thirdName: Joi.string(),
   livingcity: Joi.string().allow(""),
   birthcity: Joi.string().allow(""),
   _id: Joi.string(),

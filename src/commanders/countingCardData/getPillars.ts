@@ -1,4 +1,9 @@
-import { Animals, Elements } from "../../enums";
+import {
+  Animals,
+  Elements,
+  countIsFirstYearBounds,
+  isDateInRange,
+} from "../../enums";
 import {
   animalType,
   animalsCounted,
@@ -8,6 +13,7 @@ import {
   genderType,
   pillarType,
 } from "../../types";
+import daysBetweenDates from "../utils/daysBetweenDates";
 
 type propsType = {
   trueBirthdate: dateType;
@@ -48,23 +54,44 @@ const getDaysToCount = (
   );
   let daysToCount: number;
 
+  const isFirstYearsBounds = countIsFirstYearBounds(birthdate.year);
+
   if (monthAnimal === Animals.RAT) {
     if (direction) {
-      daysToCount =
-        daysOfYear <= Animals.RAT.monthBounds.end
-          ? Animals.RAT.monthBounds.end - daysOfYear + 1
-          : 365 - daysOfYear + Animals.RAT.monthBounds.end + 1;
+      daysToCount = isDateInRange(
+        { day: birthdate.day, month: birthdate.month },
+        { day: 0, month: 0 },
+        Animals.RAT.monthBounds.firstType.start
+      )
+        ? Animals.RAT.monthBounds.firstType.end.day - birthdate.day + 1
+        : 31 - birthdate.day + Animals.RAT.monthBounds.firstType.end.day + 1;
     } else {
-      daysToCount =
-        daysOfYear <= Animals.RAT.monthBounds.end
-          ? 365 - Animals.RAT.monthBounds.start + daysOfYear
-          : daysOfYear - Animals.RAT.monthBounds.start;
+      daysToCount = isDateInRange(
+        { day: birthdate.day, month: birthdate.month },
+        Animals.RAT.monthBounds.firstType.start,
+        { day: 11, month: 31 }
+      )
+        ? birthdate.day - Animals.RAT.monthBounds.firstType.start.day
+        : 31 - Animals.RAT.monthBounds.firstType.start.day + birthdate.day;
     }
   } else {
     if (direction) {
-      daysToCount = monthAnimal.monthBounds.end - daysOfYear + 1;
+      daysToCount =
+        daysBetweenDates(
+          { day: birthdate.day, month: birthdate.month },
+          isFirstYearsBounds
+            ? monthAnimal.monthBounds.firstType.end
+            : monthAnimal.monthBounds.secondType.end,
+          birthdate.year
+        ) + 1;
     } else {
-      daysToCount = daysOfYear - monthAnimal.monthBounds.start;
+      daysToCount = daysBetweenDates(
+        isFirstYearsBounds
+          ? monthAnimal.monthBounds.firstType.start
+          : monthAnimal.monthBounds.secondType.start,
+        { day: birthdate.day, month: birthdate.month },
+        birthdate.year
+      );
     }
   }
 

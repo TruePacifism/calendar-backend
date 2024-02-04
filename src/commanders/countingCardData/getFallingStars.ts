@@ -1,4 +1,4 @@
-import { Animals } from "../../enums";
+import { Animals, isDateInRange } from "../../enums";
 import { animalsCounted, dateType, fallingStarType } from "../../types";
 
 type propsType = {
@@ -59,7 +59,13 @@ export default function getFallingStars({
   const fallingStars: fallingStarType[] = [];
   let yearOffset = (year + 0) % 9;
   let monthOffset = (month + ((year - 100) % 3) * 3) % 9;
-  if (dayOfYear < Animals.TIGER.monthBounds.start) {
+  if (
+    isDateInRange(
+      { day, month },
+      { day: 0, month: 0 },
+      Animals.TIGER.monthBounds.firstType.start
+    )
+  ) {
     yearOffset += 8;
     yearOffset %= 9;
   }

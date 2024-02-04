@@ -23,6 +23,7 @@ import toPrettierData from "./toPrettierData";
 export default async function getCardData(
   inputData: inputDataType
 ): Promise<outputDataType> {
+  const isToday = inputData.name === "today";
   const { gender } = inputData;
   const date = new Date();
   const birthcityCoordinates = await getCityCoordinates({
@@ -42,7 +43,7 @@ export default async function getCardData(
     animals,
     elements,
   });
-  const currentPillar = getCurrentPillar({ pillars });
+  const currentPillar = isToday ? null : getCurrentPillar({ pillars });
   const mainElement = getMainElement({ elements });
   const lineChartData = getLineChartData({
     year: animals.year,

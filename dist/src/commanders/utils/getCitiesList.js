@@ -24,7 +24,11 @@ function getCitiesList({ query }) {
                 Accept: "application/json",
                 Authorization: "Token " + token,
             },
-            body: JSON.stringify({ query }),
+            body: JSON.stringify({
+                query,
+                from_bound: { value: "city" },
+                to_bound: { value: "city" },
+            }),
         });
         const responseJSON = yield response.json();
         console.log(responseJSON);

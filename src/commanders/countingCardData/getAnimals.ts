@@ -1,4 +1,4 @@
-import { Animals } from "../../enums";
+import { Animals, countIsFirstYearBounds, isDateInRange } from "../../enums";
 import {
   animalName,
   animalType,
@@ -19,23 +19,42 @@ type propsType = {
   birthdate: dateType;
 };
 
-const getYear = (year: number, dayOfYear: number): animalType => {
+const getYear = (year: number, month: number, day: number): animalType => {
   const index = year % 12;
-  if (dayOfYear == -1) {
+  if (day === -1 || month === -1) {
     return Object.values(Animals)[index];
   }
-  const trueIndex =
-    dayOfYear < Animals.TIGER.monthBounds.start ? index - 1 : index;
+  const trueIndex = isDateInRange(
+    { day, month },
+    { day: 0, month: 0 },
+    Animals.TIGER.monthBounds.firstType.start
+  )
+    ? index - 1
+    : index;
   const indexWithOffset = (trueIndex + 7) % 12;
 
   return Object.values(Animals)[indexWithOffset];
 };
-const getMonth = (dayOfYear: number): animalType => {
-  const animal = Object.values(Animals).find(
-    (animal) =>
-      animal.monthBounds.start <= dayOfYear &&
-      animal.monthBounds.end >= dayOfYear
-  );
+const getMonth = (
+  day: number,
+  month: number,
+  isFirstYearsBounds: boolean
+): animalType => {
+  const animal = Object.values(Animals).find((animal) => {
+    if (isFirstYearsBounds) {
+      return isDateInRange(
+        { day, month },
+        animal.monthBounds.firstType.start,
+        animal.monthBounds.firstType.end
+      );
+    } else {
+      return isDateInRange(
+        { day, month },
+        animal.monthBounds.secondType.start,
+        animal.monthBounds.secondType.end
+      );
+    }
+  });
   return animal ? animal : Animals.RAT;
 };
 const getDay = (year: number, month: number, day: number): animalType => {
@@ -94,11 +113,11 @@ const getHour = (hour: number): animalType => {
 };
 export default function getAnimals({ birthdate }: propsType): animalsCounted {
   const { year, month, day, hour, minute } = birthdate;
-  const dateObject = new Date(year, month, day, hour, minute);
-  const dayOfYear = month == -1 ? -1 : getDayOfYear(new Date(year, month, day));
+  const isFirstYearsBounds = countIsFirstYearBounds(year);
 
-  const monthAnimal = day == -1 ? Animals.NULL_ANIMAL : getMonth(dayOfYear);
-  const yearAnimal = getYear(year, dayOfYear);
+  const monthAnimal =
+    day == -1 ? Animals.NULL_ANIMAL : getMonth(day, month, isFirstYearsBounds);
+  const yearAnimal = getYear(year, month, day);
   const dayAnimal = getDay(year, month, day);
   const hourAnimal = getHour(hour);
 

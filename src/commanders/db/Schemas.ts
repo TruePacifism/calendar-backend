@@ -149,6 +149,7 @@ const lineChartDataSchema = new Schema({
 const cardSchema = new Schema({
   id: String,
   name: String,
+  chineseBirthdate: dateSchema,
   trueBirthdate: dateSchema,
   birthdate: dateSchema,
   birthcity: String,
@@ -177,7 +178,15 @@ const cardSchema = new Schema({
 const userSchema = new Schema({
   id: String,
   token: String,
-  name: String,
+  firstName: String,
+  secondName: {
+    type: String,
+    requred: false,
+  },
+  thirdName: {
+    type: String,
+    requred: false,
+  },
   mail: String,
   livingcity: String,
   birthcity: String,

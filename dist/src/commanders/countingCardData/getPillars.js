@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
+const daysBetweenDates_1 = __importDefault(require("../utils/daysBetweenDates"));
 const getDirection = (gender, yearElement, monthAnimal) => {
     if (monthAnimal === enums_1.Animals.BULL) {
         return gender === "male";
@@ -17,26 +21,30 @@ const getDaysToCount = (direction, birthdate, monthAnimal) => {
     const yearStartObject = new Date(birthdate.year, 0, 1);
     const daysOfYear = Math.ceil((birthdateObject.getTime() - yearStartObject.getTime()) / 1000 / 3600 / 24);
     let daysToCount;
+    const isFirstYearsBounds = (0, enums_1.countIsFirstYearBounds)(birthdate.year);
     if (monthAnimal === enums_1.Animals.RAT) {
         if (direction) {
-            daysToCount =
-                daysOfYear <= enums_1.Animals.RAT.monthBounds.end
-                    ? enums_1.Animals.RAT.monthBounds.end - daysOfYear + 1
-                    : 365 - daysOfYear + enums_1.Animals.RAT.monthBounds.end + 1;
+            daysToCount = (0, enums_1.isDateInRange)({ day: birthdate.day, month: birthdate.month }, { day: 0, month: 0 }, enums_1.Animals.RAT.monthBounds.firstType.start)
+                ? enums_1.Animals.RAT.monthBounds.firstType.end.day - birthdate.day + 1
+                : 31 - birthdate.day + enums_1.Animals.RAT.monthBounds.firstType.end.day + 1;
         }
         else {
-            daysToCount =
-                daysOfYear <= enums_1.Animals.RAT.monthBounds.end
-                    ? 365 - enums_1.Animals.RAT.monthBounds.start + daysOfYear
-                    : daysOfYear - enums_1.Animals.RAT.monthBounds.start;
+            daysToCount = (0, enums_1.isDateInRange)({ day: birthdate.day, month: birthdate.month }, enums_1.Animals.RAT.monthBounds.firstType.start, { day: 11, month: 31 })
+                ? birthdate.day - enums_1.Animals.RAT.monthBounds.firstType.start.day
+                : 31 - enums_1.Animals.RAT.monthBounds.firstType.start.day + birthdate.day;
         }
     }
     else {
         if (direction) {
-            daysToCount = monthAnimal.monthBounds.end - daysOfYear + 1;
+            daysToCount =
+                (0, daysBetweenDates_1.default)({ day: birthdate.day, month: birthdate.month }, isFirstYearsBounds
+                    ? monthAnimal.monthBounds.firstType.end
+                    : monthAnimal.monthBounds.secondType.end, birthdate.year) + 1;
         }
         else {
-            daysToCount = daysOfYear - monthAnimal.monthBounds.start;
+            daysToCount = (0, daysBetweenDates_1.default)(isFirstYearsBounds
+                ? monthAnimal.monthBounds.firstType.start
+                : monthAnimal.monthBounds.secondType.start, { day: birthdate.day, month: birthdate.month }, birthdate.year);
         }
     }
     return daysToCount;

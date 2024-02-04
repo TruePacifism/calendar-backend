@@ -21,7 +21,11 @@ export default async function getCitiesList({ query }: propsType) {
       Accept: "application/json",
       Authorization: "Token " + token,
     },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({
+      query,
+      from_bound: { value: "city" },
+      to_bound: { value: "city" },
+    }),
   });
   const responseJSON = await response.json();
   console.log(responseJSON);

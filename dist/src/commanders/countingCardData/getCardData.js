@@ -34,6 +34,7 @@ const getPillars_1 = __importDefault(require("./getPillars"));
 const toPrettierData_1 = __importDefault(require("./toPrettierData"));
 function getCardData(inputData) {
     return __awaiter(this, void 0, void 0, function* () {
+        const isToday = inputData.name === "today";
         const { gender } = inputData;
         const date = new Date();
         const birthcityCoordinates = yield (0, getCityCoordinates_1.default)({
@@ -53,7 +54,7 @@ function getCardData(inputData) {
             animals,
             elements,
         });
-        const currentPillar = (0, getCurrentPillar_1.default)({ pillars });
+        const currentPillar = isToday ? null : (0, getCurrentPillar_1.default)({ pillars });
         const mainElement = (0, getMainElement_1.default)({ elements });
         const lineChartData = (0, getLineChartData_1.default)({
             year: animals.year,

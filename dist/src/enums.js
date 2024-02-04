@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Directions = exports.MainElements = exports.Animals = exports.Elements = void 0;
+exports.Directions = exports.MainElements = exports.Animals = exports.countIsFirstYearBounds = exports.isDateInRange = exports.Elements = void 0;
 exports.Elements = {
     METAL_YAN: {
         name: "металл ян",
@@ -41,108 +41,358 @@ const firstYears = [
     2008, 2009, 2012, 2013, 2016, 2017, 2020, 2021, 2024, 2025, 2028, 2029, 2032,
     2033, 2036, 2037, 2040, 2041,
 ];
+function isDateInRange(date, startDate, endDate) {
+    const { day, month } = date;
+    const { day: startDay, month: startMonth } = startDate;
+    const { day: endDay, month: endMonth } = endDate;
+    if ((month > startMonth || (month === startMonth && day >= startDay)) && // Проверяем, больше ли текущий месяц, чем начальный, или равен и больше ли текущий день начальному дню
+        (month < endMonth || (month === endMonth && day <= endDay)) // Проверяем, меньше ли текущий месяц, чем конечный, или равен и меньше ли текущий день конечному дню
+    ) {
+        return true; // Если обе проверки проходят, то дата находится в промежутке
+    }
+    else {
+        return false; // В противном случае дата находится вне промежутка
+    }
+}
+exports.isDateInRange = isDateInRange;
+const countIsFirstYearBounds = (year) => firstYears.includes(year);
+exports.countIsFirstYearBounds = countIsFirstYearBounds;
 exports.Animals = {
     BULL: {
         name: "бык",
         monthBounds: {
-            start: 6,
-            end: 35,
+            firstType: {
+                start: {
+                    month: 0,
+                    day: 6,
+                },
+                end: {
+                    month: 1,
+                    day: 4,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 0,
+                    day: 6,
+                },
+                end: {
+                    month: 1,
+                    day: 4,
+                },
+            },
         },
         element: exports.Elements.WATER_IN,
     },
     TIGER: {
         name: "тигр",
         monthBounds: {
-            start: 36,
-            end: 64,
+            firstType: {
+                start: {
+                    month: 1,
+                    day: 5,
+                },
+                end: {
+                    month: 2,
+                    day: 5,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 1,
+                    day: 5,
+                },
+                end: {
+                    month: 2,
+                    day: 5,
+                },
+            },
         },
         element: exports.Elements.WATER_YAN,
     },
     RABBIT: {
         name: "кролик",
         monthBounds: {
-            start: 65,
-            end: 94,
+            firstType: {
+                start: {
+                    month: 2,
+                    day: 6,
+                },
+                end: {
+                    month: 3,
+                    day: 4,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 2,
+                    day: 6,
+                },
+                end: {
+                    month: 3,
+                    day: 4,
+                },
+            },
         },
         element: exports.Elements.WOOD_IN,
     },
     DRAGON: {
         name: "дракон",
         monthBounds: {
-            start: 95,
-            end: 125,
+            firstType: {
+                start: {
+                    month: 3,
+                    day: 5,
+                },
+                end: {
+                    month: 4,
+                    day: 5,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 3,
+                    day: 5,
+                },
+                end: {
+                    month: 4,
+                    day: 4,
+                },
+            },
         },
         element: exports.Elements.EARTH_YAN,
     },
     SNAKE: {
         name: "змея",
         monthBounds: {
-            start: 126,
-            end: 156,
+            firstType: {
+                start: {
+                    month: 4,
+                    day: 5,
+                },
+                end: {
+                    month: 5,
+                    day: 5,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 4,
+                    day: 5,
+                },
+                end: {
+                    month: 5,
+                    day: 5,
+                },
+            },
         },
         element: exports.Elements.WOOD_IN,
     },
     HORSE: {
         name: "лошадь",
         monthBounds: {
-            start: 157,
-            end: 188,
+            firstType: {
+                start: {
+                    month: 5,
+                    day: 6,
+                },
+                end: {
+                    month: 6,
+                    day: 7,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 5,
+                    day: 6,
+                },
+                end: {
+                    month: 6,
+                    day: 6,
+                },
+            },
         },
         element: exports.Elements.FIRE_YAN,
     },
     GOAT: {
         name: "коза",
         monthBounds: {
-            start: 189,
-            end: 219,
+            firstType: {
+                start: {
+                    month: 6,
+                    day: 8,
+                },
+                end: {
+                    month: 7,
+                    day: 7,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 6,
+                    day: 7,
+                },
+                end: {
+                    month: 7,
+                    day: 8,
+                },
+            },
         },
         element: exports.Elements.FIRE_IN,
     },
     MONKEY: {
         name: "обезьяна",
         monthBounds: {
-            start: 220,
-            end: 250,
+            firstType: {
+                start: {
+                    month: 7,
+                    day: 8,
+                },
+                end: {
+                    month: 8,
+                    day: 7,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 7,
+                    day: 7,
+                },
+                end: {
+                    month: 8,
+                    day: 7,
+                },
+            },
         },
         element: exports.Elements.EARTH_YAN,
     },
     ROOSTER: {
         name: "петух",
         monthBounds: {
-            start: 251,
-            end: 281,
+            firstType: {
+                start: {
+                    month: 8,
+                    day: 8,
+                },
+                end: {
+                    month: 9,
+                    day: 8,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 8,
+                    day: 8,
+                },
+                end: {
+                    month: 9,
+                    day: 7,
+                },
+            },
         },
         element: exports.Elements.METAL_IN,
     },
     DOG: {
         name: "собака",
         monthBounds: {
-            start: 282,
-            end: 311,
+            firstType: {
+                start: {
+                    month: 9,
+                    day: 9,
+                },
+                end: {
+                    month: 10,
+                    day: 7,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 9,
+                    day: 8,
+                },
+                end: {
+                    month: 10,
+                    day: 7,
+                },
+            },
         },
         element: exports.Elements.METAL_YAN,
     },
     PIG: {
         name: "свинья",
         monthBounds: {
-            start: 312,
-            end: 340,
+            firstType: {
+                start: {
+                    month: 10,
+                    day: 8,
+                },
+                end: {
+                    month: 11,
+                    day: 6,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 10,
+                    day: 8,
+                },
+                end: {
+                    month: 11,
+                    day: 6,
+                },
+            },
         },
         element: exports.Elements.WATER_IN,
     },
     RAT: {
         name: "крыса",
         monthBounds: {
-            start: 341,
-            end: 5,
+            firstType: {
+                start: {
+                    month: 11,
+                    day: 7,
+                },
+                end: {
+                    month: 0,
+                    day: 5,
+                },
+            },
+            secondType: {
+                start: {
+                    month: 11,
+                    day: 7,
+                },
+                end: {
+                    month: 0,
+                    day: 5,
+                },
+            },
         },
         element: exports.Elements.WATER_YAN,
     },
     NULL_ANIMAL: {
         name: " ",
         monthBounds: {
-            start: -1,
-            end: -1,
+            firstType: {
+                start: {
+                    month: -1,
+                    day: -1,
+                },
+                end: {
+                    month: -1,
+                    day: -1,
+                },
+            },
+            secondType: {
+                start: {
+                    month: -1,
+                    day: -1,
+                },
+                end: {
+                    month: -1,
+                    day: -1,
+                },
+            },
         },
         element: exports.Elements.NULL_ELEMENT,
     },

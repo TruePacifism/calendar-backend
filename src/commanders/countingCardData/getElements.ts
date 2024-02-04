@@ -1,4 +1,4 @@
-import { Animals, Elements } from "../../enums";
+import { Animals, Elements, isDateInRange } from "../../enums";
 import {
   animalsCounted,
   dateType,
@@ -20,13 +20,18 @@ function getDayOfYear(date: Date): number {
 
 const exampleDate = new Date(100, 0, 1, 0, 0);
 
-const getYear = (year: number, dayOfYear: number): elementType => {
+const getYear = (year: number, month: number, day: number): elementType => {
   const index = year % 10;
-  if (dayOfYear === -1) {
+  if (day === -1 || month === -1) {
     return Object.values(Elements)[index];
   }
-  const trueIndex =
-    dayOfYear < Animals.TIGER.monthBounds.start ? index - 1 : index;
+  const trueIndex = isDateInRange(
+    { day, month },
+    { day: 0, month: 0 },
+    Animals.TIGER.monthBounds.firstType.start
+  )
+    ? index - 1
+    : index;
   const indexWithOffset = (trueIndex + 10) % 10;
   return Object.values(Elements)[indexWithOffset];
 };
@@ -72,8 +77,7 @@ export default function getElements({
     minute === -1 ? 1 : minute
   );
 
-  const dayOfYear = getDayOfYear(new Date(year, month, day));
-  const yearElement = getYear(year, dayOfYear);
+  const yearElement = getYear(year, month, day);
   const monthElement =
     month === -1 ? Elements.NULL_ELEMENT : getMonth(dateObject, animals);
   const dayElement = day === -1 ? Elements.NULL_ELEMENT : getDay(dateObject);

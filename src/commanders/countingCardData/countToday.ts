@@ -63,7 +63,7 @@ export default async function countToday({
   };
   const gender = "female";
   const inputData: inputDataType = {
-    name: user.name,
+    name: user.firstName,
     birthcity: user.birthcity,
     livingcity: user.livingcity,
     gender,

@@ -50,7 +50,7 @@ function countToday({ user, dayOffset, }) {
         };
         const gender = "female";
         const inputData = {
-            name: user.name,
+            name: user.firstName,
             birthcity: user.birthcity,
             livingcity: user.livingcity,
             gender,

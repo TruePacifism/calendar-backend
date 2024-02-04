@@ -31,8 +31,26 @@ export type elementType = {
 export type animalType = {
   name: string;
   monthBounds: {
-    start: number;
-    end: number;
+    firstType: {
+      start: {
+        month: number;
+        day: number;
+      };
+      end: {
+        month: number;
+        day: number;
+      };
+    };
+    secondType: {
+      start: {
+        month: number;
+        day: number;
+      };
+      end: {
+        month: number;
+        day: number;
+      };
+    };
   };
   element: elementType;
 };
@@ -298,7 +316,9 @@ export type todayInputData = {
 };
 
 export type userInput = {
-  name: string;
+  firstName: string;
+  secondName?: string;
+  thirdName?: string;
   token: string;
   password: string;
   mail: string;
@@ -306,7 +326,9 @@ export type userInput = {
   birthcity: string;
 };
 export type userType = {
-  name: string;
+  firstName: string;
+  secondName?: string;
+  thirdName?: string;
   token: string;
   password: string;
   mail: string;

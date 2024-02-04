@@ -8,12 +8,14 @@ function getDayOfYear(date) {
     return dayOfYear;
 }
 const exampleDate = new Date(100, 0, 1, 0, 0);
-const getYear = (year, dayOfYear) => {
+const getYear = (year, month, day) => {
     const index = year % 10;
-    if (dayOfYear === -1) {
+    if (day === -1 || month === -1) {
         return Object.values(enums_1.Elements)[index];
     }
-    const trueIndex = dayOfYear < enums_1.Animals.TIGER.monthBounds.start ? index - 1 : index;
+    const trueIndex = (0, enums_1.isDateInRange)({ day, month }, { day: 0, month: 0 }, enums_1.Animals.TIGER.monthBounds.firstType.start)
+        ? index - 1
+        : index;
     const indexWithOffset = (trueIndex + 10) % 10;
     return Object.values(enums_1.Elements)[indexWithOffset];
 };
@@ -44,8 +46,7 @@ const getHour = (date) => {
 function getElements({ birthdate, animals, }) {
     const { year, month, day, hour, minute } = birthdate;
     const dateObject = new Date(year, month === -1 ? 0 : month, day === -1 ? 1 : day, hour === -1 ? 1 : hour, minute === -1 ? 1 : minute);
-    const dayOfYear = getDayOfYear(new Date(year, month, day));
-    const yearElement = getYear(year, dayOfYear);
+    const yearElement = getYear(year, month, day);
     const monthElement = month === -1 ? enums_1.Elements.NULL_ELEMENT : getMonth(dateObject, animals);
     const dayElement = day === -1 ? enums_1.Elements.NULL_ELEMENT : getDay(dateObject);
     const hourElement = hour === -1 ? enums_1.Elements.NULL_ELEMENT : getHour(dateObject);

@@ -37,7 +37,9 @@ exports.todayInputSchema = joi_1.default.object({
 exports.userInputSchema = joi_1.default.object({
     token: joi_1.default.string(),
     mail: joi_1.default.string(),
-    name: joi_1.default.string(),
+    firstName: joi_1.default.string().required(),
+    secondName: joi_1.default.string(),
+    thirdName: joi_1.default.string(),
     livingcity: joi_1.default.string().allow(""),
     birthcity: joi_1.default.string().allow(""),
     _id: joi_1.default.string(),

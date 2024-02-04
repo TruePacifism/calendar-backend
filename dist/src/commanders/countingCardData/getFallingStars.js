@@ -49,7 +49,7 @@ function getFallingStars({ birthdate, animals, }) {
     const fallingStars = [];
     let yearOffset = (year + 0) % 9;
     let monthOffset = (month + ((year - 100) % 3) * 3) % 9;
-    if (dayOfYear < enums_1.Animals.TIGER.monthBounds.start) {
+    if ((0, enums_1.isDateInRange)({ day, month }, { day: 0, month: 0 }, enums_1.Animals.TIGER.monthBounds.firstType.start)) {
         yearOffset += 8;
         yearOffset %= 9;
     }

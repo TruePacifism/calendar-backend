@@ -8,18 +8,26 @@ function getDayOfYear(date) {
     const dayOfYear = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
     return dayOfYear;
 }
-const getYear = (year, dayOfYear) => {
+const getYear = (year, month, day) => {
     const index = year % 12;
-    if (dayOfYear == -1) {
+    if (day === -1 || month === -1) {
         return Object.values(enums_1.Animals)[index];
     }
-    const trueIndex = dayOfYear < enums_1.Animals.TIGER.monthBounds.start ? index - 1 : index;
+    const trueIndex = (0, enums_1.isDateInRange)({ day, month }, { day: 0, month: 0 }, enums_1.Animals.TIGER.monthBounds.firstType.start)
+        ? index - 1
+        : index;
     const indexWithOffset = (trueIndex + 7) % 12;
     return Object.values(enums_1.Animals)[indexWithOffset];
 };
-const getMonth = (dayOfYear) => {
-    const animal = Object.values(enums_1.Animals).find((animal) => animal.monthBounds.start <= dayOfYear &&
-        animal.monthBounds.end >= dayOfYear);
+const getMonth = (day, month, isFirstYearsBounds) => {
+    const animal = Object.values(enums_1.Animals).find((animal) => {
+        if (isFirstYearsBounds) {
+            return (0, enums_1.isDateInRange)({ day, month }, animal.monthBounds.firstType.start, animal.monthBounds.firstType.end);
+        }
+        else {
+            return (0, enums_1.isDateInRange)({ day, month }, animal.monthBounds.secondType.start, animal.monthBounds.secondType.end);
+        }
+    });
     return animal ? animal : enums_1.Animals.RAT;
 };
 const getDay = (year, month, day) => {
@@ -77,10 +85,9 @@ const getHour = (hour) => {
 };
 function getAnimals({ birthdate }) {
     const { year, month, day, hour, minute } = birthdate;
-    const dateObject = new Date(year, month, day, hour, minute);
-    const dayOfYear = month == -1 ? -1 : getDayOfYear(new Date(year, month, day));
-    const monthAnimal = day == -1 ? enums_1.Animals.NULL_ANIMAL : getMonth(dayOfYear);
-    const yearAnimal = getYear(year, dayOfYear);
+    const isFirstYearsBounds = (0, enums_1.countIsFirstYearBounds)(year);
+    const monthAnimal = day == -1 ? enums_1.Animals.NULL_ANIMAL : getMonth(day, month, isFirstYearsBounds);
+    const yearAnimal = getYear(year, month, day);
     const dayAnimal = getDay(year, month, day);
     const hourAnimal = getHour(hour);
     return {
