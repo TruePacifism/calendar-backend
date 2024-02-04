@@ -13,7 +13,10 @@ const getYear = (year, month, day) => {
     if (day === -1 || month === -1) {
         return Object.values(enums_1.Elements)[index];
     }
-    const trueIndex = (0, enums_1.isDateInRange)({ day, month }, { day: 0, month: 0 }, enums_1.Animals.TIGER.monthBounds.firstType.start)
+    const trueIndex = (0, enums_1.isDateInRange)({ day, month }, { day: 0, month: 0 }, {
+        day: enums_1.Animals.TIGER.monthBounds.firstType.start.day - 1,
+        month: enums_1.Animals.TIGER.monthBounds.firstType.start.month,
+    })
         ? index - 1
         : index;
     const indexWithOffset = (trueIndex + 10) % 10;

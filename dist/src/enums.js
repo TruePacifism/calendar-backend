@@ -36,7 +36,7 @@ exports.Elements = {
         name: " ",
     },
 };
-const firstYears = [
+const secondYears = [
     1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 1997, 2000, 2001, 2004, 2005,
     2008, 2009, 2012, 2013, 2016, 2017, 2020, 2021, 2024, 2025, 2028, 2029, 2032,
     2033, 2036, 2037, 2040, 2041,
@@ -55,7 +55,7 @@ function isDateInRange(date, startDate, endDate) {
     }
 }
 exports.isDateInRange = isDateInRange;
-const countIsFirstYearBounds = (year) => firstYears.includes(year);
+const countIsFirstYearBounds = (year) => !secondYears.includes(year);
 exports.countIsFirstYearBounds = countIsFirstYearBounds;
 exports.Animals = {
     BULL: {
@@ -234,7 +234,7 @@ exports.Animals = {
                 },
                 end: {
                     month: 7,
-                    day: 8,
+                    day: 6,
                 },
             },
         },

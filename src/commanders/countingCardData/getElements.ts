@@ -28,7 +28,10 @@ const getYear = (year: number, month: number, day: number): elementType => {
   const trueIndex = isDateInRange(
     { day, month },
     { day: 0, month: 0 },
-    Animals.TIGER.monthBounds.firstType.start
+    {
+      day: Animals.TIGER.monthBounds.firstType.start.day - 1,
+      month: Animals.TIGER.monthBounds.firstType.start.month,
+    }
   )
     ? index - 1
     : index;
