@@ -1,7 +1,10 @@
 import { dateType, inputDataType } from "../../types";
 import date from "date-and-time";
 
-type propsType = inputDataType;
+type propsType = {
+  birthdate: dateType;
+  birthcity: string;
+};
 
 export default async function countDevTime({
   birthdate,

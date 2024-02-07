@@ -13,7 +13,7 @@ type propsType = {
 export default function getDirection({ birthdate }: propsType): directionType {
   const { year, month } = birthdate;
   if (month === -1) {
-    switch (year) {
+    switch (year % 10) {
       case 0:
       case 1:
         return Directions.W;

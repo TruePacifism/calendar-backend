@@ -31,6 +31,25 @@ export const todayInputSchema = Joi.object({
   dayOffset: Joi.number(),
 });
 
+export const collisionsFramesInputSchema = Joi.object({
+  birthdate: Joi.object({
+    year: Joi.number(),
+    month: Joi.number(),
+    day: Joi.number(),
+    hour: Joi.number(),
+    minute: Joi.number(),
+    _id: Joi.string(),
+  }),
+  trueBirthdate: Joi.object({
+    year: Joi.number(),
+    month: Joi.number(),
+    day: Joi.number(),
+    hour: Joi.number(),
+    minute: Joi.number(),
+    _id: Joi.string(),
+  }),
+});
+
 export const userInputSchema = Joi.object({
   token: Joi.string(),
   mail: Joi.string(),

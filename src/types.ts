@@ -117,6 +117,16 @@ export type collisionType = {
   targetName: collisionTargetTimeType;
   animal: animalType;
   kind: string;
+  frames?: {
+    start: {
+      hour: number;
+      minute: number;
+    };
+    end: {
+      hour: number;
+      minute: number;
+    };
+  };
 };
 export type animalsCounted = {
   year: animalType;

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userInputSchema = exports.todayInputSchema = exports.inputDataSchema = void 0;
+exports.userInputSchema = exports.collisionsFramesInputSchema = exports.todayInputSchema = exports.inputDataSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 exports.inputDataSchema = joi_1.default.object({
     name: joi_1.default.string().allow(""),
@@ -33,6 +33,24 @@ exports.todayInputSchema = joi_1.default.object({
         __v: joi_1.default.string(),
     }),
     dayOffset: joi_1.default.number(),
+});
+exports.collisionsFramesInputSchema = joi_1.default.object({
+    birthdate: joi_1.default.object({
+        year: joi_1.default.number(),
+        month: joi_1.default.number(),
+        day: joi_1.default.number(),
+        hour: joi_1.default.number(),
+        minute: joi_1.default.number(),
+        _id: joi_1.default.string(),
+    }),
+    trueBirthdate: joi_1.default.object({
+        year: joi_1.default.number(),
+        month: joi_1.default.number(),
+        day: joi_1.default.number(),
+        hour: joi_1.default.number(),
+        minute: joi_1.default.number(),
+        _id: joi_1.default.string(),
+    }),
 });
 exports.userInputSchema = joi_1.default.object({
     token: joi_1.default.string(),

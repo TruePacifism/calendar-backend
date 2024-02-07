@@ -4,7 +4,7 @@ const enums_1 = require("../../enums");
 function getDirection({ birthdate }) {
     const { year, month } = birthdate;
     if (month === -1) {
-        switch (year) {
+        switch (year % 10) {
             case 0:
             case 1:
                 return enums_1.Directions.W;

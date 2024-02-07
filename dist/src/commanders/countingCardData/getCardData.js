@@ -43,7 +43,10 @@ function getCardData(inputData) {
         const livingcityCoordinates = yield (0, getCityCoordinates_1.default)({
             cityName: inputData.livingcity,
         });
-        const trueBirthdate = yield (0, countDevTime_1.default)(inputData);
+        const trueBirthdate = yield (0, countDevTime_1.default)({
+            birthdate: inputData.birthdate,
+            birthcity: isToday ? inputData.livingcity : inputData.birthcity,
+        });
         const age = (0, getAge_1.default)({ birthdate: trueBirthdate });
         const animals = (0, getAnimals_1.default)({ birthdate: trueBirthdate });
         const elements = (0, getElements_1.default)({ birthdate: trueBirthdate, animals: animals });

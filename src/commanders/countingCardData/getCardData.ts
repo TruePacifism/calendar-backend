@@ -32,7 +32,10 @@ export default async function getCardData(
   const livingcityCoordinates = await getCityCoordinates({
     cityName: inputData.livingcity,
   });
-  const trueBirthdate = await countDevTime(inputData);
+  const trueBirthdate = await countDevTime({
+    birthdate: inputData.birthdate,
+    birthcity: isToday ? inputData.livingcity : inputData.birthcity,
+  });
   const age = getAge({ birthdate: trueBirthdate });
   const animals: animalsCounted = getAnimals({ birthdate: trueBirthdate });
   const elements = getElements({ birthdate: trueBirthdate, animals: animals });

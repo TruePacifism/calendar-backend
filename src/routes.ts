@@ -4,8 +4,9 @@ import bodyParser from "body-parser";
 import getCardData from "./commanders/countingCardData/getCardData";
 import addCard from "./commanders/db/addCard";
 import getCard from "./commanders/db/getCard";
-import { inputDataType, todayInputData } from "./types";
+import { dateType, inputDataType, todayInputData } from "./types";
 import {
+  collisionsFramesInputSchema,
   inputDataSchema,
   todayInputSchema,
   userInputSchema,
@@ -17,6 +18,7 @@ import getCitiesList from "./commanders/utils/getCitiesList";
 import getUser from "./commanders/db/getUser";
 import authUser from "./commanders/db/authUser";
 import recountAllData from "./commanders/countingCardData/recountAllData";
+import getHourCollisionsFrames from "./commanders/countingCardData/getHourCollisionsFrames";
 
 const app = express();
 app.use(cors());
@@ -87,6 +89,15 @@ app.get("/today", async (req, res) => {
   const { user, dayOffset } = query;
   const todayData = await countToday({ user, dayOffset });
   res.json(todayData);
+});
+app.get("/collisionframes", async (req, res) => {
+  console.log(req);
+
+  const query: { birthdate: dateType; trueBirthdate: dateType } =
+    await collisionsFramesInputSchema.validateAsync(req.query);
+  const { birthdate, trueBirthdate } = query;
+  const frames = getHourCollisionsFrames({ birthdate, trueBirthdate });
+  res.json(frames);
 });
 app.get("/city/:query", async (req, res) => {
   const { query } = req.params;

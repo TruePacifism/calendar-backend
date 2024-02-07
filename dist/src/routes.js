@@ -25,6 +25,7 @@ const getCitiesList_1 = __importDefault(require("./commanders/utils/getCitiesLis
 const getUser_1 = __importDefault(require("./commanders/db/getUser"));
 const authUser_1 = __importDefault(require("./commanders/db/authUser"));
 const recountAllData_1 = __importDefault(require("./commanders/countingCardData/recountAllData"));
+const getHourCollisionsFrames_1 = __importDefault(require("./commanders/countingCardData/getHourCollisionsFrames"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
@@ -84,6 +85,13 @@ app.get("/today", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user, dayOffset } = query;
     const todayData = yield (0, countToday_1.default)({ user, dayOffset });
     res.json(todayData);
+}));
+app.get("/collisionframes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req);
+    const query = yield joiSchemas_1.collisionsFramesInputSchema.validateAsync(req.query);
+    const { birthdate, trueBirthdate } = query;
+    const frames = (0, getHourCollisionsFrames_1.default)({ birthdate, trueBirthdate });
+    res.json(frames);
 }));
 app.get("/city/:query", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { query } = req.params;
