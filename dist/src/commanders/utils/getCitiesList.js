@@ -27,7 +27,7 @@ function getCitiesList({ query }) {
             body: JSON.stringify({
                 query,
                 from_bound: { value: "city" },
-                to_bound: { value: "city" },
+                to_bound: { value: "settlement" },
             }),
         });
         const responseJSON = yield response.json();

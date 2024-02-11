@@ -1,0 +1,1 @@
+{"version":3,"file":"deleteUser.js","sourceRoot":"","sources":["../../../../src/commanders/db/deleteUser.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,uCAAsC;AAMtC,SAA8B,UAAU,CAAC,EAAE,KAAK,EAAa;;QAC3D,MAAM,MAAM,GAAG,MAAM,mBAAS,CAAC,SAAS,CAAC,EAAE,KAAK,EAAE,CAAC,CAAC;QAEpD,OAAO,MAAM,CAAC;IAChB,CAAC;CAAA;AAJD,6BAIC"}

@@ -4,11 +4,13 @@ import {
   cardStrengthType,
   elementsCounted,
   mainElementType,
+  pillarType,
 } from "../../types";
 
 type propsType = {
   animals: animalsCounted;
   elements: elementsCounted;
+  currentPillar: pillarType;
   mainElement: mainElementType;
 };
 
@@ -16,6 +18,7 @@ export default function getCardStrength({
   animals,
   elements,
   mainElement,
+  currentPillar
 }: propsType): cardStrengthType {
   const powerfulElements = Object.values(MainElements).filter(
     (mainElementItem, idx) => {
@@ -52,6 +55,24 @@ export default function getCardStrength({
     }
     maxPower += 1;
   });
+  // if (currentPillar && currentPillar.animal !== Animals.NULL_ANIMAL) {
+  //   if (
+  //     powerfulElements[0].animals.includes(currentPillar.animal) ||
+  //     powerfulElements[1].animals.includes(currentPillar.animal)
+  //   ) {
+  //     power += 1;
+  //   }
+  //   maxPower += 1;
+  // }
+  // if (currentPillar && currentPillar.element !== Elements.NULL_ELEMENT) {
+  //   if (
+  //     powerfulElements[0].elements.includes(currentPillar.element) ||
+  //     powerfulElements[1].elements.includes(currentPillar.element)
+  //   ) {
+  //     power += 1;
+  //   }
+  //   maxPower += 1;
+  // }
   let powerDescription: string;
   if (power < maxPower / 2) {
     powerDescription = "Слабая";

@@ -17,7 +17,7 @@ export default function getChineseDate(
     console.log(trueBirthdate.month);
     chineseBirthdate.month -= 1;
   }
-  if (animals.month === Animals.BULL || animals.month === Animals.TIGER) {
+  if (animals.month === Animals.BULL) {
     chineseBirthdate.year -= 1;
   }
   console.log(chineseBirthdate);

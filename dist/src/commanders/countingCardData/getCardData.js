@@ -64,7 +64,12 @@ function getCardData(inputData) {
             month: animals.month,
             day: animals.day,
         });
-        const cardStrength = (0, getCardStrength_1.default)({ animals, elements, mainElement });
+        const cardStrength = (0, getCardStrength_1.default)({
+            animals,
+            elements,
+            mainElement,
+            currentPillar,
+        });
         const blackInfo = (0, getBlackInfo_1.default)({ animals, elements, currentPillar });
         const goodInfo = (0, getGoodInfo_1.default)({
             animals,
@@ -79,7 +84,7 @@ function getCardData(inputData) {
         const chartData = (0, getChartData_1.default)({ momId: "", dadId: "", animals, elements });
         const collisionsInfo = (0, getCollisions_1.default)({ animals, currentPillar, pillars });
         const fallingStars = (0, getFallingStars_1.default)({ birthdate: trueBirthdate, animals });
-        const genderCount = (0, getGenderCount_1.default)({ animals });
+        const genderCount = (0, getGenderCount_1.default)({ animals, currentPillar });
         const direction = (0, getDirection_1.default)({ birthdate: chineseBirthdate });
         const prettierData = (0, toPrettierData_1.default)({
             data: Object.assign(Object.assign({}, inputData), { date,

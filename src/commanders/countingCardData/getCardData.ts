@@ -53,7 +53,12 @@ export default async function getCardData(
     month: animals.month,
     day: animals.day,
   });
-  const cardStrength = getCardStrength({ animals, elements, mainElement });
+  const cardStrength = getCardStrength({
+    animals,
+    elements,
+    mainElement,
+    currentPillar,
+  });
   const blackInfo = getBlackInfo({ animals, elements, currentPillar });
   const goodInfo = getGoodInfo({
     animals,
@@ -68,7 +73,7 @@ export default async function getCardData(
   const chartData = getChartData({ momId: "", dadId: "", animals, elements });
   const collisionsInfo = getCollisions({ animals, currentPillar, pillars });
   const fallingStars = getFallingStars({ birthdate: trueBirthdate, animals });
-  const genderCount = getGenderCount({ animals });
+  const genderCount = getGenderCount({ animals, currentPillar });
   const direction = getDirection({ birthdate: chineseBirthdate });
   const prettierData = toPrettierData({
     data: {

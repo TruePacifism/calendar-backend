@@ -24,7 +24,7 @@ export default async function getCitiesList({ query }: propsType) {
     body: JSON.stringify({
       query,
       from_bound: { value: "city" },
-      to_bound: { value: "city" },
+      to_bound: { value: "settlement" },
     }),
   });
   const responseJSON = await response.json();

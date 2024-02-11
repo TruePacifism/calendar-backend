@@ -19,13 +19,13 @@ const addCard_1 = __importDefault(require("./commanders/db/addCard"));
 const getCard_1 = __importDefault(require("./commanders/db/getCard"));
 const joiSchemas_1 = require("./joiSchemas");
 const cors_1 = __importDefault(require("cors"));
-const countToday_1 = __importDefault(require("./commanders/countingCardData/countToday"));
 const deleteCard_1 = __importDefault(require("./commanders/db/deleteCard"));
 const getCitiesList_1 = __importDefault(require("./commanders/utils/getCitiesList"));
 const getUser_1 = __importDefault(require("./commanders/db/getUser"));
 const authUser_1 = __importDefault(require("./commanders/db/authUser"));
 const recountAllData_1 = __importDefault(require("./commanders/countingCardData/recountAllData"));
 const getHourCollisionsFrames_1 = __importDefault(require("./commanders/countingCardData/getHourCollisionsFrames"));
+const deleteUser_1 = __importDefault(require("./commanders/db/deleteUser"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
@@ -47,6 +47,11 @@ app.get("/login/:token", (req, res) => __awaiter(void 0, void 0, void 0, functio
     const { token } = req.params;
     const user = yield (0, getUser_1.default)({ token });
     res.json(user);
+}));
+app.delete("/login/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { token } = req.params;
+    const result = yield (0, deleteUser_1.default)({ token });
+    res.send(result);
 }));
 app.post("/card/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cardInput = req.body;
@@ -78,13 +83,6 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(error);
         res.send(error);
     }
-}));
-app.get("/today", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.query);
-    const query = yield joiSchemas_1.todayInputSchema.validateAsync(req.query);
-    const { user, dayOffset } = query;
-    const todayData = yield (0, countToday_1.default)({ user, dayOffset });
-    res.json(todayData);
 }));
 app.get("/collisionframes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req);

@@ -8,17 +8,16 @@ import { dateType, inputDataType, todayInputData } from "./types";
 import {
   collisionsFramesInputSchema,
   inputDataSchema,
-  todayInputSchema,
   userInputSchema,
 } from "./joiSchemas";
 import cors from "cors";
-import countToday from "./commanders/countingCardData/countToday";
 import deleteCard from "./commanders/db/deleteCard";
 import getCitiesList from "./commanders/utils/getCitiesList";
 import getUser from "./commanders/db/getUser";
 import authUser from "./commanders/db/authUser";
 import recountAllData from "./commanders/countingCardData/recountAllData";
 import getHourCollisionsFrames from "./commanders/countingCardData/getHourCollisionsFrames";
+import deleteUser from "./commanders/db/deleteUser";
 
 const app = express();
 app.use(cors());
@@ -46,6 +45,12 @@ app.get("/login/:token", async (req, res) => {
   const user = await getUser({ token });
 
   res.json(user);
+});
+app.delete("/login/:token", async (req, res) => {
+  const { token } = req.params;
+  const result = await deleteUser({ token });
+
+  res.send(result);
 });
 app.post("/card/:token", async (req, res) => {
   const cardInput = req.body;
@@ -81,14 +86,6 @@ app.get("/count", async (req, res) => {
     console.log(error);
     res.send(error);
   }
-});
-app.get("/today", async (req, res) => {
-  console.log(req.query);
-
-  const query: todayInputData = await todayInputSchema.validateAsync(req.query);
-  const { user, dayOffset } = query;
-  const todayData = await countToday({ user, dayOffset });
-  res.json(todayData);
 });
 app.get("/collisionframes", async (req, res) => {
   console.log(req);

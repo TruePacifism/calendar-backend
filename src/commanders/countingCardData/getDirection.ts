@@ -12,10 +12,14 @@ type propsType = {
 
 export default function getDirection({ birthdate }: propsType): directionType {
   const { year, month } = birthdate;
+  console.log(birthdate);
+
   if (month === -1) {
     switch (year % 10) {
       case 0:
       case 1:
+      case 8:
+      case 9:
         return Directions.W;
       case 2:
       case 3:
@@ -26,22 +30,18 @@ export default function getDirection({ birthdate }: propsType): directionType {
       case 6:
       case 7:
         return Directions.S;
-      case 8:
-      case 9:
-        return Directions.C;
       default:
         return Directions.NULL_DIRECTION;
     }
   }
   if (month === 0) {
-    return {
-      shortName: "С",
-      fullName: "Север",
-    };
+    return Directions.N;
   }
   switch (year % 10) {
     case 0:
     case 1:
+    case 8:
+    case 9:
       switch (month) {
         case 1:
         case 10:
@@ -74,7 +74,6 @@ export default function getDirection({ birthdate }: propsType): directionType {
         case 2:
         case 4:
         case 5:
-        case 7:
           return Directions.NE;
       }
     case 4:
@@ -112,25 +111,6 @@ export default function getDirection({ birthdate }: propsType): directionType {
         case 3:
         case 4:
           return Directions.SE;
-      }
-    case 8:
-    case 9:
-      switch (month) {
-        case 1:
-        case 11:
-          return Directions.CN;
-        case 2:
-        case 3:
-        case 4:
-          return Directions.CE;
-        case 5:
-        case 6:
-        case 7:
-          return Directions.CS;
-        case 8:
-        case 9:
-        case 10:
-          return Directions.CW;
       }
   }
 }

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
-function getCardStrength({ animals, elements, mainElement, }) {
+function getCardStrength({ animals, elements, mainElement, currentPillar }) {
     const powerfulElements = Object.values(enums_1.MainElements).filter((mainElementItem, idx) => {
         return (mainElementItem === mainElement ||
             Object.values(enums_1.MainElements)[(idx + 4) % 5] === mainElement);
@@ -28,6 +28,24 @@ function getCardStrength({ animals, elements, mainElement, }) {
         }
         maxPower += 1;
     });
+    // if (currentPillar && currentPillar.animal !== Animals.NULL_ANIMAL) {
+    //   if (
+    //     powerfulElements[0].animals.includes(currentPillar.animal) ||
+    //     powerfulElements[1].animals.includes(currentPillar.animal)
+    //   ) {
+    //     power += 1;
+    //   }
+    //   maxPower += 1;
+    // }
+    // if (currentPillar && currentPillar.element !== Elements.NULL_ELEMENT) {
+    //   if (
+    //     powerfulElements[0].elements.includes(currentPillar.element) ||
+    //     powerfulElements[1].elements.includes(currentPillar.element)
+    //   ) {
+    //     power += 1;
+    //   }
+    //   maxPower += 1;
+    // }
     let powerDescription;
     if (power < maxPower / 2) {
         powerDescription = "Слабая";

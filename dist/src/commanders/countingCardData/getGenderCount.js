@@ -19,7 +19,7 @@ const getGenderByAnimal = (animal) => {
             return "female";
     }
 };
-function getGenderCount({ animals, }) {
+function getGenderCount({ animals, currentPillar, }) {
     const genderCount = {
         female: 0,
         male: 0,
@@ -32,6 +32,8 @@ function getGenderCount({ animals, }) {
     genderCount[dayGender] += 7.5;
     const hourGender = getGenderByAnimal(animals.hour);
     genderCount[hourGender] += 2.5;
+    // const pillarGender = getGenderByAnimal(currentPillar.animal);
+    // genderCount[pillarGender] += 2.5;
     const sum = genderCount.female + genderCount.male;
     genderCount.female = Math.round((genderCount.female / sum) * 100);
     genderCount.male = Math.round((genderCount.male / sum) * 100);
