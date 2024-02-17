@@ -19,6 +19,14 @@ exports.inputDataSchema = joi_1.default.object({
     livingcity: joi_1.default.string().allow(""),
     birthcity: joi_1.default.string().allow(""),
     _id: joi_1.default.string(),
+    offset: joi_1.default.object({
+        year: joi_1.default.number(),
+        month: joi_1.default.number(),
+        day: joi_1.default.number(),
+        hour: joi_1.default.number(),
+        minute: joi_1.default.number(),
+        _id: joi_1.default.string(),
+    }),
 });
 exports.todayInputSchema = joi_1.default.object({
     user: joi_1.default.object({

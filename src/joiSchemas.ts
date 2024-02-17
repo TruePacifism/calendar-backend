@@ -14,6 +14,14 @@ export const inputDataSchema = Joi.object({
   livingcity: Joi.string().allow(""),
   birthcity: Joi.string().allow(""),
   _id: Joi.string(),
+  offset: Joi.object({
+    year: Joi.number(),
+    month: Joi.number(),
+    day: Joi.number(),
+    hour: Joi.number(),
+    minute: Joi.number(),
+    _id: Joi.string(),
+  }),
 });
 
 export const todayInputSchema = Joi.object({

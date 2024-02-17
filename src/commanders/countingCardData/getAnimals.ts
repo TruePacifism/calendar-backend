@@ -17,9 +17,15 @@ function getDayOfYear(date: Date): number {
 }
 type propsType = {
   birthdate: dateType;
+  offset?: dateType;
 };
 
-const getYear = (year: number, month: number, day: number): animalType => {
+const getYear = (
+  year: number,
+  month: number,
+  day: number,
+  offset: number
+): animalType => {
   const index = year % 12;
   if (day === -1 || month === -1) {
     return Object.values(Animals)[index];
@@ -34,16 +40,23 @@ const getYear = (year: number, month: number, day: number): animalType => {
   )
     ? index - 1
     : index;
-  const indexWithOffset = (trueIndex + 7) % 12;
+  let indexWithOffset = trueIndex + 7 + offset;
+  while (indexWithOffset < 0) {
+    indexWithOffset += 12;
+  }
+  while (indexWithOffset > 11) {
+    indexWithOffset %= 12;
+  }
 
   return Object.values(Animals)[indexWithOffset];
 };
 const getMonth = (
   day: number,
   month: number,
-  isFirstYearsBounds: boolean
+  isFirstYearsBounds: boolean,
+  offset: number
 ): animalType => {
-  const animal = Object.values(Animals).find((animal) => {
+  const index = Object.values(Animals).findIndex((animal) => {
     if (isFirstYearsBounds) {
       return isDateInRange(
         { day, month },
@@ -58,9 +71,22 @@ const getMonth = (
       );
     }
   });
+  let indexWithOffset = index + offset;
+  while (indexWithOffset < 0) {
+    indexWithOffset += 12;
+  }
+  while (indexWithOffset > 11) {
+    indexWithOffset %= 12;
+  }
+  const animal = Object.values(Animals)[indexWithOffset];
   return animal ? animal : Animals.RAT;
 };
-const getDay = (year: number, month: number, day: number): animalType => {
+const getDay = (
+  year: number,
+  month: number,
+  day: number,
+  offset: number
+): animalType => {
   if (day == -1) {
     return Animals.NULL_ANIMAL;
   }
@@ -68,61 +94,93 @@ const getDay = (year: number, month: number, day: number): animalType => {
   const timeDiff = dateObject.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
   const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
   const index = dayCount % 12;
-  const indexWithOffset = (index + 5) % 12;
+  let indexWithOffset = index + 5 + offset;
+  while (indexWithOffset < 0) {
+    indexWithOffset += 12;
+  }
+  while (indexWithOffset > 11) {
+    indexWithOffset %= 12;
+  }
   return Object.values(Animals)[indexWithOffset];
 };
 
-const getHour = (hour: number): animalType => {
+const getHour = (hour: number, offset: number): animalType => {
+  let index = 0;
   switch (hour) {
     case 23:
     case 0:
-      return Animals.RAT;
+      index = 11;
+      break;
     case 1:
     case 2:
-      return Animals.BULL;
+      index = 0;
+      break;
     case 3:
     case 4:
-      return Animals.TIGER;
+      index = 1;
+      break;
     case 5:
     case 6:
-      return Animals.RABBIT;
+      index = 2;
+      break;
     case 7:
     case 8:
-      return Animals.DRAGON;
+      index = 3;
+      break;
     case 9:
     case 10:
-      return Animals.SNAKE;
+      index = 4;
+      break;
     case 11:
     case 12:
-      return Animals.HORSE;
+      index = 5;
+      break;
     case 13:
     case 14:
-      return Animals.GOAT;
+      index = 6;
+      break;
     case 15:
     case 16:
-      return Animals.MONKEY;
+      index = 7;
+      break;
     case 17:
     case 18:
-      return Animals.ROOSTER;
+      index = 8;
+      break;
     case 19:
     case 20:
-      return Animals.DOG;
+      index = 9;
+      break;
     case 21:
     case 22:
-      return Animals.PIG;
+      index = 10;
+      break;
     default:
       return Animals.NULL_ANIMAL;
   }
+  let indexWithOffset = index + offset;
+  while (indexWithOffset < 0) {
+    indexWithOffset += 12;
+  }
+  while (indexWithOffset > 11) {
+    indexWithOffset %= 12;
+  }
+  return Object.values(Animals)[indexWithOffset];
 };
-export default function getAnimals({ birthdate }: propsType): animalsCounted {
+export default function getAnimals({
+  birthdate,
+  offset,
+}: propsType): animalsCounted {
   const { year, month, day, hour, minute } = birthdate;
   const isFirstYearsBounds = countIsFirstYearBounds(year);
 
   const monthAnimal =
-    day == -1 ? Animals.NULL_ANIMAL : getMonth(day, month, isFirstYearsBounds);
-  const yearAnimal = getYear(year, month, day);
-  const dayAnimal = getDay(year, month, day);
-  const hourAnimal = getHour(hour);
+    day == -1
+      ? Animals.NULL_ANIMAL
+      : getMonth(day, month, isFirstYearsBounds, offset ? offset.month : 0);
+  const yearAnimal = getYear(year, month, day, offset ? offset.year : 0);
+  const dayAnimal = getDay(year, month, day, offset ? offset.day : 0);
+  const hourAnimal = getHour(hour, offset ? offset.day : 0);
 
   return {
     year: yearAnimal,

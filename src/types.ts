@@ -152,6 +152,7 @@ export type inputDataType = {
   birthcity: string;
   gender: genderType;
   livingcity: string;
+  offset?: dateType;
 };
 export type outputAnimalType = {
   name: string;
