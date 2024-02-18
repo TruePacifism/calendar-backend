@@ -25,9 +25,11 @@ function getGenderCount({ animals, currentPillar, }) {
         male: 0,
     };
     const yearGender = getGenderByAnimal(animals.year);
-    genderCount[yearGender] += 25;
+    genderCount[yearGender] +=
+        animals.month === enums_1.Animals.BULL || animals.month === enums_1.Animals.TIGER ? 15 : 25;
     const monthGender = getGenderByAnimal(animals.month);
-    genderCount[monthGender] += 15;
+    genderCount[monthGender] +=
+        animals.month === enums_1.Animals.BULL || animals.month === enums_1.Animals.TIGER ? 25 : 15;
     const dayGender = getGenderByAnimal(animals.day);
     genderCount[dayGender] += 7.5;
     const hourGender = getGenderByAnimal(animals.hour);

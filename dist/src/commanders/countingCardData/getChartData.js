@@ -18,10 +18,16 @@ function getChartData({ momId, dadId, animals, elements, }) {
     };
     Object.entries(chartData).forEach(([key, value]) => {
         if (enums_1.Animals[key] === animals.year) {
-            chartData[key] += 25;
+            chartData[key] +=
+                animals.month === enums_1.Animals.BULL || animals.month === enums_1.Animals.TIGER
+                    ? 15
+                    : 25;
         }
         if (enums_1.Animals[key] === animals.month) {
-            chartData[key] += 15;
+            chartData[key] +=
+                animals.month === enums_1.Animals.BULL || animals.month === enums_1.Animals.TIGER
+                    ? 25
+                    : 15;
         }
         if (enums_1.Animals[key] === animals.day) {
             chartData[key] += 7.5;
@@ -30,6 +36,8 @@ function getChartData({ momId, dadId, animals, elements, }) {
             chartData[key] += 2.5;
         }
     });
+    const sum = Object.values(chartData).reduce((prev, current) => prev + current, 0);
+    Object.keys(chartData).forEach((key) => (chartData[key] *= 2));
     return chartData;
 }
 exports.default = getChartData;

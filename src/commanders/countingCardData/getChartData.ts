@@ -34,10 +34,16 @@ export default function getChartData({
   };
   Object.entries(chartData).forEach(([key, value]) => {
     if (Animals[key] === animals.year) {
-      chartData[key] += 25;
+      chartData[key] +=
+        animals.month === Animals.BULL || animals.month === Animals.TIGER
+          ? 15
+          : 25;
     }
     if (Animals[key] === animals.month) {
-      chartData[key] += 15;
+      chartData[key] +=
+        animals.month === Animals.BULL || animals.month === Animals.TIGER
+          ? 25
+          : 15;
     }
     if (Animals[key] === animals.day) {
       chartData[key] += 7.5;
@@ -46,5 +52,10 @@ export default function getChartData({
       chartData[key] += 2.5;
     }
   });
+  const sum = Object.values(chartData).reduce(
+    (prev, current) => prev + current,
+    0
+  );
+  Object.keys(chartData).forEach((key) => (chartData[key] *= 2));
   return chartData;
 }

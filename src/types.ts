@@ -163,6 +163,10 @@ export type outputAnimalType = {
 export type fallingStarType = {
   yearNumber: number;
   monthNumber: number;
+  element: mainElementType;
+  side: directionType;
+  goods: string[];
+  bads: string[];
 };
 
 export type cardStrengthType = {

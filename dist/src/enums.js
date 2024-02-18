@@ -479,8 +479,8 @@ exports.Directions = {
         fullName: "Западо-Восток",
     },
     C: {
-        shortName: "З",
-        fullName: "Запад",
+        shortName: "Ц",
+        fullName: "Центр",
     },
     NULL_DIRECTION: {
         shortName: "-",

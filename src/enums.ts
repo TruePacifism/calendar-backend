@@ -497,8 +497,8 @@ export const Directions: customEnumType<directionType> = {
     fullName: "Западо-Восток",
   },
   C: {
-    shortName: "З",
-    fullName: "Запад",
+    shortName: "Ц",
+    fullName: "Центр",
   },
   NULL_DIRECTION: {
     shortName: "-",
