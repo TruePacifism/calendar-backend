@@ -48,8 +48,15 @@ function getCardData(inputData) {
             birthcity: isToday ? inputData.livingcity : inputData.birthcity,
         });
         const age = (0, getAge_1.default)({ birthdate: trueBirthdate });
-        const animals = (0, getAnimals_1.default)({ birthdate: trueBirthdate });
-        const elements = (0, getElements_1.default)({ birthdate: trueBirthdate, animals: animals });
+        const animals = (0, getAnimals_1.default)({
+            birthdate: trueBirthdate,
+            offset: inputData.offset,
+        });
+        const elements = (0, getElements_1.default)({
+            birthdate: trueBirthdate,
+            animals: animals,
+            offset: inputData.offset,
+        });
         const chineseBirthdate = (0, getChineseDate_1.default)(trueBirthdate, animals);
         const pillars = (0, getPillars_1.default)({
             trueBirthdate,

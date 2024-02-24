@@ -8,7 +8,7 @@ function getDayOfYear(date) {
     return dayOfYear;
 }
 const exampleDate = new Date(100, 0, 1, 0, 0);
-const getYear = (year, month, day) => {
+const getYear = (year, month, day, offset) => {
     const index = year % 10;
     if (day === -1 || month === -1) {
         return Object.values(enums_1.Elements)[index];
@@ -19,40 +19,70 @@ const getYear = (year, month, day) => {
     })
         ? index - 1
         : index;
-    const indexWithOffset = (trueIndex + 10) % 10;
+    let indexWithOffset = trueIndex + 10 + offset;
+    while (indexWithOffset < 0) {
+        indexWithOffset += 10;
+    }
+    while (indexWithOffset >= 10) {
+        indexWithOffset %= 10;
+    }
     return Object.values(enums_1.Elements)[indexWithOffset];
 };
-const getMonth = (date, animals) => {
+const getMonth = (date, animals, offset) => {
     const yearDifference = date.getFullYear() - exampleDate.getFullYear();
     const monthDifference = date.getMonth() - exampleDate.getMonth() + yearDifference * 12;
     const trueMonthDifference = Object.values(enums_1.Animals)[date.getMonth()] === animals.month
         ? monthDifference
         : monthDifference - 1;
     const index = trueMonthDifference % 10;
-    const indexWithOffset = (index + 7) % 10;
+    let indexWithOffset = index + 7 + offset;
+    while (indexWithOffset < 0) {
+        indexWithOffset += 10;
+    }
+    while (indexWithOffset >= 10) {
+        indexWithOffset %= 10;
+    }
     return Object.values(enums_1.Elements)[indexWithOffset];
 };
-const getDay = (date) => {
+const getDay = (date, offset) => {
     const timeDiff = date.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
     const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
     const index = dayCount % 10;
-    const indexWithOffset = (index + 7) % 10;
+    let indexWithOffset = index + 7 + offset;
+    while (indexWithOffset < 0) {
+        indexWithOffset += 10;
+    }
+    while (indexWithOffset >= 10) {
+        indexWithOffset %= 10;
+    }
     return Object.values(enums_1.Elements)[indexWithOffset];
 };
-const getHour = (date) => {
+const getHour = (date, offset) => {
     const timeDiff = date.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
     const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
     const index = (Math.ceil(date.getHours() / 2) + (dayCount % 5) * 2) % 10;
-    const indexWithOffset = index % 10;
+    let indexWithOffset = index + offset;
+    while (indexWithOffset < 0) {
+        indexWithOffset += 10;
+    }
+    while (indexWithOffset >= 10) {
+        indexWithOffset %= 10;
+    }
     return Object.values(enums_1.Elements)[indexWithOffset];
 };
-function getElements({ birthdate, animals, }) {
+function getElements({ birthdate, animals, offset, }) {
     const { year, month, day, hour, minute } = birthdate;
     const dateObject = new Date(year, month === -1 ? 0 : month, day === -1 ? 1 : day, hour === -1 ? 1 : hour, minute === -1 ? 1 : minute);
-    const yearElement = getYear(year, month, day);
-    const monthElement = month === -1 ? enums_1.Elements.NULL_ELEMENT : getMonth(dateObject, animals);
-    const dayElement = day === -1 ? enums_1.Elements.NULL_ELEMENT : getDay(dateObject);
-    const hourElement = hour === -1 ? enums_1.Elements.NULL_ELEMENT : getHour(dateObject);
+    const yearElement = getYear(year, month, day, offset ? offset.year : 0);
+    const monthElement = month === -1
+        ? enums_1.Elements.NULL_ELEMENT
+        : getMonth(dateObject, animals, offset ? offset.year : 0);
+    const dayElement = day === -1
+        ? enums_1.Elements.NULL_ELEMENT
+        : getDay(dateObject, offset ? offset.year : 0);
+    const hourElement = hour === -1
+        ? enums_1.Elements.NULL_ELEMENT
+        : getHour(dateObject, offset ? offset.year : 0);
     return {
         year: yearElement,
         month: monthElement,

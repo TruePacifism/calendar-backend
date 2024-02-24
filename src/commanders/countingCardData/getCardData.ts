@@ -37,8 +37,15 @@ export default async function getCardData(
     birthcity: isToday ? inputData.livingcity : inputData.birthcity,
   });
   const age = getAge({ birthdate: trueBirthdate });
-  const animals: animalsCounted = getAnimals({ birthdate: trueBirthdate });
-  const elements = getElements({ birthdate: trueBirthdate, animals: animals });
+  const animals: animalsCounted = getAnimals({
+    birthdate: trueBirthdate,
+    offset: inputData.offset,
+  });
+  const elements = getElements({
+    birthdate: trueBirthdate,
+    animals: animals,
+    offset: inputData.offset,
+  });
   const chineseBirthdate = getChineseDate(trueBirthdate, animals);
   const pillars = getPillars({
     trueBirthdate,

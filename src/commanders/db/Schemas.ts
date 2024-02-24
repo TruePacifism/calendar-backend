@@ -149,6 +149,7 @@ const lineChartDataSchema = new Schema({
 const cardSchema = new Schema({
   id: String,
   name: String,
+  offset: dateSchema,
   chineseBirthdate: dateSchema,
   trueBirthdate: dateSchema,
   birthdate: dateSchema,
