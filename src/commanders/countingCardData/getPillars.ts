@@ -34,8 +34,8 @@ const getDirection = (
     return gender === "female";
   }
   const direction: boolean =
-    (gender === "male" && yearElement.name.includes("Ян")) ||
-    (gender === "female" && yearElement.name.includes("Инь"));
+    (gender === "male" && yearElement.name.includes("ян")) ||
+    (gender === "female" && yearElement.name.includes("инь"));
   return direction;
 };
 const getDaysToCount = (
@@ -111,6 +111,10 @@ export default function getPillars({
   const daysToCount = getDaysToCount(direction, birthdate, animals.month);
   const firstYear = birthdate.year;
   const firstMonth = birthdate.month;
+  console.log("direction", direction);
+  console.log("daysToCount", daysToCount);
+  console.log("firstYear", firstYear);
+  console.log("firstMonth", firstMonth);
 
   let year = firstYear + Math.floor(daysToCount / 3);
   let month = birthdate.month + (daysToCount % 3) * 4;

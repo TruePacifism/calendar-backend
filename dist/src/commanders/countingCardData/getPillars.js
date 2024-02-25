@@ -12,8 +12,8 @@ const getDirection = (gender, yearElement, monthAnimal) => {
     if (monthAnimal === enums_1.Animals.TIGER) {
         return gender === "female";
     }
-    const direction = (gender === "male" && yearElement.name.includes("Ян")) ||
-        (gender === "female" && yearElement.name.includes("Инь"));
+    const direction = (gender === "male" && yearElement.name.includes("ян")) ||
+        (gender === "female" && yearElement.name.includes("инь"));
     return direction;
 };
 const getDaysToCount = (direction, birthdate, monthAnimal) => {
@@ -57,6 +57,10 @@ function getPillars({ trueBirthdate: birthdate, gender, animals, elements, }) {
     const daysToCount = getDaysToCount(direction, birthdate, animals.month);
     const firstYear = birthdate.year;
     const firstMonth = birthdate.month;
+    console.log("direction", direction);
+    console.log("daysToCount", daysToCount);
+    console.log("firstYear", firstYear);
+    console.log("firstMonth", firstMonth);
     let year = firstYear + Math.floor(daysToCount / 3);
     let month = birthdate.month + (daysToCount % 3) * 4;
     if (month > 11) {

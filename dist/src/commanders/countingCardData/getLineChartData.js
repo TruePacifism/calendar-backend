@@ -104,7 +104,6 @@ function getLineChartData({ year, month, day, birthdate, }) {
         month: monthValues,
         day: dayValues,
     };
-    console.log(result);
     return result;
 }
 exports.default = getLineChartData;

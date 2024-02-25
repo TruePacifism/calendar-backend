@@ -139,7 +139,6 @@ export default function getLineChartData({
     month: monthValues,
     day: dayValues,
   };
-  console.log(result);
 
   return result;
 }

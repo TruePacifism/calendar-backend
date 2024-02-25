@@ -14,13 +14,14 @@ const uuid_1 = require("uuid");
 function addCard({ token, card }) {
     return __awaiter(this, void 0, void 0, function* () {
         const id = (0, uuid_1.v4)();
-        Schemas_1.UserModel.findOneAndUpdate({ token }, { $push: { cards: Object.assign({ id }, card) } })
+        yield Schemas_1.UserModel.findOneAndUpdate({ token }, { $push: { cards: Object.assign({ id }, card) } })
             .then(() => {
             console.log("Успешное добавление карты");
         })
             .catch((error) => {
             console.error("Ошибка добавления:", error);
         });
+        return id;
     });
 }
 exports.default = addCard;

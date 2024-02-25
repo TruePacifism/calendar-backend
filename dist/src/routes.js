@@ -64,8 +64,8 @@ app.delete("/login/:token", (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 app.post("/card/:token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cardInput = req.body;
-    yield (0, addCard_1.default)({ card: cardInput, token: req.params.token });
-    res.send("Карта успешно добавлена");
+    const id = yield (0, addCard_1.default)({ card: cardInput, token: req.params.token });
+    res.json({ id });
 }));
 app.delete("/card/:token/:cardId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { token, cardId } = req.params;

@@ -9,11 +9,15 @@ type propsType = {
 
 export default async function addCard({ token, card }: propsType) {
   const id: string = uuidv4();
-  UserModel.findOneAndUpdate({ token }, { $push: { cards: { id, ...card } } })
+  await UserModel.findOneAndUpdate(
+    { token },
+    { $push: { cards: { id, ...card } } }
+  )
     .then(() => {
       console.log("Успешное добавление карты");
     })
     .catch((error) => {
       console.error("Ошибка добавления:", error);
     });
+  return id;
 }

@@ -66,8 +66,8 @@ app.delete("/login/:token", async (req, res) => {
 app.post("/card/:token", async (req, res) => {
   const cardInput = req.body;
 
-  await addCard({ card: cardInput, token: req.params.token });
-  res.send("Карта успешно добавлена");
+  const id = await addCard({ card: cardInput, token: req.params.token });
+  res.json({ id });
 });
 app.delete("/card/:token/:cardId", async (req, res) => {
   const { token, cardId } = req.params;
