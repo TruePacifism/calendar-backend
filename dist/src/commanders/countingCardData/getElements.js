@@ -76,13 +76,9 @@ function getElements({ birthdate, animals, offset, }) {
     const yearElement = getYear(year, month, day, offset ? offset.year : 0);
     const monthElement = month === -1
         ? enums_1.Elements.NULL_ELEMENT
-        : getMonth(dateObject, animals, offset ? offset.year : 0);
-    const dayElement = day === -1
-        ? enums_1.Elements.NULL_ELEMENT
-        : getDay(dateObject, offset ? offset.year : 0);
-    const hourElement = hour === -1
-        ? enums_1.Elements.NULL_ELEMENT
-        : getHour(dateObject, offset ? offset.year : 0);
+        : getMonth(dateObject, animals, offset ? offset.month : 0);
+    const dayElement = day === -1 ? enums_1.Elements.NULL_ELEMENT : getDay(dateObject, 0);
+    const hourElement = hour === -1 ? enums_1.Elements.NULL_ELEMENT : getHour(dateObject, 0);
     return {
         year: yearElement,
         month: monthElement,

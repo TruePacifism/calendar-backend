@@ -17,9 +17,7 @@ export const inputDataSchema = Joi.object({
   offset: Joi.object({
     year: Joi.number(),
     month: Joi.number(),
-    day: Joi.number(),
-    hour: Joi.number(),
-    minute: Joi.number(),
+    pillar: Joi.number(),
     _id: Joi.string(),
   }),
 });

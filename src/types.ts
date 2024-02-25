@@ -146,13 +146,18 @@ export type genderCountType = {
 };
 
 export type genderType = "male" | "female" | "";
+export type offsetType = {
+  month: number;
+  year: number;
+  pillar: number;
+};
 export type inputDataType = {
   name: string;
   birthdate: dateType;
   birthcity: string;
   gender: genderType;
   livingcity: string;
-  offset?: dateType;
+  offset?: offsetType;
 };
 export type outputAnimalType = {
   name: string;

@@ -4,6 +4,7 @@ import {
   animalType,
   animalsCounted,
   dateType,
+  offsetType,
   outputDatePartType,
 } from "../../types";
 
@@ -17,7 +18,7 @@ function getDayOfYear(date: Date): number {
 }
 type propsType = {
   birthdate: dateType;
-  offset?: dateType;
+  offset?: offsetType;
 };
 
 const getYear = (
@@ -179,8 +180,8 @@ export default function getAnimals({
       ? Animals.NULL_ANIMAL
       : getMonth(day, month, isFirstYearsBounds, offset ? offset.month : 0);
   const yearAnimal = getYear(year, month, day, offset ? offset.year : 0);
-  const dayAnimal = getDay(year, month, day, offset ? offset.day : 0);
-  const hourAnimal = getHour(hour, offset ? offset.day : 0);
+  const dayAnimal = getDay(year, month, day, 0);
+  const hourAnimal = getHour(hour, 0);
 
   return {
     year: yearAnimal,

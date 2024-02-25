@@ -134,8 +134,8 @@ function getAnimals({ birthdate, offset, }) {
         ? enums_1.Animals.NULL_ANIMAL
         : getMonth(day, month, isFirstYearsBounds, offset ? offset.month : 0);
     const yearAnimal = getYear(year, month, day, offset ? offset.year : 0);
-    const dayAnimal = getDay(year, month, day, offset ? offset.day : 0);
-    const hourAnimal = getHour(hour, offset ? offset.day : 0);
+    const dayAnimal = getDay(year, month, day, 0);
+    const hourAnimal = getHour(hour, 0);
     return {
         year: yearAnimal,
         month: monthAnimal,

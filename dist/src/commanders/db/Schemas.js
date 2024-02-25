@@ -136,10 +136,15 @@ const lineChartDataSchema = new Schema({
     month: [lineChartDataPartSchema],
     day: [lineChartDataPartSchema],
 });
+const offsetSchema = new Schema({
+    year: Number,
+    month: Number,
+    pillar: Number,
+});
 const cardSchema = new Schema({
     id: String,
     name: String,
-    offset: dateSchema,
+    offset: offsetSchema,
     chineseBirthdate: dateSchema,
     trueBirthdate: dateSchema,
     birthdate: dateSchema,

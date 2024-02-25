@@ -4,12 +4,13 @@ import {
   dateType,
   elementType,
   elementsCounted,
+  offsetType,
 } from "../../types";
 
 type propsType = {
   birthdate: dateType;
   animals: animalsCounted;
-  offset?: dateType;
+  offset?: offsetType;
 };
 
 function getDayOfYear(date: Date): number {
@@ -122,15 +123,10 @@ export default function getElements({
   const monthElement =
     month === -1
       ? Elements.NULL_ELEMENT
-      : getMonth(dateObject, animals, offset ? offset.year : 0);
-  const dayElement =
-    day === -1
-      ? Elements.NULL_ELEMENT
-      : getDay(dateObject, offset ? offset.year : 0);
+      : getMonth(dateObject, animals, offset ? offset.month : 0);
+  const dayElement = day === -1 ? Elements.NULL_ELEMENT : getDay(dateObject, 0);
   const hourElement =
-    hour === -1
-      ? Elements.NULL_ELEMENT
-      : getHour(dateObject, offset ? offset.year : 0);
+    hour === -1 ? Elements.NULL_ELEMENT : getHour(dateObject, 0);
   return {
     year: yearElement,
     month: monthElement,

@@ -22,9 +22,7 @@ exports.inputDataSchema = joi_1.default.object({
     offset: joi_1.default.object({
         year: joi_1.default.number(),
         month: joi_1.default.number(),
-        day: joi_1.default.number(),
-        hour: joi_1.default.number(),
-        minute: joi_1.default.number(),
+        pillar: joi_1.default.number(),
         _id: joi_1.default.string(),
     }),
 });
