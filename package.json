@@ -30,6 +30,7 @@
     "geocoder": "^0.2.3",
     "joi": "^17.11.0",
     "mongoose": "^7.6.2",
+    "morgan": "^1.10.0",
     "nodejs-yandex-geocoder": "^1.0.5",
     "opencage-api-client": "^1.0.2",
     "typescript-is": "^0.20.0",

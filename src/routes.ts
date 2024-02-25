@@ -1,4 +1,7 @@
 import express from "express";
+const morgan = require("morgan");
+const path = require("path");
+const fs = require("fs");
 import countDevTime from "./commanders/countingCardData/countDevTime";
 import bodyParser from "body-parser";
 import getCardData from "./commanders/countingCardData/getCardData";
@@ -26,6 +29,14 @@ app.use(
     extended: true,
   })
 );
+// Создаем файл логов
+const accessLogStream = fs.createWriteStream(path.join("./access.log"), {
+  flags: "a",
+});
+
+// Настраиваем логгер
+app.use(morgan("combined", { stream: accessLogStream }));
+
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -88,8 +99,6 @@ app.get("/count", async (req, res) => {
   }
 });
 app.get("/collisionframes", async (req, res) => {
-  console.log(req);
-
   const query: { birthdate: dateType; trueBirthdate: dateType } =
     await collisionsFramesInputSchema.validateAsync(req.query);
   const { birthdate, trueBirthdate } = query;

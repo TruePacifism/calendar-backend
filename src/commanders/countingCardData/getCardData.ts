@@ -59,6 +59,7 @@ export default async function getCardData(
     year: animals.year,
     month: animals.month,
     day: animals.day,
+    birthdate: trueBirthdate,
   });
   const cardStrength = getCardStrength({
     animals,

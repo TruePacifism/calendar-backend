@@ -57,5 +57,6 @@ export default function getChartData({
     0
   );
   Object.keys(chartData).forEach((key) => (chartData[key] *= 2));
+
   return chartData;
 }

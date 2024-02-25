@@ -12,6 +12,7 @@ type propsType = {
   year: animalType;
   month: animalType;
   day: animalType;
+  birthdate: dateType;
 };
 
 const animalsOrder = [
@@ -69,27 +70,33 @@ const dateToObject = (date: Date): dateType => {
   };
 };
 
+const dateObjectToDate = (date: dateType): Date => {
+  const { year, month, day, hour, minute } = date;
+  return new Date(year, month, day, hour, minute);
+};
+
 export default function getLineChartData({
   year,
   month,
   day,
+  birthdate,
 }: propsType): lineChartDataType {
-  const now = new Date();
+  const start = dateObjectToDate(birthdate);
   const yearNowValue = getAnimalValue(
     year,
-    getAnimals({ birthdate: dateToObject(now) }).year
+    getAnimals({ birthdate: dateToObject(start) }).year
   );
   const monthNowValue = getAnimalValue(
     month,
-    getAnimals({ birthdate: dateToObject(now) }).month
+    getAnimals({ birthdate: dateToObject(start) }).month
   );
-  const startYearsDate = addYears(now, -4);
+  const startYearsDate = start;
   const yearValues: lineChartDataPartType[] = [];
-  const startMonthDate: Date = addMonths(now, -4);
+  const startMonthDate: Date = addMonths(start, -4);
   const monthValues: lineChartDataPartType[] = [];
-  const startDaysDate: Date = addDays(now, -4);
+  const startDaysDate: Date = addDays(start, -4);
   const dayValues: lineChartDataPartType[] = [];
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 1; i <= 120; i++) {
     // Вычисление данных по году
     const yearDate: Date = addYears(startYearsDate, i);
     const yearAnimal: animalType = getAnimals({
@@ -101,32 +108,38 @@ export default function getLineChartData({
       value: yearValue,
     });
 
-    // Вычисление данных по месяцу
-    const monthDate: Date = addMonths(startMonthDate, i);
-    const monthAnimal: animalType = getAnimals({
-      birthdate: dateToObject(monthDate),
-    }).month;
-    const monthValue: number = getAnimalValue(month, monthAnimal);
-    monthValues.push({
-      date: monthDate.getMonth(),
-      value: monthValue * (2 / 3) + yearNowValue,
-    });
+    if (i < 10) {
+      // Вычисление данных по месяцу
+      const monthDate: Date = addMonths(startMonthDate, i);
+      const monthAnimal: animalType = getAnimals({
+        birthdate: dateToObject(monthDate),
+      }).month;
+      const monthValue: number = getAnimalValue(month, monthAnimal);
+      monthValues.push({
+        date: monthDate.getMonth(),
+        value: monthValue * (2 / 3) + yearNowValue,
+      });
 
-    //Вычисление данных по дню
-    const dayDate: Date = addDays(startDaysDate, i);
-    const dayAnimal: animalType = getAnimals({
-      birthdate: dateToObject(dayDate),
-    }).day;
-    const dayValue: number = getAnimalValue(day, dayAnimal);
-    dayValues.push({
-      date: dayDate.getDate(),
-      value: dayValue * (1 / 3) + monthNowValue * (2 / 3) + yearNowValue,
-    });
+      //Вычисление данных по дню
+      const dayDate: Date = addDays(startDaysDate, i);
+      const dayAnimal: animalType = getAnimals({
+        birthdate: dateToObject(dayDate),
+      }).day;
+      const dayValue: number = getAnimalValue(day, dayAnimal);
+      dayValues.push({
+        date: dayDate.getDate(),
+        value: dayValue * (1 / 3) + monthNowValue * (2 / 3) + yearNowValue,
+      });
+    }
   }
+  const nowYear = new Date().getFullYear();
   const result: lineChartDataType = {
-    year: yearValues,
+    life: yearValues,
+    year: yearValues.filter((value) => Math.abs(nowYear - value.date) < 5),
     month: monthValues,
     day: dayValues,
   };
+  console.log(result);
+
   return result;
 }

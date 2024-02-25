@@ -15,21 +15,15 @@ function calculateTimeDifferenceInMinutes(date1, date2) {
     return Math.round(minutes2 - minutes1);
 }
 function getHourCollisionsFrames({ trueBirthdate, birthdate, }) {
-    console.log(trueBirthdate);
-    console.log(birthdate);
     const hourPosition = trueBirthdate.hour % 2 === 0 ? "end" : "start";
     const devTimeMinutes = calculateTimeDifferenceInMinutes(trueBirthdate, birthdate);
     const birthdateObject = new Date(birthdate.year, birthdate.month, birthdate.day, birthdate.hour, birthdate.minute);
-    console.log(hourPosition);
     const startTime = hourPosition === "start"
         ? date_and_time_1.default.addMinutes(birthdateObject, -trueBirthdate.minute)
         : date_and_time_1.default.addMinutes(birthdateObject, -trueBirthdate.minute - 60);
     const endTime = hourPosition === "start"
         ? date_and_time_1.default.addMinutes(birthdateObject, -trueBirthdate.minute + 120)
         : date_and_time_1.default.addMinutes(birthdateObject, -trueBirthdate.minute + 60);
-    console.log(devTimeMinutes);
-    console.log(`${startTime.getHours()}:${startTime.getMinutes()}`);
-    console.log(`${endTime.getHours()}:${endTime.getMinutes()}`);
     return {
         start: {
             hour: startTime.getHours(),

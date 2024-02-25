@@ -44,6 +44,7 @@ export default async function countDevTime({
       hour: devTimedDateObject.getHours(),
       minute: devTimedDateObject.getMinutes(),
     };
+
     return newBirthdate;
   }
 }

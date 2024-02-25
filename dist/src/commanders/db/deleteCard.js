@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Schemas_1 = require("./Schemas");
 function deleteCard({ token, cardId }) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(token);
-        console.log(cardId);
         Schemas_1.UserModel.findOneAndUpdate({ token }, { $pull: { cards: { id: cardId } } })
             .then(() => {
             console.log("Карта успешно удалена");

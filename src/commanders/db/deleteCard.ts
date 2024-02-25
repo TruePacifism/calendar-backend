@@ -6,8 +6,6 @@ type propsType = {
 };
 
 export default async function deleteCard({ token, cardId }: propsType) {
-  console.log(token);
-  console.log(cardId);
 
   UserModel.findOneAndUpdate({ token }, { $pull: { cards: { id: cardId } } })
     .then(() => {

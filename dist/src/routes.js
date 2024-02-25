@@ -13,6 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const morgan = require("morgan");
+const path = require("path");
+const fs = require("fs");
 const body_parser_1 = __importDefault(require("body-parser"));
 const getCardData_1 = __importDefault(require("./commanders/countingCardData/getCardData"));
 const addCard_1 = __importDefault(require("./commanders/db/addCard"));
@@ -31,6 +34,12 @@ app.use((0, cors_1.default)());
 app.use(body_parser_1.default.urlencoded({
     extended: true,
 }));
+// Создаем файл логов
+const accessLogStream = fs.createWriteStream(path.join("./access.log"), {
+    flags: "a",
+});
+// Настраиваем логгер
+app.use(morgan("combined", { stream: accessLogStream }));
 app.use(body_parser_1.default.json());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -85,7 +94,6 @@ app.get("/count", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 app.get("/collisionframes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req);
     const query = yield joiSchemas_1.collisionsFramesInputSchema.validateAsync(req.query);
     const { birthdate, trueBirthdate } = query;
     const frames = (0, getHourCollisionsFrames_1.default)({ birthdate, trueBirthdate });

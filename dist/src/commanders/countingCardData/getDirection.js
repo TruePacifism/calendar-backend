@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const enums_1 = require("../../enums");
 function getDirection({ birthdate }) {
     const { year, month } = birthdate;
-    console.log(birthdate);
     if (month === -1) {
         switch (year % 10) {
             case 0:

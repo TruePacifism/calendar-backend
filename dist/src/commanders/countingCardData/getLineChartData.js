@@ -49,17 +49,21 @@ const dateToObject = (date) => {
         minute: date.getMinutes(),
     };
 };
-function getLineChartData({ year, month, day, }) {
-    const now = new Date();
-    const yearNowValue = getAnimalValue(year, (0, getAnimals_1.default)({ birthdate: dateToObject(now) }).year);
-    const monthNowValue = getAnimalValue(month, (0, getAnimals_1.default)({ birthdate: dateToObject(now) }).month);
-    const startYearsDate = (0, date_and_time_1.addYears)(now, -4);
+const dateObjectToDate = (date) => {
+    const { year, month, day, hour, minute } = date;
+    return new Date(year, month, day, hour, minute);
+};
+function getLineChartData({ year, month, day, birthdate, }) {
+    const start = dateObjectToDate(birthdate);
+    const yearNowValue = getAnimalValue(year, (0, getAnimals_1.default)({ birthdate: dateToObject(start) }).year);
+    const monthNowValue = getAnimalValue(month, (0, getAnimals_1.default)({ birthdate: dateToObject(start) }).month);
+    const startYearsDate = start;
     const yearValues = [];
-    const startMonthDate = (0, date_and_time_1.addMonths)(now, -4);
+    const startMonthDate = (0, date_and_time_1.addMonths)(start, -4);
     const monthValues = [];
-    const startDaysDate = (0, date_and_time_1.addDays)(now, -4);
+    const startDaysDate = (0, date_and_time_1.addDays)(start, -4);
     const dayValues = [];
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 1; i <= 120; i++) {
         // Вычисление данных по году
         const yearDate = (0, date_and_time_1.addYears)(startYearsDate, i);
         const yearAnimal = (0, getAnimals_1.default)({
@@ -70,32 +74,37 @@ function getLineChartData({ year, month, day, }) {
             date: yearDate.getFullYear(),
             value: yearValue,
         });
-        // Вычисление данных по месяцу
-        const monthDate = (0, date_and_time_1.addMonths)(startMonthDate, i);
-        const monthAnimal = (0, getAnimals_1.default)({
-            birthdate: dateToObject(monthDate),
-        }).month;
-        const monthValue = getAnimalValue(month, monthAnimal);
-        monthValues.push({
-            date: monthDate.getMonth(),
-            value: monthValue * (2 / 3) + yearNowValue,
-        });
-        //Вычисление данных по дню
-        const dayDate = (0, date_and_time_1.addDays)(startDaysDate, i);
-        const dayAnimal = (0, getAnimals_1.default)({
-            birthdate: dateToObject(dayDate),
-        }).day;
-        const dayValue = getAnimalValue(day, dayAnimal);
-        dayValues.push({
-            date: dayDate.getDate(),
-            value: dayValue * (1 / 3) + monthNowValue * (2 / 3) + yearNowValue,
-        });
+        if (i < 10) {
+            // Вычисление данных по месяцу
+            const monthDate = (0, date_and_time_1.addMonths)(startMonthDate, i);
+            const monthAnimal = (0, getAnimals_1.default)({
+                birthdate: dateToObject(monthDate),
+            }).month;
+            const monthValue = getAnimalValue(month, monthAnimal);
+            monthValues.push({
+                date: monthDate.getMonth(),
+                value: monthValue * (2 / 3) + yearNowValue,
+            });
+            //Вычисление данных по дню
+            const dayDate = (0, date_and_time_1.addDays)(startDaysDate, i);
+            const dayAnimal = (0, getAnimals_1.default)({
+                birthdate: dateToObject(dayDate),
+            }).day;
+            const dayValue = getAnimalValue(day, dayAnimal);
+            dayValues.push({
+                date: dayDate.getDate(),
+                value: dayValue * (1 / 3) + monthNowValue * (2 / 3) + yearNowValue,
+            });
+        }
     }
+    const nowYear = new Date().getFullYear();
     const result = {
-        year: yearValues,
+        life: yearValues,
+        year: yearValues.filter((value) => Math.abs(nowYear - value.date) < 5),
         month: monthValues,
         day: dayValues,
     };
+    console.log(result);
     return result;
 }
 exports.default = getLineChartData;

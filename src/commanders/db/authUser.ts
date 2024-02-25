@@ -13,7 +13,6 @@ const getUTC = async (city: string): Promise<number> => {
     response.results.length > 0
   ) {
     const UTC = response.results[0].annotations.timezone.offset_sec / 3600;
-    console.log(UTC);
     return UTC;
   }
   return 0;
@@ -21,7 +20,6 @@ const getUTC = async (city: string): Promise<number> => {
 
 export default async function authUser(input: propsType) {
   const { token, livingcity } = input;
-  console.log("livingCity", livingcity);
 
   const id: string = Math.random().toString();
   const UTC = await getUTC(livingcity);

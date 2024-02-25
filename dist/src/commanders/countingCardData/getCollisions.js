@@ -218,22 +218,11 @@ function getCollisions({ animals, currentPillar, pillars, }) {
                         } }));
                     id += 1;
                 }
-                console.log(selectedTimes);
             });
-            console.log(selectedTimes);
         });
     });
     Object.entries(collisionsInfo).forEach((value) => {
         const [time, collisions] = value;
-        console.log(time, collisions.map((collision) => {
-            const { id, animal, secondTarget, thirdTarget } = collision;
-            return {
-                id,
-                animalOne: animal.name,
-                animalTwo: secondTarget.animal.name,
-                animalThree: thirdTarget && thirdTarget.animal ? thirdTarget.animal.name : null,
-            };
-        }));
     });
     return collisionsInfo;
 }

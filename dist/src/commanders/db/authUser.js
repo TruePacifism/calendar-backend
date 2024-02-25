@@ -17,7 +17,6 @@ const getUTC = (city) => __awaiter(void 0, void 0, void 0, function* () {
         response.status.code < 300 &&
         response.results.length > 0) {
         const UTC = response.results[0].annotations.timezone.offset_sec / 3600;
-        console.log(UTC);
         return UTC;
     }
     return 0;
@@ -25,7 +24,6 @@ const getUTC = (city) => __awaiter(void 0, void 0, void 0, function* () {
 function authUser(input) {
     return __awaiter(this, void 0, void 0, function* () {
         const { token, livingcity } = input;
-        console.log("livingCity", livingcity);
         const id = Math.random().toString();
         const UTC = yield getUTC(livingcity);
         const foundUser = yield Schemas_1.UserModel.findOne({ token });

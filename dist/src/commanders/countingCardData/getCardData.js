@@ -70,6 +70,7 @@ function getCardData(inputData) {
             year: animals.year,
             month: animals.month,
             day: animals.day,
+            birthdate: trueBirthdate,
         });
         const cardStrength = (0, getCardStrength_1.default)({
             animals,

@@ -36,9 +36,6 @@ export default function getHourCollisionsFrames({
   trueBirthdate,
   birthdate,
 }: propsType): returnType {
-  console.log(trueBirthdate);
-  console.log(birthdate);
-
   const hourPosition: "start" | "end" =
     trueBirthdate.hour % 2 === 0 ? "end" : "start";
   const devTimeMinutes = calculateTimeDifferenceInMinutes(
@@ -52,7 +49,6 @@ export default function getHourCollisionsFrames({
     birthdate.hour,
     birthdate.minute
   );
-  console.log(hourPosition);
 
   const startTime =
     hourPosition === "start"
@@ -62,9 +58,6 @@ export default function getHourCollisionsFrames({
     hourPosition === "start"
       ? date.addMinutes(birthdateObject, -trueBirthdate.minute + 120)
       : date.addMinutes(birthdateObject, -trueBirthdate.minute + 60);
-  console.log(devTimeMinutes);
-  console.log(`${startTime.getHours()}:${startTime.getMinutes()}`);
-  console.log(`${endTime.getHours()}:${endTime.getMinutes()}`);
   return {
     start: {
       hour: startTime.getHours(),
