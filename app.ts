@@ -35,7 +35,7 @@ function sendMessage() {
 //   });
 // });
 // Устанавливаем расписание для отправки каждый день в 12:00
-schedule.scheduleJob("30 20 * * *", () => {
+schedule.scheduleJob("38 20 * * *", () => {
   sendMessage();
 });
 
