@@ -3,7 +3,7 @@ import date from "date-and-time";
 
 function convertDateToMinutes(date: dateType): number {
   const { year, month, day, hour, minute } = date;
-  const dateObject = new Date(year, month, day, hour, minute);
+  const dateObject = new Date(Date.UTC(year, month, day, hour, minute));
   return dateObject.getTime() / (1000 * 60); // Переводим миллисекунды в минуты
 }
 
@@ -43,11 +43,13 @@ export default function getHourCollisionsFrames({
     birthdate
   );
   const birthdateObject = new Date(
-    birthdate.year,
-    birthdate.month,
-    birthdate.day,
-    birthdate.hour,
-    birthdate.minute
+    Date.UTC(
+      birthdate.year,
+      birthdate.month,
+      birthdate.day,
+      birthdate.hour,
+      birthdate.minute
+    )
   );
 
   const startTime =

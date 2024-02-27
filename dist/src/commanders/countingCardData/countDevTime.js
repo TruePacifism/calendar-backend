@@ -20,7 +20,7 @@ function countDevTime({ birthdate, birthcity, }) {
         if (hour === -1 || !birthcity) {
             return birthdate;
         }
-        const dateObject = new Date(year, month, day, hour, minute);
+        const dateObject = new Date(Date.UTC(year, month, day, hour, minute));
         const opencage = require("opencage-api-client");
         const data = yield opencage.geocode({ q: birthcity });
         if (data.status.code === 200 && data.results.length > 0) {
@@ -41,6 +41,7 @@ function countDevTime({ birthdate, birthcity, }) {
                 hour: devTimedDateObject.getHours(),
                 minute: devTimedDateObject.getMinutes(),
             };
+            console.log(newBirthdate);
             return newBirthdate;
         }
     });

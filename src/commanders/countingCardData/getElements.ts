@@ -110,14 +110,18 @@ export default function getElements({
   offset,
 }: propsType): elementsCounted {
   const { year, month, day, hour, minute } = birthdate;
+  console.log(birthdate);
 
   const dateObject = new Date(
-    year,
-    month === -1 ? 0 : month,
-    day === -1 ? 1 : day,
-    hour === -1 ? 1 : hour,
-    minute === -1 ? 1 : minute
+    Date.UTC(
+      year,
+      month === -1 ? 0 : month,
+      day === -1 ? 1 : day,
+      hour === -1 ? 1 : hour,
+      minute === -1 ? 1 : minute
+    )
   );
+  console.log(dateObject);
 
   const yearElement = getYear(year, month, day, offset ? offset.year : 0);
   const monthElement =

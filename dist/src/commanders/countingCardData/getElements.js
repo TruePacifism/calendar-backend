@@ -72,7 +72,9 @@ const getHour = (date, offset) => {
 };
 function getElements({ birthdate, animals, offset, }) {
     const { year, month, day, hour, minute } = birthdate;
-    const dateObject = new Date(year, month === -1 ? 0 : month, day === -1 ? 1 : day, hour === -1 ? 1 : hour, minute === -1 ? 1 : minute);
+    console.log(birthdate);
+    const dateObject = new Date(Date.UTC(year, month === -1 ? 0 : month, day === -1 ? 1 : day, hour === -1 ? 1 : hour, minute === -1 ? 1 : minute));
+    console.log(dateObject);
     const yearElement = getYear(year, month, day, offset ? offset.year : 0);
     const monthElement = month === -1
         ? enums_1.Elements.NULL_ELEMENT

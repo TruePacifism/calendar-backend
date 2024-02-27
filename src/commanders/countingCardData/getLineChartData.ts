@@ -72,7 +72,7 @@ const dateToObject = (date: Date): dateType => {
 
 const dateObjectToDate = (date: dateType): Date => {
   const { year, month, day, hour, minute } = date;
-  return new Date(year, month, day, hour, minute);
+  return new Date(Date.UTC(year, month, day, hour, minute));
 };
 
 export default function getLineChartData({

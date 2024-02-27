@@ -51,7 +51,7 @@ const dateToObject = (date) => {
 };
 const dateObjectToDate = (date) => {
     const { year, month, day, hour, minute } = date;
-    return new Date(year, month, day, hour, minute);
+    return new Date(Date.UTC(year, month, day, hour, minute));
 };
 function getLineChartData({ year, month, day, birthdate, }) {
     const start = dateObjectToDate(birthdate);

@@ -15,7 +15,7 @@ export default async function countDevTime({
   if (hour === -1 || !birthcity) {
     return birthdate;
   }
-  const dateObject = new Date(year, month, day, hour, minute);
+  const dateObject = new Date(Date.UTC(year, month, day, hour, minute));
 
   const opencage = require("opencage-api-client");
 
@@ -44,6 +44,7 @@ export default async function countDevTime({
       hour: devTimedDateObject.getHours(),
       minute: devTimedDateObject.getMinutes(),
     };
+    console.log(newBirthdate);
 
     return newBirthdate;
   }

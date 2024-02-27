@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const date_and_time_1 = __importDefault(require("date-and-time"));
 function convertDateToMinutes(date) {
     const { year, month, day, hour, minute } = date;
-    const dateObject = new Date(year, month, day, hour, minute);
+    const dateObject = new Date(Date.UTC(year, month, day, hour, minute));
     return dateObject.getTime() / (1000 * 60); // Переводим миллисекунды в минуты
 }
 function calculateTimeDifferenceInMinutes(date1, date2) {
@@ -17,7 +17,7 @@ function calculateTimeDifferenceInMinutes(date1, date2) {
 function getHourCollisionsFrames({ trueBirthdate, birthdate, }) {
     const hourPosition = trueBirthdate.hour % 2 === 0 ? "end" : "start";
     const devTimeMinutes = calculateTimeDifferenceInMinutes(trueBirthdate, birthdate);
-    const birthdateObject = new Date(birthdate.year, birthdate.month, birthdate.day, birthdate.hour, birthdate.minute);
+    const birthdateObject = new Date(Date.UTC(birthdate.year, birthdate.month, birthdate.day, birthdate.hour, birthdate.minute));
     const startTime = hourPosition === "start"
         ? date_and_time_1.default.addMinutes(birthdateObject, -trueBirthdate.minute)
         : date_and_time_1.default.addMinutes(birthdateObject, -trueBirthdate.minute - 60);

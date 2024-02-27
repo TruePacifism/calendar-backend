@@ -57,10 +57,6 @@ function getPillars({ trueBirthdate: birthdate, gender, animals, elements, }) {
     const daysToCount = getDaysToCount(direction, birthdate, animals.month);
     const firstYear = birthdate.year;
     const firstMonth = birthdate.month;
-    console.log("direction", direction);
-    console.log("daysToCount", daysToCount);
-    console.log("firstYear", firstYear);
-    console.log("firstMonth", firstMonth);
     let year = firstYear + Math.floor(daysToCount / 3);
     let month = birthdate.month + (daysToCount % 3) * 4;
     if (month > 11) {
