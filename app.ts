@@ -6,7 +6,7 @@ import TelegramBot from "node-telegram-bot-api";
 
 // Укажи свой токен Telegram бота
 const token = "6484002112:AAFAET6sbeb0U4GUsitOM9K0KHtxyv-KFlA";
-const chatId = "1343339845"; // Укажи ID чата, куда бот будет отправлять сообщения
+const chatId = "809204367"; // Укажи ID чата, куда бот будет отправлять сообщения
 
 const bot = new TelegramBot(token, { polling: true });
 
