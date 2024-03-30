@@ -20,7 +20,7 @@ function getDayOfYear(date: Date): number {
   return dayOfYear;
 }
 
-const exampleDate = new Date(100, 0, 1, 0, 0);
+const exampleDate = new Date(100, 0, 1, 1, 0);
 
 const getYear = (
   year: number,
@@ -90,10 +90,13 @@ const getDay = (date: Date, offset: number): elementType => {
   return Object.values(Elements)[indexWithOffset];
 };
 const getHour = (date: Date, offset: number): elementType => {
+  console.log("date", date);
+
   const timeDiff = date.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
   const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
-  const index = (Math.ceil(date.getHours() / 2) + (dayCount % 5) * 2) % 10;
-  let indexWithOffset = index - 2 + offset;
+  const index =
+    (Math.ceil((date.getHours() - 1) / 2) + (dayCount % 5) * 2) % 10;
+  let indexWithOffset = index - 1 + offset;
   while (indexWithOffset < 0) {
     indexWithOffset += 10;
   }
