@@ -31,14 +31,18 @@ export default async function getCardData(
   const isToday = inputData.name === "today";
   const { gender } = inputData;
   const date = new Date();
-  const birthcityCoordinates: coordinatesType = {
-    lat: inputData.birthcity.lat,
-    lng: inputData.birthcity.lon,
-  };
-  const livingcityCoordinates: coordinatesType = {
-    lat: inputData.livingcity.lat,
-    lng: inputData.livingcity.lon,
-  };
+  const birthcityCoordinates: coordinatesType = inputData.birthcity
+    ? {
+        lat: inputData.birthcity.lat,
+        lng: inputData.birthcity.lon,
+      }
+    : null;
+  const livingcityCoordinates: coordinatesType = inputData.livingcity
+    ? {
+        lat: inputData.livingcity.lat,
+        lng: inputData.livingcity.lon,
+      }
+    : null;
   const trueBirthdate = await countDevTime({
     birthdate: inputData.birthdate,
     birthcity: isToday ? inputData.livingcity : inputData.birthcity,

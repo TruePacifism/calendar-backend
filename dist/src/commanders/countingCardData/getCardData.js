@@ -36,14 +36,18 @@ function getCardData(inputData) {
         const isToday = inputData.name === "today";
         const { gender } = inputData;
         const date = new Date();
-        const birthcityCoordinates = {
-            lat: inputData.birthcity.lat,
-            lng: inputData.birthcity.lon,
-        };
-        const livingcityCoordinates = {
-            lat: inputData.livingcity.lat,
-            lng: inputData.livingcity.lon,
-        };
+        const birthcityCoordinates = inputData.birthcity
+            ? {
+                lat: inputData.birthcity.lat,
+                lng: inputData.birthcity.lon,
+            }
+            : null;
+        const livingcityCoordinates = inputData.livingcity
+            ? {
+                lat: inputData.livingcity.lat,
+                lng: inputData.livingcity.lon,
+            }
+            : null;
         const trueBirthdate = yield (0, countDevTime_1.default)({
             birthdate: inputData.birthdate,
             birthcity: isToday ? inputData.livingcity : inputData.birthcity,
