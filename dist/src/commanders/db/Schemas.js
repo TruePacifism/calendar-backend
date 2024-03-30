@@ -9,6 +9,28 @@ const { Schema } = mongoose_1.default;
 const elementSchema = new Schema({
     name: String,
 });
+const citySchema = new Schema({
+    fullName: {
+        type: String,
+        required: true,
+    },
+    shortName: {
+        type: String,
+        required: true,
+    },
+    lon: {
+        type: Number,
+        required: true,
+    },
+    lat: {
+        type: Number,
+        required: true,
+    },
+    UTC: {
+        type: Number,
+        required: true,
+    },
+});
 const animalSchema = new Schema({
     name: String,
     element: elementSchema,
@@ -94,12 +116,12 @@ const inputDataSchema = new Schema({
     id: String,
     name: String,
     birthdate: dateSchema,
-    birthcity: String,
+    birthcity: citySchema,
     gender: {
         type: String,
         required: true,
     },
-    livingcity: String,
+    livingcity: citySchema,
 });
 const ageSchema = new Schema({
     year: Number,
@@ -148,10 +170,10 @@ const cardSchema = new Schema({
     chineseBirthdate: dateSchema,
     trueBirthdate: dateSchema,
     birthdate: dateSchema,
-    birthcity: String,
+    birthcity: citySchema,
     gender: String,
     date: Date,
-    livingcity: String,
+    livingcity: citySchema,
     age: ageSchema,
     year: outputDatePartSchema,
     month: outputDatePartSchema,
@@ -183,8 +205,8 @@ const userSchema = new Schema({
         requred: false,
     },
     mail: String,
-    livingcity: String,
-    birthcity: String,
+    livingcity: citySchema,
+    birthcity: citySchema,
     UTC: Number,
     cards: [cardSchema],
 });

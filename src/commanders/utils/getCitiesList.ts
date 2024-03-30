@@ -1,4 +1,5 @@
 import axios from "axios";
+import { cityType } from "../../types";
 
 type propsType = {
   query: string;
@@ -13,6 +14,8 @@ var secret = "ee1888bbbd215aac7ac056e5973ba24ba123bdef";
 var testquery = "москва сухонская 11";
 
 export default async function getCitiesList({ query }: propsType) {
+  console.log("query", query);
+
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",
@@ -28,17 +31,42 @@ export default async function getCitiesList({ query }: propsType) {
     }),
   });
   const responseJSON = await response.json();
-  console.log(responseJSON);
 
   if (!responseJSON) {
     return;
   }
+  // const test = await fetch(
+  //   `https://timeapi.io/api/TimeZone/coordinate?latitude=${56}&longitude=${43}`,
+  //   { method: "get" }
+  // );
+  // console.log("test", test.body);
 
-  const output = responseJSON.suggestions.map((city) => {
-    return {
-      name: city.value,
-    };
-  });
+  const UTCsResponse = await Promise.all(
+    responseJSON.suggestions
+      .filter((city) => city.data.geo_lat && city.data.geo_lon)
+      .map((city) => {
+        console.log(city.data.geo_lat, city.data.geo_lon);
+
+        return axios(
+          `https://timeapi.io/api/TimeZone/coordinate?latitude=${city.data.geo_lat}&longitude=${city.data.geo_lon}`
+        );
+      })
+  );
+  const UTCs = UTCsResponse.map(
+    (res) => res.data.currentUtcOffset.seconds / 3600
+  );
+  console.log(UTCs);
+  const output: cityType[] = responseJSON.suggestions
+    .map((city, idx): cityType => {
+      return {
+        fullName: city.value,
+        shortName: city.data.settlement_with_type || city.data.city_with_type,
+        lat: city.data.geo_lat,
+        lon: city.data.geo_lon,
+        UTC: UTCs[idx],
+      };
+    })
+    .filter((city) => city.lat && city.lon);
   // const output = response.data.map((city) => {
   //   return {
   //     name: `${city.name}, ${city.state}, ${city.country}`,

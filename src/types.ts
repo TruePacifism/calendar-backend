@@ -151,12 +151,19 @@ export type offsetType = {
   year: number;
   pillar: number;
 };
+export type cityType = {
+  fullName: string;
+  shortName: string;
+  lon: number;
+  lat: number;
+  UTC: number;
+};
 export type inputDataType = {
   name: string;
   birthdate: dateType;
-  birthcity: string;
+  birthcity: cityType;
   gender: genderType;
-  livingcity: string;
+  livingcity: cityType;
   offset?: offsetType;
 };
 export type outputAnimalType = {
@@ -311,8 +318,8 @@ export type outputDataType = inputDataType & {
 
 export type todayDataType = {
   name: string;
-  livingcity: string;
-  birthcity: string;
+  livingcity: cityType;
+  birthcity: cityType;
   birthdate: dateType;
   gender: genderType;
   age: ageType;
@@ -343,8 +350,8 @@ export type userInput = {
   token: string;
   password: string;
   mail: string;
-  livingcity: string;
-  birthcity: string;
+  livingcity: cityType;
+  birthcity: cityType;
 };
 export type userType = {
   firstName: string;
@@ -353,8 +360,8 @@ export type userType = {
   token: string;
   password: string;
   mail: string;
-  livingcity: string;
-  birthcity: string;
+  livingcity: cityType;
+  birthcity: cityType;
   UTC: number;
   cards: [];
 };

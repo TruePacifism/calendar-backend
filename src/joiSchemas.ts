@@ -1,5 +1,12 @@
 import Joi from "joi";
-
+export const citySchema = Joi.object({
+  fullName: Joi.string(),
+  shortName: Joi.string(),
+  lon: Joi.number(),
+  lat: Joi.number(),
+  UTC: Joi.number(),
+  _id: Joi.string(),
+});
 export const inputDataSchema = Joi.object({
   name: Joi.string().allow(""),
   birthdate: Joi.object({
@@ -11,8 +18,8 @@ export const inputDataSchema = Joi.object({
     _id: Joi.string(),
   }),
   gender: Joi.string().allow(""),
-  livingcity: Joi.string().allow(""),
-  birthcity: Joi.string().allow(""),
+  livingcity: citySchema,
+  birthcity: citySchema,
   _id: Joi.string(),
   offset: Joi.object({
     year: Joi.number(),
@@ -29,8 +36,8 @@ export const todayInputSchema = Joi.object({
     token: Joi.string(),
     name: Joi.string(),
     mail: Joi.string(),
-    livingcity: Joi.string(),
-    birthcity: Joi.string(),
+    livingcity: citySchema,
+    birthcity: citySchema,
     UTC: Joi.number(),
     __v: Joi.string(),
   }),
@@ -62,7 +69,7 @@ export const userInputSchema = Joi.object({
   firstName: Joi.string().required(),
   secondName: Joi.string().allow(""),
   thirdName: Joi.string().allow(""),
-  livingcity: Joi.string().allow(""),
-  birthcity: Joi.string().allow(""),
+  livingcity: citySchema,
+  birthcity: citySchema,
   _id: Joi.string(),
 });

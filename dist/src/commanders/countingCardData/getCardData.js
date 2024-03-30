@@ -19,7 +19,6 @@ const getBlackInfo_1 = __importDefault(require("./getBlackInfo"));
 const getCardStrength_1 = __importDefault(require("./getCardStrength"));
 const getChartData_1 = __importDefault(require("./getChartData"));
 const getChineseDate_1 = __importDefault(require("./getChineseDate"));
-const getCityCoordinates_1 = __importDefault(require("./getCityCoordinates"));
 const getCollisions_1 = __importDefault(require("./getCollisions"));
 const getCurrentPillar_1 = __importDefault(require("./getCurrentPillar"));
 const getDirection_1 = __importDefault(require("./getDirection"));
@@ -37,17 +36,22 @@ function getCardData(inputData) {
         const isToday = inputData.name === "today";
         const { gender } = inputData;
         const date = new Date();
-        const birthcityCoordinates = yield (0, getCityCoordinates_1.default)({
-            cityName: inputData.birthcity,
-        });
-        const livingcityCoordinates = yield (0, getCityCoordinates_1.default)({
-            cityName: inputData.livingcity,
-        });
+        const birthcityCoordinates = {
+            lat: inputData.birthcity.lat,
+            lng: inputData.birthcity.lon,
+        };
+        const livingcityCoordinates = {
+            lat: inputData.livingcity.lat,
+            lng: inputData.livingcity.lon,
+        };
         const trueBirthdate = yield (0, countDevTime_1.default)({
             birthdate: inputData.birthdate,
             birthcity: isToday ? inputData.livingcity : inputData.birthcity,
         });
-        const age = (0, getAge_1.default)({ birthdate: trueBirthdate });
+        console.log("trueBirthdate", trueBirthdate);
+        const age = inputData.name === "today"
+            ? { year: 0, month: 0 }
+            : (0, getAge_1.default)({ birthdate: inputData.birthdate });
         const animals = (0, getAnimals_1.default)({
             birthdate: trueBirthdate,
             offset: inputData.offset,

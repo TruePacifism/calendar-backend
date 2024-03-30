@@ -1,4 +1,9 @@
-import { animalsCounted, inputDataType, outputDataType } from "../../types";
+import {
+  animalsCounted,
+  coordinatesType,
+  inputDataType,
+  outputDataType,
+} from "../../types";
 import countDevTime from "./countDevTime";
 import getAge from "./getAge";
 import getAnimals from "./getAnimals";
@@ -26,17 +31,24 @@ export default async function getCardData(
   const isToday = inputData.name === "today";
   const { gender } = inputData;
   const date = new Date();
-  const birthcityCoordinates = await getCityCoordinates({
-    cityName: inputData.birthcity,
-  });
-  const livingcityCoordinates = await getCityCoordinates({
-    cityName: inputData.livingcity,
-  });
+  const birthcityCoordinates: coordinatesType = {
+    lat: inputData.birthcity.lat,
+    lng: inputData.birthcity.lon,
+  };
+  const livingcityCoordinates: coordinatesType = {
+    lat: inputData.livingcity.lat,
+    lng: inputData.livingcity.lon,
+  };
   const trueBirthdate = await countDevTime({
     birthdate: inputData.birthdate,
     birthcity: isToday ? inputData.livingcity : inputData.birthcity,
   });
-  const age = getAge({ birthdate: trueBirthdate });
+  console.log("trueBirthdate", trueBirthdate);
+
+  const age =
+    inputData.name === "today"
+      ? { year: 0, month: 0 }
+      : getAge({ birthdate: inputData.birthdate });
   const animals: animalsCounted = getAnimals({
     birthdate: trueBirthdate,
     offset: inputData.offset,
