@@ -93,7 +93,7 @@ const getHour = (date: Date, offset: number): elementType => {
   const timeDiff = date.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
   const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
   const index = (Math.ceil(date.getHours() / 2) + (dayCount % 5) * 2) % 10;
-  let indexWithOffset = index + offset;
+  let indexWithOffset = index - 2 + offset;
   while (indexWithOffset < 0) {
     indexWithOffset += 10;
   }
