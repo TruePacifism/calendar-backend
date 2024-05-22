@@ -61,7 +61,9 @@ const getHour = (date, offset) => {
     console.log("date", date);
     const timeDiff = date.getTime() - exampleDate.getTime(); // Вычисляем разницу во времени в миллисекундах
     const dayCount = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Разделим разницу на количество миллисекунд в одном дне и округлим результат до целого числа
-    const index = (Math.ceil((date.getHours() - 1) / 2) + (dayCount % 5) * 2) % 10;
+    const index = Math.ceil(timeDiff / (1000 * 3600 * 2) - 0.25) % 10;
+    console.log(timeDiff);
+    console.log(timeDiff / (1000 * 60 * 60 * 2) - 0.25);
     let indexWithOffset = index - 1 + offset;
     while (indexWithOffset < 0) {
         indexWithOffset += 10;
